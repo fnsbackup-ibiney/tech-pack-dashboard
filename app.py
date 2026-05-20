@@ -57,6 +57,17 @@ from sample_data.cardigan_sample import CARDIGAN_SAMPLE
 
 
 # =============================================================================
+# CONFIGURATION — flip these when going from testing to production
+# =============================================================================
+
+# Pre-fill the form with the cardigan demo data on first visit?
+#   True  → testing / demo mode (handy while you're still building it out)
+#   False → production / customer-facing (every new visitor sees a blank form;
+#           they can still click "Load Sample" in the sidebar to see the demo)
+LOAD_SAMPLE_ON_FIRST_VISIT = True
+
+
+# =============================================================================
 # PAGE CONFIG
 # =============================================================================
 st.set_page_config(
@@ -95,11 +106,17 @@ def clean(value):
 
 
 def init_state():
-    """Initialize session state on first run."""
+    """Initialize session state on first run.
+
+    If LOAD_SAMPLE_ON_FIRST_VISIT is True, we pre-fill the form with the
+    cardigan demo data. Otherwise the form starts blank (every dropdown
+    showing '— Not specified —').
+    """
     if "initialized" not in st.session_state:
-        for key, value in CARDIGAN_SAMPLE.items():
-            if key not in WIDGET_ONLY_KEYS:
-                st.session_state[key] = value
+        if LOAD_SAMPLE_ON_FIRST_VISIT:
+            for key, value in CARDIGAN_SAMPLE.items():
+                if key not in WIDGET_ONLY_KEYS:
+                    st.session_state[key] = value
         st.session_state["initialized"] = True
 
 
