@@ -14,7 +14,6 @@ Deploy:
 
 import json
 from datetime import date, datetime
-from io import BytesIO
 
 import pandas as pd
 import streamlit as st
@@ -22,7 +21,7 @@ import streamlit as st
 from config.dropdown_options import (
     BUTTON_COLORS,
     BUTTON_MATERIALS,
-    BUTTON_SIZES_MM,
+    BUTTON_SIZES_L,
     COMPOSITIONS,
     CUFF_STYLES,
     FABRIC_STRUCTURES,
@@ -52,6 +51,8 @@ from config.dropdown_options import (
     YARN_COUNTS,
     YARN_TYPES,
 )
+from exporters.docx_exporter import generate_docx
+from exporters.pdf_exporter import generate_pdf
 from sample_data.cardigan_sample import CARDIGAN_SAMPLE
 
 
@@ -66,37 +67,84 @@ st.set_page_config(
 
 
 # =============================================================================
-# HELPERS
+# CONSTANTS & HELPERS
 # =============================================================================
+
+# Every dropdown has this as the first option, so the user can always "un-select"
+BLANK = "— Not specified —"
+
+
+def with_blank(options: list) -> list:
+    """Prepend the BLANK placeholder to a list of dropdown options."""
+    return [BLANK] + list(options)
+
+
 def safe_index(options: list, value, default: int = 0) -> int:
-    """Return the index of value in options, or default if not found."""
+    """Return the index of value in options, or default (0 = BLANK)."""
     try:
         return options.index(value)
     except (ValueError, TypeError):
         return default
 
 
+def clean(value):
+    """Convert BLANK placeholder to None when exporting data."""
+    if value in (BLANK, "", None):
+        return None
+    return value
+
+
 def init_state():
     """Initialize session state on first run."""
     if "initialized" not in st.session_state:
-        # Pre-fill with cardigan sample on first load
         for key, value in CARDIGAN_SAMPLE.items():
             st.session_state[key] = value
         st.session_state["initialized"] = True
 
 
+def _snapshot():
+    """Save the current state so the user can Undo later."""
+    PROTECTED = {"initialized", "_snapshot"}
+    st.session_state["_snapshot"] = {
+        k: v for k, v in st.session_state.items() if k not in PROTECTED
+    }
+
+
 def reset_to_blank():
-    """Clear all fields to start a fresh tech pack."""
-    keys_to_clear = [k for k in st.session_state.keys() if k != "initialized"]
-    for k in keys_to_clear:
+    """Clear all fields to start a fresh tech pack (everything becomes BLANK).
+
+    Used as an on_click callback so it runs BEFORE widgets are re-instantiated.
+    """
+    _snapshot()
+    PROTECTED = {"initialized", "_snapshot"}
+    for k in [k for k in st.session_state.keys() if k not in PROTECTED]:
         del st.session_state[k]
-    st.session_state["product_type"] = PRODUCT_TYPES[0]
 
 
 def load_sample():
-    """Load the cardigan sample data."""
+    """Reload the cardigan sample data.
+
+    Used as an on_click callback so it runs BEFORE widgets are re-instantiated.
+    """
+    _snapshot()
     for key, value in CARDIGAN_SAMPLE.items():
         st.session_state[key] = value
+
+
+def undo():
+    """Restore the state from the most recent snapshot (before Load Sample / Reset)."""
+    snapshot = st.session_state.get("_snapshot")
+    if not snapshot:
+        return
+    PROTECTED = {"initialized", "_snapshot"}
+    # Clear current state (except protected keys)
+    for k in [k for k in st.session_state.keys() if k not in PROTECTED]:
+        del st.session_state[k]
+    # Restore from snapshot
+    for k, v in snapshot.items():
+        st.session_state[k] = v
+    # Remove the snapshot itself (single-level undo)
+    del st.session_state["_snapshot"]
 
 
 def collect_data() -> dict:
@@ -108,13 +156,25 @@ def collect_data() -> dict:
         "fabric_structure", "fabric_weight_gsm", "dye_method",
         "neckline", "neckline_rib_cm", "sleeve_length", "sleeve_type",
         "hem_style", "hem_height_cm", "cuff_style", "cuff_height_cm",
-        "placket", "button_size_mm", "button_count", "button_material",
+        "placket", "button_size_l", "button_count", "button_material",
         "button_color", "print_embroidery", "wash_finishing",
         "shoulder_reinforcement", "base_size", "measurements",
         "labels", "packing", "supplier_actions",
         "target_quantity", "target_price_usd", "delivery_date", "notes",
     ]
-    data = {f: st.session_state.get(f) for f in fields}
+    data = {f: clean(st.session_state.get(f)) for f in fields}
+
+    # Non-text fields shouldn't go through clean()
+    data["measurements"] = st.session_state.get("measurements") or {}
+    data["labels"] = st.session_state.get("labels") or []
+    data["supplier_actions"] = st.session_state.get("supplier_actions") or []
+    data["shoulder_reinforcement"] = bool(st.session_state.get("shoulder_reinforcement"))
+    data["neckline_rib_cm"] = st.session_state.get("neckline_rib_cm")
+    data["hem_height_cm"] = st.session_state.get("hem_height_cm")
+    data["cuff_height_cm"] = st.session_state.get("cuff_height_cm")
+    data["button_count"] = st.session_state.get("button_count")
+    data["target_quantity"] = st.session_state.get("target_quantity")
+    data["target_price_usd"] = st.session_state.get("target_price_usd")
 
     # Convert non-serializable types
     if isinstance(data.get("delivery_date"), (date, datetime)):
@@ -152,15 +212,31 @@ with st.sidebar:
 
     st.subheader("Quick Actions")
     col_a, col_b = st.columns(2)
-    if col_a.button("📋 Load Sample", use_container_width=True):
-        load_sample()
-        st.rerun()
-    if col_b.button("🧹 Reset", use_container_width=True):
-        reset_to_blank()
-        st.rerun()
+    col_a.button(
+        "📋 Load Sample",
+        on_click=load_sample,
+        use_container_width=True,
+        help="Replace everything with the cardigan demo data.",
+    )
+    col_b.button(
+        "🧹 Reset",
+        on_click=reset_to_blank,
+        use_container_width=True,
+        help="Clear all fields back to '— Not specified —'.",
+    )
+
+    # Undo — only enabled if there's a snapshot to restore
+    can_undo = bool(st.session_state.get("_snapshot"))
+    st.button(
+        "↩️ Undo (restore previous)" if can_undo else "↩️ Undo (nothing to undo)",
+        on_click=undo,
+        use_container_width=True,
+        disabled=not can_undo,
+        help="Restore the state from before your last Load Sample or Reset.",
+    )
 
     st.divider()
-    st.caption("v0.1 · Draft")
+    st.caption("v0.2 · Draft")
 
 
 # =============================================================================
@@ -176,6 +252,10 @@ tab_editor, tab_preview, tab_export = st.tabs(
 # -----------------------------------------------------------------------------
 with tab_editor:
     st.header("Fill out the tech pack")
+    st.caption(
+        "Every dropdown has a **— Not specified —** option at the top — leave it "
+        "there if you don't want to lock that detail down yet."
+    )
     is_knitwear = st.session_state["product_type"].startswith("Knitwear")
 
     # --- Section 1: Style Overview ---
@@ -183,219 +263,121 @@ with tab_editor:
         c1, c2, c3 = st.columns(3)
         c1.text_input("Style name", key="style_name", placeholder="e.g. Cotton Knit Cardigan")
         c2.text_input("Style number", key="style_number", placeholder="e.g. KW-SS26-001")
-        c3.selectbox(
-            "Season",
-            SEASONS,
-            index=safe_index(SEASONS, st.session_state.get("season")),
-            key="season",
-        )
+        opts = with_blank(SEASONS)
+        c3.selectbox("Season", opts, index=safe_index(opts, st.session_state.get("season")), key="season")
 
         c1, c2, c3 = st.columns(3)
-        c1.selectbox(
-            "Gender",
-            GENDERS,
-            index=safe_index(GENDERS, st.session_state.get("gender")),
-            key="gender",
-        )
-        c2.selectbox(
-            "Fit",
-            FITS,
-            index=safe_index(FITS, st.session_state.get("fit")),
-            key="fit",
-        )
-        c3.selectbox(
-            "Size range",
-            SIZE_RANGES,
-            index=safe_index(SIZE_RANGES, st.session_state.get("size_range")),
-            key="size_range",
-        )
+        opts = with_blank(GENDERS)
+        c1.selectbox("Gender", opts, index=safe_index(opts, st.session_state.get("gender")), key="gender")
+        opts = with_blank(FITS)
+        c2.selectbox("Fit", opts, index=safe_index(opts, st.session_state.get("fit")), key="fit")
+        opts = with_blank(SIZE_RANGES)
+        c3.selectbox("Size range", opts, index=safe_index(opts, st.session_state.get("size_range")), key="size_range")
 
         c1, c2, c3 = st.columns(3)
         c1.text_input("Color name", key="color_name", placeholder="e.g. Sunshine Yellow")
         c2.text_input("Pantone code", key="pantone_code", placeholder="e.g. 13-0859 TCX")
-        c3.selectbox(
-            "Composition",
-            COMPOSITIONS,
-            index=safe_index(COMPOSITIONS, st.session_state.get("composition")),
-            key="composition",
-        )
+        opts = with_blank(COMPOSITIONS)
+        c3.selectbox("Composition", opts, index=safe_index(opts, st.session_state.get("composition")), key="composition")
 
     # --- Section 2: Construction (Conditional on Product Type) ---
     with st.expander("2. Construction — Material & Knit/Fabric", expanded=True):
         if is_knitwear:
             st.markdown("**Knitwear-specific fields**")
             c1, c2, c3 = st.columns(3)
-            c1.selectbox(
-                "Yarn type",
-                YARN_TYPES,
-                index=safe_index(YARN_TYPES, st.session_state.get("yarn_type")),
-                key="yarn_type",
-            )
+            opts = with_blank(YARN_TYPES)
+            c1.selectbox("Yarn type", opts, index=safe_index(opts, st.session_state.get("yarn_type")), key="yarn_type")
+            opts = with_blank(YARN_COUNTS)
             c2.selectbox(
-                "Yarn count",
-                YARN_COUNTS,
-                index=safe_index(YARN_COUNTS, st.session_state.get("yarn_count")),
+                "Yarn count", opts,
+                index=safe_index(opts, st.session_state.get("yarn_count")),
                 key="yarn_count",
                 help="Ne = English count (cotton system). Nm = Metric count (wool system).",
             )
+            opts = with_blank(GAUGES)
             c3.selectbox(
-                "Gauge (GG)",
-                GAUGES,
-                index=safe_index(GAUGES, st.session_state.get("gauge")),
+                "Gauge (GG)", opts,
+                index=safe_index(opts, st.session_state.get("gauge")),
                 key="gauge",
                 help="Needles per inch. Lower GG = chunkier, higher GG = finer.",
             )
 
             c1, c2, c3 = st.columns(3)
-            c1.selectbox(
-                "Knit structure",
-                KNIT_STRUCTURES,
-                index=safe_index(KNIT_STRUCTURES, st.session_state.get("knit_structure")),
-                key="knit_structure",
-            )
-            c2.selectbox(
-                "Rib structure",
-                RIB_STRUCTURES,
-                index=safe_index(RIB_STRUCTURES, st.session_state.get("rib_structure")),
-                key="rib_structure",
-            )
-            c3.selectbox(
-                "Dyeing method",
-                KNITWEAR_DYE_METHODS,
-                index=safe_index(KNITWEAR_DYE_METHODS, st.session_state.get("dye_method")),
-                key="dye_method",
-            )
+            opts = with_blank(KNIT_STRUCTURES)
+            c1.selectbox("Knit structure", opts, index=safe_index(opts, st.session_state.get("knit_structure")), key="knit_structure")
+            opts = with_blank(RIB_STRUCTURES)
+            c2.selectbox("Rib structure", opts, index=safe_index(opts, st.session_state.get("rib_structure")), key="rib_structure")
+            opts = with_blank(KNITWEAR_DYE_METHODS)
+            c3.selectbox("Dyeing method", opts, index=safe_index(opts, st.session_state.get("dye_method")), key="dye_method")
         else:
             st.markdown("**T-shirt / Jersey-specific fields**")
             c1, c2, c3 = st.columns(3)
-            c1.selectbox(
-                "Fabric structure",
-                FABRIC_STRUCTURES,
-                index=safe_index(FABRIC_STRUCTURES, st.session_state.get("fabric_structure")),
-                key="fabric_structure",
-            )
+            opts = with_blank(FABRIC_STRUCTURES)
+            c1.selectbox("Fabric structure", opts, index=safe_index(opts, st.session_state.get("fabric_structure")), key="fabric_structure")
+            opts = with_blank(FABRIC_WEIGHTS_GSM)
             c2.selectbox(
-                "Fabric weight (gsm)",
-                FABRIC_WEIGHTS_GSM,
-                index=safe_index(FABRIC_WEIGHTS_GSM, st.session_state.get("fabric_weight_gsm")),
+                "Fabric weight (gsm)", opts,
+                index=safe_index(opts, st.session_state.get("fabric_weight_gsm")),
                 key="fabric_weight_gsm",
                 help="gsm = grams per square meter. Higher = heavier fabric.",
             )
-            c3.selectbox(
-                "Dyeing method",
-                TSHIRT_DYE_METHODS,
-                index=safe_index(TSHIRT_DYE_METHODS, st.session_state.get("dye_method")),
-                key="dye_method",
-            )
+            opts = with_blank(TSHIRT_DYE_METHODS)
+            c3.selectbox("Dyeing method", opts, index=safe_index(opts, st.session_state.get("dye_method")), key="dye_method")
 
     # --- Section 3: Construction Details ---
     with st.expander("3. Construction — Style Details", expanded=True):
         c1, c2 = st.columns(2)
-        c1.selectbox(
-            "Neckline",
-            NECKLINES,
-            index=safe_index(NECKLINES, st.session_state.get("neckline")),
-            key="neckline",
-        )
-        c2.number_input(
-            "Neckline rib height (cm)",
-            min_value=0.0, max_value=20.0, step=0.5,
-            key="neckline_rib_cm",
-        )
+        opts = with_blank(NECKLINES)
+        c1.selectbox("Neckline", opts, index=safe_index(opts, st.session_state.get("neckline")), key="neckline")
+        c2.number_input("Neckline rib height (cm)", min_value=0.0, max_value=20.0, step=0.5, key="neckline_rib_cm")
 
         c1, c2 = st.columns(2)
-        c1.selectbox(
-            "Sleeve length",
-            SLEEVE_LENGTHS,
-            index=safe_index(SLEEVE_LENGTHS, st.session_state.get("sleeve_length")),
-            key="sleeve_length",
-        )
+        opts = with_blank(SLEEVE_LENGTHS)
+        c1.selectbox("Sleeve length", opts, index=safe_index(opts, st.session_state.get("sleeve_length")), key="sleeve_length")
+        opts = with_blank(SLEEVE_TYPES)
         c2.selectbox(
-            "Sleeve type",
-            SLEEVE_TYPES,
-            index=safe_index(SLEEVE_TYPES, st.session_state.get("sleeve_type")),
+            "Sleeve type", opts,
+            index=safe_index(opts, st.session_state.get("sleeve_type")),
             key="sleeve_type",
             help="Set-in = standard. Raglan = diagonal seam. Drop shoulder = relaxed.",
         )
 
         c1, c2, c3, c4 = st.columns(4)
-        c1.selectbox(
-            "Hem style",
-            HEM_STYLES,
-            index=safe_index(HEM_STYLES, st.session_state.get("hem_style")),
-            key="hem_style",
-        )
-        c2.number_input(
-            "Hem rib height (cm)",
-            min_value=0.0, max_value=20.0, step=0.5,
-            key="hem_height_cm",
-        )
-        c3.selectbox(
-            "Cuff style",
-            CUFF_STYLES,
-            index=safe_index(CUFF_STYLES, st.session_state.get("cuff_style")),
-            key="cuff_style",
-        )
-        c4.number_input(
-            "Cuff rib height (cm)",
-            min_value=0.0, max_value=20.0, step=0.5,
-            key="cuff_height_cm",
-        )
+        opts = with_blank(HEM_STYLES)
+        c1.selectbox("Hem style", opts, index=safe_index(opts, st.session_state.get("hem_style")), key="hem_style")
+        c2.number_input("Hem rib height (cm)", min_value=0.0, max_value=20.0, step=0.5, key="hem_height_cm")
+        opts = with_blank(CUFF_STYLES)
+        c3.selectbox("Cuff style", opts, index=safe_index(opts, st.session_state.get("cuff_style")), key="cuff_style")
+        c4.number_input("Cuff rib height (cm)", min_value=0.0, max_value=20.0, step=0.5, key="cuff_height_cm")
 
         c1, c2 = st.columns(2)
-        c1.selectbox(
-            "Placket / closure",
-            PLACKETS,
-            index=safe_index(PLACKETS, st.session_state.get("placket")),
-            key="placket",
-        )
+        opts = with_blank(PLACKETS)
+        c1.selectbox("Placket / closure", opts, index=safe_index(opts, st.session_state.get("placket")), key="placket")
 
         # Button details (only show if placket uses buttons)
         placket_has_buttons = "button" in (st.session_state.get("placket") or "").lower()
         if placket_has_buttons:
-            st.markdown("**Button details**")
+            st.markdown("**Button details** _(L = Ligne, the industry-standard unit. 32L ≈ 20 mm)_")
             c1, c2, c3, c4 = st.columns(4)
-            c1.number_input(
-                "Number of buttons",
-                min_value=1, max_value=20, step=1,
-                key="button_count",
-            )
+            c1.number_input("Number of buttons", min_value=1, max_value=20, step=1, key="button_count")
+            opts = with_blank(BUTTON_SIZES_L)
             c2.selectbox(
-                "Button size (mm)",
-                BUTTON_SIZES_MM,
-                index=safe_index(BUTTON_SIZES_MM, st.session_state.get("button_size_mm")),
-                key="button_size_mm",
+                "Button size (L)", opts,
+                index=safe_index(opts, st.session_state.get("button_size_l")),
+                key="button_size_l",
+                help="L = Ligne. 1L = 1/40 inch ≈ 0.635 mm. 32L ≈ 20 mm.",
             )
-            c3.selectbox(
-                "Button material",
-                BUTTON_MATERIALS,
-                index=safe_index(BUTTON_MATERIALS, st.session_state.get("button_material")),
-                key="button_material",
-            )
-            c4.selectbox(
-                "Button color",
-                BUTTON_COLORS,
-                index=safe_index(BUTTON_COLORS, st.session_state.get("button_color")),
-                key="button_color",
-            )
+            opts = with_blank(BUTTON_MATERIALS)
+            c3.selectbox("Button material", opts, index=safe_index(opts, st.session_state.get("button_material")), key="button_material")
+            opts = with_blank(BUTTON_COLORS)
+            c4.selectbox("Button color", opts, index=safe_index(opts, st.session_state.get("button_color")), key="button_color")
 
         c1, c2, c3 = st.columns(3)
-        c1.selectbox(
-            "Print / embroidery",
-            PRINT_EMBROIDERY,
-            index=safe_index(PRINT_EMBROIDERY, st.session_state.get("print_embroidery")),
-            key="print_embroidery",
-        )
-        c2.selectbox(
-            "Wash / finishing",
-            WASH_FINISHING,
-            index=safe_index(WASH_FINISHING, st.session_state.get("wash_finishing")),
-            key="wash_finishing",
-        )
-        c3.checkbox(
-            "Shoulder reinforcement required",
-            key="shoulder_reinforcement",
-        )
+        opts = with_blank(PRINT_EMBROIDERY)
+        c1.selectbox("Print / embroidery", opts, index=safe_index(opts, st.session_state.get("print_embroidery")), key="print_embroidery")
+        opts = with_blank(WASH_FINISHING)
+        c2.selectbox("Wash / finishing", opts, index=safe_index(opts, st.session_state.get("wash_finishing")), key="wash_finishing")
+        c3.checkbox("Shoulder reinforcement required", key="shoulder_reinforcement")
 
     # --- Section 4: Measurements ---
     with st.expander("4. Measurements (Base size)", expanded=True):
@@ -416,7 +398,6 @@ with tab_editor:
             KNITWEAR_MEASUREMENT_POINTS if is_knitwear else TSHIRT_MEASUREMENT_POINTS
         )
 
-        # Build a DataFrame for st.data_editor
         existing = st.session_state.get("measurements", {})
         rows = []
         for point, unit, default_tol in measurement_points:
@@ -442,7 +423,6 @@ with tab_editor:
             key="measurements_editor",
         )
 
-        # Save back to session state
         new_measurements = {}
         for _, row in edited_df.iterrows():
             if row["Value"] > 0:
@@ -455,18 +435,9 @@ with tab_editor:
     # --- Section 5: Labels & Packing ---
     with st.expander("5. Labels & Packing", expanded=False):
         c1, c2 = st.columns(2)
-        c1.multiselect(
-            "Labels to include",
-            LABEL_TYPES,
-            default=st.session_state.get("labels", []),
-            key="labels",
-        )
-        c2.selectbox(
-            "Packing method",
-            PACKING,
-            index=safe_index(PACKING, st.session_state.get("packing")),
-            key="packing",
-        )
+        c1.multiselect("Labels to include", LABEL_TYPES, default=st.session_state.get("labels", []), key="labels")
+        opts = with_blank(PACKING)
+        c2.selectbox("Packing method", opts, index=safe_index(opts, st.session_state.get("packing")), key="packing")
 
     # --- Section 6: Supplier Actions ---
     with st.expander("6. Supplier Actions Required", expanded=False):
@@ -480,11 +451,7 @@ with tab_editor:
     # --- Section 7: Commercial ---
     with st.expander("7. Commercial Information", expanded=False):
         c1, c2, c3 = st.columns(3)
-        c1.number_input(
-            "Target quantity (pcs)",
-            min_value=0, step=50,
-            key="target_quantity",
-        )
+        c1.number_input("Target quantity (pcs)", min_value=0, step=50, key="target_quantity")
         c2.number_input(
             "Target price (USD)",
             min_value=0.0, step=0.5,
@@ -514,7 +481,6 @@ with tab_preview:
     st.title("TECH PACK")
     st.caption(f"Generated by Tech Pack Dashboard · {datetime.now().strftime('%Y-%m-%d')}")
 
-    # 1. Style Overview
     st.header("1. Style Overview")
     cols = st.columns(3)
     cols[0].markdown(f"**Style Name:** {data.get('style_name') or '—'}")
@@ -529,7 +495,6 @@ with tab_preview:
     cols[1].markdown(f"**Pantone:** {data.get('pantone_code') or '—'}")
     cols[2].markdown(f"**Composition:** {data.get('composition') or '—'}")
 
-    # 2. Material & Knit / Fabric
     st.header("2. Material & Construction")
     if is_knitwear:
         cols = st.columns(3)
@@ -546,7 +511,6 @@ with tab_preview:
         cols[1].markdown(f"**Fabric Weight:** {data.get('fabric_weight_gsm') or '—'} gsm")
         cols[2].markdown(f"**Dye Method:** {data.get('dye_method') or '—'}")
 
-    # 3. Style details
     st.header("3. Style Details")
     cols = st.columns(2)
     cols[0].markdown(f"**Neckline:** {data.get('neckline') or '—'}  (rib: {data.get('neckline_rib_cm') or 0} cm)")
@@ -558,7 +522,7 @@ with tab_preview:
     cols[0].markdown(f"**Placket:** {data.get('placket') or '—'}")
     if "button" in (data.get("placket") or "").lower():
         cols[1].markdown(
-            f"**Buttons:** {data.get('button_count') or 0} × {data.get('button_size_mm') or '—'} mm "
+            f"**Buttons:** {data.get('button_count') or 0} × {data.get('button_size_l') or '—'} "
             f"{data.get('button_material') or ''} ({data.get('button_color') or ''})"
         )
     cols = st.columns(3)
@@ -566,7 +530,6 @@ with tab_preview:
     cols[1].markdown(f"**Wash / Finishing:** {data.get('wash_finishing') or '—'}")
     cols[2].markdown(f"**Shoulder Reinforcement:** {'Yes' if data.get('shoulder_reinforcement') else 'No'}")
 
-    # 4. Measurements
     st.header(f"4. Measurements (Size {data.get('base_size') or 'M'})")
     measurements = data.get("measurements") or {}
     if measurements:
@@ -582,13 +545,11 @@ with tab_preview:
     else:
         st.info("No measurements filled in yet.")
 
-    # 5. Labels & Packing
     st.header("5. Labels & Packing")
     cols = st.columns(2)
     cols[0].markdown(f"**Labels:** {', '.join(data.get('labels') or []) or '—'}")
     cols[1].markdown(f"**Packing:** {data.get('packing') or '—'}")
 
-    # 6. Supplier actions
     st.header("6. Supplier Actions Required")
     actions = data.get("supplier_actions") or []
     if actions:
@@ -597,13 +558,10 @@ with tab_preview:
     else:
         st.info("No supplier actions specified.")
 
-    # 7. Commercial
     st.header("7. Commercial")
     cols = st.columns(3)
     cols[0].markdown(f"**Target Quantity:** {data.get('target_quantity') or 0} pcs")
-    cols[1].markdown(
-        f"**Target Price:** ${data.get('target_price_usd') or 0:.2f} USD"
-    )
+    cols[1].markdown(f"**Target Price:** ${data.get('target_price_usd') or 0:.2f} USD")
     cols[2].markdown(f"**Delivery:** {data.get('delivery_date') or '—'}")
     if data.get("notes"):
         st.markdown(f"**Notes:** {data['notes']}")
@@ -615,25 +573,60 @@ with tab_preview:
 with tab_export:
     st.header("Export Tech Pack")
     st.markdown(
-        "Download the tech pack data as a JSON file. This can be fed into AI tools "
-        "(Copilot, ChatGPT) or imported into ERP/PLM systems."
+        "Pick the format you need. **PDF** and **Word** are formatted documents "
+        "you can send straight to a factory. **JSON** is structured data — feed it "
+        "into AI tools (Copilot, ChatGPT) or import into ERP/PLM systems."
     )
 
     data = collect_data()
 
     style_id = data.get("style_number") or "tech_pack"
-    filename = f"{style_id}_{datetime.now().strftime('%Y%m%d')}.json"
+    timestamp = datetime.now().strftime("%Y%m%d")
 
-    json_str = json.dumps(data, indent=2, ensure_ascii=False)
+    col_pdf, col_docx, col_json = st.columns(3)
 
-    st.download_button(
-        label="📥 Download JSON",
-        data=json_str.encode("utf-8"),
-        file_name=filename,
-        mime="application/json",
-        use_container_width=True,
-    )
+    with col_pdf:
+        st.subheader("📄 PDF")
+        st.caption("Best for sharing externally — print-ready, fixed layout.")
+        try:
+            pdf_bytes = generate_pdf(data)
+            st.download_button(
+                label="Download PDF",
+                data=pdf_bytes,
+                file_name=f"{style_id}_{timestamp}.pdf",
+                mime="application/pdf",
+                use_container_width=True,
+            )
+        except Exception as e:
+            st.error(f"PDF generation failed: {e}")
+
+    with col_docx:
+        st.subheader("📝 Word")
+        st.caption("Editable — drop into your existing tech pack template.")
+        try:
+            docx_bytes = generate_docx(data)
+            st.download_button(
+                label="Download Word",
+                data=docx_bytes,
+                file_name=f"{style_id}_{timestamp}.docx",
+                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                use_container_width=True,
+            )
+        except Exception as e:
+            st.error(f"Word generation failed: {e}")
+
+    with col_json:
+        st.subheader("🔧 JSON")
+        st.caption("For Copilot/ChatGPT/ERP — structured machine-readable data.")
+        json_str = json.dumps(data, indent=2, ensure_ascii=False)
+        st.download_button(
+            label="Download JSON",
+            data=json_str.encode("utf-8"),
+            file_name=f"{style_id}_{timestamp}.json",
+            mime="application/json",
+            use_container_width=True,
+        )
 
     st.divider()
-    st.subheader("JSON Preview")
-    st.code(json_str, language="json")
+    with st.expander("👀 Preview JSON data", expanded=False):
+        st.code(json.dumps(data, indent=2, ensure_ascii=False), language="json")

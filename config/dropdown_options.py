@@ -134,7 +134,11 @@ PLACKETS = [
 ]
 
 # Button options
-BUTTON_SIZES_MM = ["12", "15", "18", "20", "22", "25", "28"]
+# Button sizes use the Ligne (L) unit, the industry standard for buttons.
+# 1L = 1/40 inch ≈ 0.635 mm. Common conversions:
+#   14L ≈ 9mm   16L ≈ 10mm   18L ≈ 11.5mm   20L ≈ 12.5mm
+#   24L ≈ 15mm  28L ≈ 18mm   32L ≈ 20mm     36L ≈ 23mm    40L ≈ 25mm
+BUTTON_SIZES_L = ["14L", "16L", "18L", "20L", "24L", "28L", "32L", "36L", "40L", "44L"]
 BUTTON_MATERIALS = [
     "Plastic",
     "Horn",

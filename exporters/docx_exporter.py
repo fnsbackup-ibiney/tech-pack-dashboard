@@ -1,0 +1,194 @@
+"""
+Generate a Word document version of the tech pack using python-docx.
+"""
+
+from datetime import datetime
+from io import BytesIO
+
+from docx import Document
+from docx.enum.table import WD_ALIGN_VERTICAL
+from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.shared import Cm, Pt, RGBColor
+
+
+def _add_kv_table(doc: Document, items: list):
+    """Add a 2-column key-value table."""
+    table = doc.add_table(rows=len(items), cols=2)
+    table.autofit = False
+    table.columns[0].width = Cm(5)
+    table.columns[1].width = Cm(11)
+    for i, (label, value) in enumerate(items):
+        row = table.rows[i]
+        row.cells[0].width = Cm(5)
+        row.cells[1].width = Cm(11)
+        c0 = row.cells[0].paragraphs[0]
+        run = c0.add_run(str(label))
+        run.bold = True
+        run.font.size = Pt(10)
+        c1 = row.cells[1].paragraphs[0]
+        run = c1.add_run(str(value) if value is not None else "—")
+        run.font.size = Pt(10)
+
+
+def _add_measurement_table(doc: Document, measurements: dict, base_size: str):
+    table = doc.add_table(rows=1 + len(measurements), cols=3)
+    table.style = "Light Grid"
+    header = table.rows[0].cells
+    header[0].text = "Measurement Point"
+    header[1].text = f"Size {base_size or 'M'}"
+    header[2].text = "Tolerance"
+    for cell in header:
+        for paragraph in cell.paragraphs:
+            for run in paragraph.runs:
+                run.bold = True
+                run.font.size = Pt(10)
+    for i, (point, vals) in enumerate(measurements.items(), start=1):
+        row = table.rows[i].cells
+        row[0].text = point
+        row[1].text = f"{vals.get('value', 0)} cm"
+        row[2].text = f"± {vals.get('tolerance', 0)} cm"
+        for cell in row:
+            for paragraph in cell.paragraphs:
+                for run in paragraph.runs:
+                    run.font.size = Pt(10)
+
+
+def _add_h2(doc: Document, text: str):
+    p = doc.add_paragraph()
+    run = p.add_run(text)
+    run.bold = True
+    run.font.size = Pt(13)
+    run.font.color.rgb = RGBColor(0x22, 0x22, 0x22)
+    p.paragraph_format.space_before = Pt(12)
+    p.paragraph_format.space_after = Pt(4)
+
+
+def generate_docx(data: dict) -> bytes:
+    """Render the tech pack as a .docx file and return raw bytes."""
+    doc = Document()
+
+    # Page margins
+    for section in doc.sections:
+        section.left_margin = Cm(2)
+        section.right_margin = Cm(2)
+        section.top_margin = Cm(2)
+        section.bottom_margin = Cm(2)
+
+    # Title
+    title = doc.add_paragraph()
+    title.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    run = title.add_run("TECH PACK")
+    run.bold = True
+    run.font.size = Pt(22)
+
+    subtitle = doc.add_paragraph()
+    subtitle.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    sub_run = subtitle.add_run(
+        f"{data.get('style_name') or '—'} · {data.get('style_number') or '—'}"
+        f" · {data.get('season') or '—'}"
+    )
+    sub_run.font.size = Pt(11)
+
+    timestamp = doc.add_paragraph()
+    timestamp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    ts_run = timestamp.add_run(f"Generated {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    ts_run.font.size = Pt(9)
+    ts_run.font.color.rgb = RGBColor(0x80, 0x80, 0x80)
+
+    is_knitwear = (data.get("product_type") or "").startswith("Knitwear")
+
+    # 1. Style Overview
+    _add_h2(doc, "1. Style Overview")
+    _add_kv_table(doc, [
+        ("Product Type", data.get("product_type")),
+        ("Style Name", data.get("style_name")),
+        ("Style Number", data.get("style_number")),
+        ("Season", data.get("season")),
+        ("Gender", data.get("gender")),
+        ("Fit", data.get("fit")),
+        ("Size Range", data.get("size_range")),
+        ("Color", data.get("color_name")),
+        ("Pantone Code", data.get("pantone_code")),
+        ("Composition", data.get("composition")),
+    ])
+
+    # 2. Material & Construction
+    _add_h2(doc, "2. Material & Construction")
+    if is_knitwear:
+        _add_kv_table(doc, [
+            ("Yarn Type", data.get("yarn_type")),
+            ("Yarn Count", data.get("yarn_count")),
+            ("Gauge", data.get("gauge")),
+            ("Knit Structure", data.get("knit_structure")),
+            ("Rib Structure", data.get("rib_structure")),
+            ("Dyeing Method", data.get("dye_method")),
+        ])
+    else:
+        _add_kv_table(doc, [
+            ("Fabric Structure", data.get("fabric_structure")),
+            ("Fabric Weight (gsm)", data.get("fabric_weight_gsm")),
+            ("Dyeing Method", data.get("dye_method")),
+        ])
+
+    # 3. Style Details
+    _add_h2(doc, "3. Style Details")
+    details = [
+        ("Neckline", f"{data.get('neckline') or '—'} (rib: {data.get('neckline_rib_cm') or 0} cm)"),
+        ("Sleeve", f"{data.get('sleeve_length') or '—'} / {data.get('sleeve_type') or '—'}"),
+        ("Hem", f"{data.get('hem_style') or '—'} ({data.get('hem_height_cm') or 0} cm)"),
+        ("Cuff", f"{data.get('cuff_style') or '—'} ({data.get('cuff_height_cm') or 0} cm)"),
+        ("Placket / Closure", data.get("placket")),
+    ]
+    if "button" in (data.get("placket") or "").lower():
+        details.append((
+            "Buttons",
+            f"{data.get('button_count') or 0} × {data.get('button_size_l') or '—'} "
+            f"{data.get('button_material') or ''} ({data.get('button_color') or ''})",
+        ))
+    details.extend([
+        ("Print / Embroidery", data.get("print_embroidery")),
+        ("Wash / Finishing", data.get("wash_finishing")),
+        ("Shoulder Reinforcement", "Yes" if data.get("shoulder_reinforcement") else "No"),
+    ])
+    _add_kv_table(doc, details)
+
+    # 4. Measurements
+    _add_h2(doc, f"4. Measurements (Size {data.get('base_size') or 'M'})")
+    measurements = data.get("measurements") or {}
+    if measurements:
+        _add_measurement_table(doc, measurements, data.get("base_size") or "M")
+    else:
+        doc.add_paragraph("No measurements specified.")
+
+    # 5. Labels & Packing
+    _add_h2(doc, "5. Labels & Packing")
+    _add_kv_table(doc, [
+        ("Labels", ", ".join(data.get("labels") or []) or "—"),
+        ("Packing", data.get("packing")),
+    ])
+
+    # 6. Supplier Actions
+    _add_h2(doc, "6. Supplier Actions Required")
+    actions = data.get("supplier_actions") or []
+    if actions:
+        for a in actions:
+            doc.add_paragraph(a, style="List Bullet")
+    else:
+        doc.add_paragraph("None specified.")
+
+    # 7. Commercial
+    _add_h2(doc, "7. Commercial Information")
+    _add_kv_table(doc, [
+        ("Target Quantity", f"{data.get('target_quantity') or 0} pcs"),
+        ("Target Price", f"${data.get('target_price_usd') or 0:.2f} USD"),
+        ("Delivery Date", str(data.get("delivery_date") or "—")),
+    ])
+    if data.get("notes"):
+        notes_p = doc.add_paragraph()
+        run = notes_p.add_run("Notes: ")
+        run.bold = True
+        notes_p.add_run(str(data["notes"]))
+
+    buf = BytesIO()
+    doc.save(buf)
+    return buf.getvalue()

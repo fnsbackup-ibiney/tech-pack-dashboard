@@ -36,7 +36,7 @@ CARDIGAN_SAMPLE = {
     "cuff_style": "Ribbed cuff",
     "cuff_height_cm": 2.0,
     "placket": "Half button placket",
-    "button_size_mm": "20",
+    "button_size_l": "32L",  # ~20mm, standard for cardigan
     "button_count": 2,
     "button_material": "Mother of Pearl (MOP)",
     "button_color": "Natural",
