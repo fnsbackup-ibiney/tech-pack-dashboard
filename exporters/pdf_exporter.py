@@ -9,13 +9,17 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import cm
+import base64
+
 from reportlab.platypus import (
+    Image as RLImage,
     Paragraph,
     SimpleDocTemplate,
     Spacer,
     Table,
     TableStyle,
 )
+from PIL import Image as PILImage
 
 
 def _styles():
@@ -83,6 +87,63 @@ def _measurement_table(measurements: dict, base_size: str) -> Table:
     return table
 
 
+def _render_images(images: list, max_per_row: int = 2) -> list:
+    """Lay out images in a 2-column table, each cell with the image + caption.
+
+    Returns a list of flowables to append to the PDF story.
+    """
+    flowables = []
+    styles = _styles()
+    target_w = 8 * cm  # width per cell
+    target_h = 8 * cm  # max height per cell
+
+    cells = []
+    for img in images:
+        try:
+            raw = base64.b64decode(img["data"])
+        except Exception:
+            continue
+        pil = PILImage.open(BytesIO(raw))
+        # Scale to fit target box, preserving aspect ratio
+        w, h = pil.size
+        scale = min(target_w / w, target_h / h)
+        rl_img = RLImage(BytesIO(raw), width=w * scale, height=h * scale)
+        caption = Paragraph(
+            f'<i>{(img.get("caption") or "").replace("&", "&amp;")}</i>',
+            styles["small"],
+        )
+        cells.append([rl_img, caption])
+
+    # Pack into rows of `max_per_row`
+    for row_start in range(0, len(cells), max_per_row):
+        chunk = cells[row_start:row_start + max_per_row]
+        # Compose each cell as a sub-table (image stacked over caption)
+        row_cells = []
+        for img_flow, caption_flow in chunk:
+            sub = Table([[img_flow], [caption_flow]], colWidths=[target_w])
+            sub.setStyle(TableStyle([
+                ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ("LEFTPADDING", (0, 0), (-1, -1), 2),
+                ("RIGHTPADDING", (0, 0), (-1, -1), 2),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+            ]))
+            row_cells.append(sub)
+        # Pad the row to `max_per_row` columns so the table stays even
+        while len(row_cells) < max_per_row:
+            row_cells.append("")
+
+        row_table = Table([row_cells], colWidths=[target_w] * max_per_row)
+        row_table.setStyle(TableStyle([
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 0),
+            ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+        ]))
+        flowables.append(row_table)
+        flowables.append(Spacer(1, 6))
+
+    return flowables
+
+
 def generate_pdf(data: dict) -> bytes:
     """Render the tech pack as a PDF and return raw bytes."""
     buf = BytesIO()
@@ -109,6 +170,18 @@ def generate_pdf(data: dict) -> bytes:
     story.append(Spacer(1, 8))
 
     is_knitwear = (data.get("product_type") or "").startswith("Knitwear")
+
+    # --- Images (rendered before the textual sections) ---
+    images = data.get("images") or []
+    if images:
+        story.append(Paragraph("Images & References", styles["h2"]))
+        story.extend(_render_images(images))
+
+    # --- AI Technical Drawing (its own section) ---
+    tech_drawing = data.get("technical_drawing")
+    if tech_drawing:
+        story.append(Paragraph("Technical Drawing (AI-generated)", styles["h2"]))
+        story.extend(_render_images([tech_drawing], max_per_row=1))
 
     # --- 1. Style Overview ---
     story.append(Paragraph("1. Style Overview", styles["h2"]))

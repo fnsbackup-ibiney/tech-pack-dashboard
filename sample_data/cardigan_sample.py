@@ -1,9 +1,29 @@
 """
 Pre-filled sample data for demo purposes.
 Based on the customer's original TECH PACK.docx (Cotton Knit Cardigan, SS26).
+
+The two demo images live in sample_data/images/ — they're compressed at import
+time so the demo always has visible reference photos, matching what was in
+the customer's original Word doc.
 """
 
 from datetime import date
+from pathlib import Path
+
+from services.image_helpers import make_image_entry
+
+_IMAGES_DIR = Path(__file__).parent / "images"
+
+
+def _load_demo_image(filename: str, caption: str) -> dict:
+    path = _IMAGES_DIR / filename
+    return make_image_entry(path.read_bytes(), filename=filename, caption=caption)
+
+
+_DEMO_IMAGES = [
+    _load_demo_image("cardigan_reference.png", "Front reference (model)"),
+    _load_demo_image("cardigan_technical.png", "Technical drawing (front & back)"),
+]
 
 CARDIGAN_SAMPLE = {
     # Style Overview
@@ -76,4 +96,7 @@ CARDIGAN_SAMPLE = {
 
     # Notes
     "notes": "Lightweight, airy rib structure. Loose fit, slightly cropped body.",
+
+    # Images — preloaded references from the customer's original TECH PACK.docx
+    "images": _DEMO_IMAGES,
 }

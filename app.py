@@ -54,6 +54,17 @@ from config.dropdown_options import (
 from exporters.docx_exporter import generate_docx
 from exporters.pdf_exporter import generate_pdf
 from sample_data.cardigan_sample import CARDIGAN_SAMPLE
+from services import firestore_client
+from services.ai_drawing import (
+    build_prompt as build_drawing_prompt,
+    generate_drawing,
+    is_demo_mode as ai_demo_mode,
+)
+from services.image_helpers import (
+    approximate_size_kb,
+    make_image_entry,
+    to_data_url,
+)
 
 
 # =============================================================================
@@ -63,8 +74,8 @@ from sample_data.cardigan_sample import CARDIGAN_SAMPLE
 # Pre-fill the form with the cardigan demo data on first visit?
 #   True  → testing / demo mode (handy while you're still building it out)
 #   False → production / customer-facing (every new visitor sees a blank form;
-#           they can still click "Load Sample" in the sidebar to see the demo)
-LOAD_SAMPLE_ON_FIRST_VISIT = True
+#           they can still click "Load Demo" in the sidebar to see the example)
+LOAD_SAMPLE_ON_FIRST_VISIT = False
 
 
 # =============================================================================
@@ -123,7 +134,7 @@ def init_state():
 # Keys we must NOT touch via session_state — Streamlit forbids it for
 # some widgets (e.g. data_editor, button, file_uploader, form_submit_button).
 # Touching them throws StreamlitValueAssignmentNotAllowedError.
-WIDGET_ONLY_KEYS = {"measurements_editor"}
+WIDGET_ONLY_KEYS = {"measurements_editor", "_image_uploader"}
 PROTECTED_KEYS = {"initialized", "_snapshot"} | WIDGET_ONLY_KEYS
 
 
@@ -171,6 +182,76 @@ def undo():
     del st.session_state["_snapshot"]
 
 
+# -----------------------------------------------------------------------------
+# Image management — callbacks used by the Editor's Images section.
+# Images live in st.session_state["images"] as a list of dicts:
+#   {"id": str, "caption": str, "data": base64_str, "mime": str}
+# -----------------------------------------------------------------------------
+
+def _ensure_image_list():
+    if "images" not in st.session_state:
+        st.session_state["images"] = []
+
+
+def add_image(file_bytes: bytes, filename: str):
+    """Compress and append a new image to the list."""
+    _ensure_image_list()
+    st.session_state["images"].append(make_image_entry(file_bytes, filename))
+
+
+def delete_image(img_id: str):
+    _ensure_image_list()
+    st.session_state["images"] = [
+        i for i in st.session_state["images"] if i["id"] != img_id
+    ]
+
+
+def move_image(img_id: str, direction: int):
+    """Move an image up (-1) or down (+1) in the list."""
+    _ensure_image_list()
+    images = st.session_state["images"]
+    idx = next((i for i, img in enumerate(images) if img["id"] == img_id), -1)
+    if idx < 0:
+        return
+    new_idx = idx + direction
+    if 0 <= new_idx < len(images):
+        images[idx], images[new_idx] = images[new_idx], images[idx]
+
+
+def update_caption(img_id: str):
+    """on_change callback — reads the latest caption from the text_input widget
+    and writes it back into the image dict."""
+    _ensure_image_list()
+    widget_key = f"_caption_input_{img_id}"
+    new_caption = st.session_state.get(widget_key, "")
+    for img in st.session_state["images"]:
+        if img["id"] == img_id:
+            img["caption"] = new_caption
+            return
+
+
+def restore_from_dict(loaded: dict):
+    """Replace current state with a saved tech pack record from Firestore.
+
+    Used as an on_click callback so it runs BEFORE widgets are re-instantiated.
+    """
+    _snapshot()
+    # Clear current state
+    for k in [k for k in st.session_state.keys() if k not in PROTECTED_KEYS]:
+        del st.session_state[k]
+    # Apply the loaded values
+    for k, v in loaded.items():
+        if k in WIDGET_ONLY_KEYS or k.startswith("_"):
+            continue
+        # delivery_date comes back as ISO string — try to parse back to date
+        if k == "delivery_date" and isinstance(v, str):
+            try:
+                v = date.fromisoformat(v.split("T")[0])
+            except (ValueError, AttributeError):
+                pass
+        st.session_state[k] = v
+
+
 def collect_data() -> dict:
     """Pull all form values from session_state into a single dict for export."""
     fields = [
@@ -192,6 +273,8 @@ def collect_data() -> dict:
     data["measurements"] = st.session_state.get("measurements") or {}
     data["labels"] = st.session_state.get("labels") or []
     data["supplier_actions"] = st.session_state.get("supplier_actions") or []
+    data["images"] = st.session_state.get("images") or []
+    data["technical_drawing"] = st.session_state.get("technical_drawing")
     data["shoulder_reinforcement"] = bool(st.session_state.get("shoulder_reinforcement"))
     data["neckline_rib_cm"] = st.session_state.get("neckline_rib_cm")
     data["hem_height_cm"] = st.session_state.get("hem_height_cm")
@@ -237,10 +320,10 @@ with st.sidebar:
     st.subheader("Quick Actions")
     col_a, col_b = st.columns(2)
     col_a.button(
-        "📋 Load Sample",
+        "📋 Load Demo",
         on_click=load_sample,
         use_container_width=True,
-        help="Replace everything with the cardigan demo data.",
+        help="Fill the form with an example tech pack (the cotton cardigan).",
     )
     col_b.button(
         "🧹 Reset",
@@ -256,18 +339,78 @@ with st.sidebar:
         on_click=undo,
         use_container_width=True,
         disabled=not can_undo,
-        help="Restore the state from before your last Load Sample or Reset.",
+        help="Restore the state from before your last Load Demo, Reset, or History load.",
     )
 
     st.divider()
-    st.caption("v0.2 · Draft")
+
+    # --- Save to cloud ---
+    st.subheader("Save / Cloud")
+    firestore_ready = firestore_client.is_configured()
+    current_doc_id = st.session_state.get("_current_doc_id")
+
+    if current_doc_id:
+        st.caption(f"📝 Editing record `{current_doc_id[:8]}…`")
+    else:
+        st.caption("💡 Not saved yet — click below to save a new record.")
+
+    def _do_save():
+        """on_click callback: save to Firestore."""
+        try:
+            data = collect_data()
+            doc_id = firestore_client.save_tech_pack(
+                data, doc_id=st.session_state.get("_current_doc_id")
+            )
+            st.session_state["_current_doc_id"] = doc_id
+            st.session_state["_save_status"] = ("success", doc_id)
+        except Exception as e:
+            st.session_state["_save_status"] = ("error", str(e))
+
+    def _save_as_new():
+        """on_click callback: force a brand-new record (don't overwrite current)."""
+        st.session_state["_current_doc_id"] = None
+        _do_save()
+
+    save_label = "💾 Save (update record)" if current_doc_id else "💾 Save to cloud"
+    st.button(
+        save_label,
+        on_click=_do_save,
+        use_container_width=True,
+        disabled=not firestore_ready,
+        type="primary" if firestore_ready else "secondary",
+        help=(
+            "Save the current tech pack to Firestore."
+            if firestore_ready
+            else "Firestore not configured. Add credentials to Streamlit secrets."
+        ),
+    )
+    if current_doc_id:
+        st.button(
+            "💾 Save as new (don't overwrite)",
+            on_click=_save_as_new,
+            use_container_width=True,
+            disabled=not firestore_ready,
+            help="Create a brand-new record instead of updating the one you're editing.",
+        )
+
+    # Surface the result of the last save action
+    status = st.session_state.pop("_save_status", None)
+    if status:
+        kind, payload = status
+        if kind == "success":
+            st.success(f"✅ Saved · id `{payload[:8]}…`")
+        else:
+            st.error(f"❌ Save failed: {payload}")
+
+    st.divider()
+    st.caption("v0.3 · Draft")
 
 
 # =============================================================================
 # MAIN TABS
 # =============================================================================
-tab_editor, tab_preview, tab_export = st.tabs(
-    ["📝 Editor", "👀 Preview", "📥 Export"]
+tab_editor, tab_preview, tab_export, tab_history = st.tabs(
+    ["📝 Editor", "👀 Preview", "📥 Export", "🗂️ History"]
 )
 
 
@@ -303,6 +446,150 @@ with tab_editor:
         c2.text_input("Pantone code", key="pantone_code", placeholder="e.g. 13-0859 TCX")
         opts = with_blank(COMPOSITIONS)
         c3.selectbox("Composition", opts, index=safe_index(opts, st.session_state.get("composition")), key="composition")
+
+    # --- Images section ---
+    with st.expander("📷 Images & References", expanded=True):
+        st.caption(
+            "Upload reference photos, technical drawings, mood boards, etc. "
+            "Images are auto-resized to 800 px and compressed before saving "
+            "(keeps each tech pack under Firestore's size limit)."
+        )
+
+        # Multi-file uploader — anything dropped here gets added to the list.
+        uploaded_files = st.file_uploader(
+            "Drop images here or click to browse",
+            accept_multiple_files=True,
+            type=["png", "jpg", "jpeg", "webp", "gif"],
+            key="_image_uploader",
+            label_visibility="collapsed",
+        )
+        if uploaded_files:
+            # Process new uploads — but only ones we haven't already added
+            # (st.file_uploader re-yields the same files on every rerun).
+            already_added = st.session_state.get("_uploaded_filenames", set())
+            for f in uploaded_files:
+                # Use name + size as a cheap dedupe key
+                fkey = f"{f.name}::{f.size}"
+                if fkey not in already_added:
+                    try:
+                        add_image(f.getvalue(), f.name)
+                        already_added.add(fkey)
+                    except Exception as e:
+                        st.error(f"Couldn't add {f.name}: {e}")
+            st.session_state["_uploaded_filenames"] = already_added
+
+        # Show the current list of images with controls
+        images = st.session_state.get("images") or []
+        if not images:
+            st.info("No images yet. Drag some onto the uploader above.")
+        else:
+            st.markdown(f"**{len(images)}** image{'s' if len(images) != 1 else ''}")
+            for idx, img in enumerate(images):
+                cols = st.columns([1, 4, 1, 1, 1])
+                cols[0].image(to_data_url(img), width=110)
+                # Seed the widget value on first render only — after that the
+                # widget owns its session_state key and on_change syncs back.
+                caption_key = f"_caption_input_{img['id']}"
+                if caption_key not in st.session_state:
+                    st.session_state[caption_key] = img.get("caption", "")
+                cols[1].text_input(
+                    "Caption",
+                    key=caption_key,
+                    on_change=update_caption,
+                    args=(img["id"],),
+                    label_visibility="collapsed",
+                    placeholder="Caption (e.g. Front reference, Technical drawing)",
+                )
+                cols[1].caption(f"~{approximate_size_kb(img):.0f} KB")
+                cols[2].button(
+                    "↑",
+                    key=f"_up_{img['id']}",
+                    on_click=move_image,
+                    args=(img["id"], -1),
+                    use_container_width=True,
+                    disabled=(idx == 0),
+                )
+                cols[3].button(
+                    "↓",
+                    key=f"_down_{img['id']}",
+                    on_click=move_image,
+                    args=(img["id"], +1),
+                    use_container_width=True,
+                    disabled=(idx == len(images) - 1),
+                )
+                cols[4].button(
+                    "🗑️",
+                    key=f"_del_{img['id']}",
+                    on_click=delete_image,
+                    args=(img["id"],),
+                    use_container_width=True,
+                    help="Remove this image",
+                )
+
+    # --- AI Technical Drawing section ---
+    with st.expander("🎨 Technical Drawing (AI-generated)", expanded=True):
+        ai_cols = st.columns([3, 1])
+        ai_cols[0].caption(
+            "Click the button below — AI reads the fields you've filled in "
+            "above and generates a flat technical sketch (front + back view). "
+            "Use this in place of a hand-drawn tech illustration."
+        )
+        if ai_demo_mode():
+            ai_cols[1].caption("🧪 **Demo mode** — placeholder output")
+
+        # Generate / re-generate button
+        existing_drawing = st.session_state.get("technical_drawing")
+
+        def _do_generate():
+            try:
+                data_now = collect_data()
+                drawing = generate_drawing(data_now)
+                st.session_state["technical_drawing"] = drawing
+                st.session_state["_drawing_status"] = ("success", None)
+            except Exception as e:
+                st.session_state["_drawing_status"] = ("error", str(e))
+
+        def _do_clear_drawing():
+            st.session_state["technical_drawing"] = None
+
+        btn_label = (
+            "🎨 Re-generate Technical Drawing"
+            if existing_drawing
+            else "🎨 Generate Technical Drawing"
+        )
+
+        gen_cols = st.columns([2, 1])
+        gen_cols[0].button(
+            btn_label,
+            on_click=_do_generate,
+            use_container_width=True,
+            type="primary",
+        )
+        if existing_drawing:
+            gen_cols[1].button(
+                "🗑️ Clear",
+                on_click=_do_clear_drawing,
+                use_container_width=True,
+            )
+
+        # Surface result of last generation
+        drawing_status = st.session_state.pop("_drawing_status", None)
+        if drawing_status:
+            kind, payload = drawing_status
+            if kind == "success":
+                st.success("✅ Drawing generated.")
+            else:
+                st.error(f"❌ Generation failed: {payload}")
+
+        # Display the current drawing
+        if existing_drawing:
+            disp_cols = st.columns([2, 3])
+            with disp_cols[0]:
+                st.image(to_data_url(existing_drawing), use_container_width=True)
+                st.caption(existing_drawing.get("caption") or "—")
+            with disp_cols[1]:
+                with st.expander("🔍 View AI prompt that was used", expanded=False):
+                    st.code(existing_drawing.get("prompt") or "(no prompt recorded)", language="text")
 
     # --- Section 2: Construction (Conditional on Product Type) ---
     with st.expander("2. Construction — Material & Knit/Fabric", expanded=True):
@@ -505,6 +792,32 @@ with tab_preview:
     st.title("TECH PACK")
     st.caption(f"Generated by Tech Pack Dashboard · {datetime.now().strftime('%Y-%m-%d')}")
 
+    # --- Images ---
+    images = data.get("images") or []
+    if images:
+        st.header("📷 Images & References")
+        # Render in a responsive grid: 3 columns for up to ~9 images
+        per_row = 3
+        for row_start in range(0, len(images), per_row):
+            row_imgs = images[row_start:row_start + per_row]
+            cols = st.columns(per_row)
+            for i, img in enumerate(row_imgs):
+                with cols[i]:
+                    st.image(to_data_url(img), use_container_width=True)
+                    st.caption(img.get("caption") or "—")
+
+    # --- AI Technical Drawing ---
+    tech_drawing = data.get("technical_drawing")
+    if tech_drawing:
+        st.header("🎨 Technical Drawing")
+        cols = st.columns([2, 3])
+        cols[0].image(to_data_url(tech_drawing), use_container_width=True)
+        cols[0].caption(tech_drawing.get("caption") or "—")
+        with cols[1]:
+            st.markdown("**AI-generated from inputs above**")
+            with st.expander("🔍 Prompt used", expanded=False):
+                st.code(tech_drawing.get("prompt") or "—", language="text")
+
     st.header("1. Style Overview")
     cols = st.columns(3)
     cols[0].markdown(f"**Style Name:** {data.get('style_name') or '—'}")
@@ -654,3 +967,129 @@ with tab_export:
     st.divider()
     with st.expander("👀 Preview JSON data", expanded=False):
         st.code(json.dumps(data, indent=2, ensure_ascii=False), language="json")
+
+
+# -----------------------------------------------------------------------------
+# TAB 4: HISTORY
+# -----------------------------------------------------------------------------
+with tab_history:
+    st.header("🗂️ Saved Tech Packs")
+    st.caption(
+        "Every tech pack you save shows up here. Click **Load** to restore it "
+        "into the Editor; **Delete** removes it permanently."
+    )
+
+    if not firestore_client.is_configured():
+        st.warning(
+            "**Firestore is not connected yet.** To enable cloud history:\n\n"
+            "1. Set up a Firebase project + Firestore database\n"
+            "2. Create a service account, download the JSON key\n"
+            "3. Add the key to `.streamlit/secrets.toml` (local) or Streamlit "
+            "Cloud secrets (deployed) under `[firebase_service_account]`\n\n"
+            "Until then, you can still use the dashboard normally — Save and "
+            "History just won't work."
+        )
+    else:
+        # --- Refresh button ---
+        col_refresh, col_info = st.columns([1, 4])
+        if col_refresh.button("🔄 Refresh", use_container_width=True):
+            st.rerun()
+        col_info.caption("List is sorted by most recently updated.")
+
+        try:
+            records = firestore_client.list_tech_packs()
+        except Exception as e:
+            st.error(f"Couldn't load history: {e}")
+            records = []
+
+        if not records:
+            st.info(
+                "No saved tech packs yet. Fill out the Editor, then click "
+                "**💾 Save to cloud** in the sidebar."
+            )
+        else:
+            st.write(f"**{len(records)}** record{'s' if len(records) != 1 else ''}")
+            st.divider()
+
+            for rec in records:
+                with st.container():
+                    cols = st.columns([3, 2, 2, 2, 1, 1])
+
+                    # Display info
+                    cols[0].markdown(f"**{rec['name'] or 'Untitled'}**")
+                    cols[0].caption(f"`{rec['id'][:8]}…`")
+
+                    cols[1].markdown(rec.get("style_number") or "—")
+                    cols[1].caption("Style #")
+
+                    product_short = (rec.get("product_type") or "—").split(" (")[0]
+                    cols[2].markdown(product_short)
+                    cols[2].caption("Type")
+
+                    cols[3].markdown(rec.get("season") or "—")
+                    updated = rec.get("updated_at")
+                    if updated and hasattr(updated, "strftime"):
+                        cols[3].caption(updated.strftime("%Y-%m-%d %H:%M"))
+                    else:
+                        cols[3].caption("—")
+
+                    # Load button
+                    def _make_load_callback(doc_id):
+                        def _cb():
+                            try:
+                                loaded = firestore_client.load_tech_pack(doc_id)
+                                if loaded:
+                                    restore_from_dict(loaded)
+                                    st.session_state["_current_doc_id"] = doc_id
+                                    st.session_state["_load_status"] = ("success", doc_id)
+                                else:
+                                    st.session_state["_load_status"] = ("error", "Record not found")
+                            except Exception as e:
+                                st.session_state["_load_status"] = ("error", str(e))
+                        return _cb
+
+                    cols[4].button(
+                        "Load",
+                        key=f"load_{rec['id']}",
+                        on_click=_make_load_callback(rec["id"]),
+                        use_container_width=True,
+                        help="Load this record into the Editor (your current work will be undoable).",
+                    )
+
+                    # Delete button (two-step: arm then confirm)
+                    arm_key = f"arm_delete_{rec['id']}"
+                    if st.session_state.get(arm_key):
+                        if cols[5].button(
+                            "❗ Confirm",
+                            key=f"confirm_{rec['id']}",
+                            use_container_width=True,
+                            type="primary",
+                        ):
+                            try:
+                                firestore_client.delete_tech_pack(rec["id"])
+                                # Also clear the editing pointer if we just deleted what's open
+                                if st.session_state.get("_current_doc_id") == rec["id"]:
+                                    st.session_state["_current_doc_id"] = None
+                                st.session_state[arm_key] = False
+                                st.rerun()
+                            except Exception as e:
+                                st.error(f"Delete failed: {e}")
+                    else:
+                        if cols[5].button(
+                            "Delete",
+                            key=f"del_{rec['id']}",
+                            use_container_width=True,
+                        ):
+                            st.session_state[arm_key] = True
+                            st.rerun()
+
+                    st.divider()
+
+        # Surface result of Load action
+        load_status = st.session_state.pop("_load_status", None)
+        if load_status:
+            kind, payload = load_status
+            if kind == "success":
+                st.success(f"✅ Loaded record `{payload[:8]}…` — switch to the **📝 Editor** tab to see it.")
+            else:
+                st.error(f"❌ Load failed: {payload}")

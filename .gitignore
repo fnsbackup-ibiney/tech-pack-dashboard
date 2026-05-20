@@ -12,6 +12,12 @@ ENV/
 # Streamlit
 .streamlit/secrets.toml
 
+# Firebase / Google service account credentials — NEVER commit these
+*-firebase-adminsdk-*.json
+*-service-account*.json
+serviceAccountKey*.json
+firebase-credentials*.json
+
 # Mac
 .DS_Store
 

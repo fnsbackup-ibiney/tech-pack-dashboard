@@ -2,6 +2,7 @@
 Generate a Word document version of the tech pack using python-docx.
 """
 
+import base64
 from datetime import datetime
 from io import BytesIO
 
@@ -63,6 +64,48 @@ def _add_h2(doc: Document, text: str):
     p.paragraph_format.space_after = Pt(4)
 
 
+def _add_image_grid(doc: Document, images: list, per_row: int = 2):
+    """Insert the images as a 2-column table of (image / caption) cells."""
+    cell_width_cm = 7.5
+
+    # Pad to a multiple of `per_row` so the last row stays even.
+    padded = list(images) + [None] * ((per_row - len(images) % per_row) % per_row)
+    row_count = len(padded) // per_row
+    if row_count == 0:
+        return
+
+    table = doc.add_table(rows=row_count * 2, cols=per_row)  # 2 rows per image: image, caption
+    table.autofit = False
+
+    for ri in range(row_count):
+        img_row = table.rows[ri * 2].cells
+        cap_row = table.rows[ri * 2 + 1].cells
+        for ci in range(per_row):
+            entry = padded[ri * per_row + ci]
+            img_cell = img_row[ci]
+            cap_cell = cap_row[ci]
+            img_cell.width = Cm(cell_width_cm)
+            cap_cell.width = Cm(cell_width_cm)
+            if entry is None:
+                continue
+            # Insert the image
+            try:
+                raw = base64.b64decode(entry["data"])
+            except Exception:
+                continue
+            p = img_cell.paragraphs[0]
+            run = p.add_run()
+            run.add_picture(BytesIO(raw), width=Cm(cell_width_cm - 0.2))
+            # Caption
+            cap_p = cap_cell.paragraphs[0]
+            cap_run = cap_p.add_run(entry.get("caption") or "")
+            cap_run.italic = True
+            cap_run.font.size = Pt(9)
+
+    # Space after the grid
+    doc.add_paragraph()
+
+
 def generate_docx(data: dict) -> bytes:
     """Render the tech pack as a .docx file and return raw bytes."""
     doc = Document()
@@ -96,6 +139,18 @@ def generate_docx(data: dict) -> bytes:
     ts_run.font.color.rgb = RGBColor(0x80, 0x80, 0x80)
 
     is_knitwear = (data.get("product_type") or "").startswith("Knitwear")
+
+    # Images (placed before the textual sections so they're seen first)
+    images = data.get("images") or []
+    if images:
+        _add_h2(doc, "Images & References")
+        _add_image_grid(doc, images)
+
+    # AI Technical Drawing — its own section
+    tech_drawing = data.get("technical_drawing")
+    if tech_drawing:
+        _add_h2(doc, "Technical Drawing (AI-generated)")
+        _add_image_grid(doc, [tech_drawing], per_row=1)
 
     # 1. Style Overview
     _add_h2(doc, "1. Style Overview")
