@@ -98,15 +98,22 @@ def init_state():
     """Initialize session state on first run."""
     if "initialized" not in st.session_state:
         for key, value in CARDIGAN_SAMPLE.items():
-            st.session_state[key] = value
+            if key not in WIDGET_ONLY_KEYS:
+                st.session_state[key] = value
         st.session_state["initialized"] = True
+
+
+# Keys we must NOT touch via session_state — Streamlit forbids it for
+# some widgets (e.g. data_editor, button, file_uploader, form_submit_button).
+# Touching them throws StreamlitValueAssignmentNotAllowedError.
+WIDGET_ONLY_KEYS = {"measurements_editor"}
+PROTECTED_KEYS = {"initialized", "_snapshot"} | WIDGET_ONLY_KEYS
 
 
 def _snapshot():
     """Save the current state so the user can Undo later."""
-    PROTECTED = {"initialized", "_snapshot"}
     st.session_state["_snapshot"] = {
-        k: v for k, v in st.session_state.items() if k not in PROTECTED
+        k: v for k, v in st.session_state.items() if k not in PROTECTED_KEYS
     }
 
 
@@ -116,8 +123,7 @@ def reset_to_blank():
     Used as an on_click callback so it runs BEFORE widgets are re-instantiated.
     """
     _snapshot()
-    PROTECTED = {"initialized", "_snapshot"}
-    for k in [k for k in st.session_state.keys() if k not in PROTECTED]:
+    for k in [k for k in st.session_state.keys() if k not in PROTECTED_KEYS]:
         del st.session_state[k]
 
 
@@ -128,7 +134,8 @@ def load_sample():
     """
     _snapshot()
     for key, value in CARDIGAN_SAMPLE.items():
-        st.session_state[key] = value
+        if key not in WIDGET_ONLY_KEYS:
+            st.session_state[key] = value
 
 
 def undo():
@@ -136,13 +143,13 @@ def undo():
     snapshot = st.session_state.get("_snapshot")
     if not snapshot:
         return
-    PROTECTED = {"initialized", "_snapshot"}
     # Clear current state (except protected keys)
-    for k in [k for k in st.session_state.keys() if k not in PROTECTED]:
+    for k in [k for k in st.session_state.keys() if k not in PROTECTED_KEYS]:
         del st.session_state[k]
-    # Restore from snapshot
+    # Restore from snapshot (skip widget-only keys)
     for k, v in snapshot.items():
-        st.session_state[k] = v
+        if k not in WIDGET_ONLY_KEYS:
+            st.session_state[k] = v
     # Remove the snapshot itself (single-level undo)
     del st.session_state["_snapshot"]
 
