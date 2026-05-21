@@ -59,7 +59,7 @@ from config.dropdown_options import (
 from exporters.docx_exporter import generate_docx
 from exporters.pdf_exporter import generate_pdf
 from sample_data.cardigan_sample import CARDIGAN_SAMPLE
-from services import firestore_client, photo_analyzer
+from services import firestore_client, market_pricing, photo_analyzer
 from services.ai_drawing import (
     build_prompt as build_drawing_prompt,
     generate_drawing,
@@ -478,7 +478,26 @@ tab_editor, tab_preview, tab_export, tab_history = st.tabs(
 # TAB 1: EDITOR
 # -----------------------------------------------------------------------------
 with tab_editor:
-    st.header("Build your tech pack")
+    # Header on the left, market-pricing reference card on the right.
+    # Stakeholder asked for a "top-right tool" — Streamlit doesn't do floating
+    # widgets, so we approximate with a two-column header row.
+    _hdr_col, _mkt_col = st.columns([3, 1])
+    with _hdr_col:
+        st.header("Build your tech pack")
+    with _mkt_col:
+        _selected_cat = st.session_state.get("garment_sub_category") or ""
+        _mkt_stats = market_pricing.get_price_stats(_selected_cat or None) if market_pricing.is_available() else None
+        if _mkt_stats:
+            _scope = _selected_cat if _selected_cat else "all knitwear"
+            st.caption(f"💰 **Market reference** · {_scope} · n={_mkt_stats['n']}")
+            _c1, _c2 = st.columns(2)
+            _c1.metric("Median", f"€{_mkt_stats['median']:.2f}")
+            _c2.metric("Range", f"€{_mkt_stats['low']:.0f}–{_mkt_stats['high']:.0f}")
+            _meta = market_pricing.get_metadata()
+            if _meta.get("pulled_on"):
+                st.caption(f"_Marie Lund / PNC, pulled {_meta['pulled_on']}_")
+        elif market_pricing.is_available() and _selected_cat:
+            st.caption(f"💰 No market data for *{_selected_cat}* yet.")
 
     form_unlocked = st.session_state.get("_form_unlocked", False)
 
