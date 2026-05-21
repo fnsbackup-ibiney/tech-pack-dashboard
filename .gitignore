@@ -11,6 +11,8 @@ ENV/
 
 # Streamlit
 .streamlit/secrets.toml
+.streamlit/secrets.toml.*
+.streamlit/secrets*.bak
 
 # Firebase / Google service account credentials — NEVER commit these
 *-firebase-adminsdk-*.json

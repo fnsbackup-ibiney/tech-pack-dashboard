@@ -25,6 +25,28 @@ PRODUCT_TYPES = [
     "T-shirt / Jersey",
 ]
 
+# Sub-categories derived from the customer's own brand catalog (Marie Lund,
+# 252 SKUs on P&C). These are the buckets the buyer side already thinks in.
+KNITWEAR_SUB_CATEGORIES = [
+    "Cardigan",                    # Strickjacke — most common (43%)
+    "Pullover / Sweater",          # Strickpullover — pullover crew/V neck
+    "Knit Wrap / Cape",            # Strickhülle — open wrap, no closure
+    "Short-Sleeve Cardigan",       # Kurzarm-Strickjacke
+    "Bolero / Shrug",              # Strick-Bolero — short cropped open jacket
+    "Knit Shirt",                  # Strickshirt — knit version of a tee/shirt
+    "Knit Vest",                   # sleeveless knit
+]
+
+TSHIRT_SUB_CATEGORIES = [
+    "T-shirt (Crew Neck)",
+    "T-shirt (V-Neck)",
+    "Polo Shirt",
+    "Long-Sleeve Tee",
+    "Tank Top",
+    "Henley",
+    "Cropped Tee",
+]
+
 # =============================================================================
 # UNIVERSAL FIELDS (shown for both Knitwear and T-shirt)
 # =============================================================================
