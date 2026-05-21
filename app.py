@@ -607,24 +607,35 @@ with tab_editor:
         images = st.session_state.get("images") or []
         has_image = bool(images)
 
+        # === AUTO-TRIGGER photo analysis when a NEW first image arrives ===
+        # Customer-facing app: people won't think to click "Auto-fill". We
+        # detect new uploads by tracking image IDs we've already analyzed.
+        if ai_ready and has_image:
+            _first_id = images[0].get("id")
+            _analyzed_ids = st.session_state.get("_autoanalyzed_ids", set())
+            if _first_id and _first_id not in _analyzed_ids:
+                with st.spinner("🔍 AI is reading your photo to pre-fill the form…"):
+                    ai_autofill_callback()
+                st.session_state["_autoanalyzed_ids"] = _analyzed_ids | {_first_id}
+                st.rerun()
+
         if not ai_ready:
             ai_help = "🔒 AI auto-fill is off until a Gemini key is added to secrets."
         elif not has_image:
-            ai_help = "Upload a photo first — then AI can read it and pre-fill the form."
+            ai_help = "Upload a photo first — AI will read it automatically and pre-fill the form."
         else:
             ai_help = (
-                "AI reads the first uploaded image and pre-fills sub-category, fit, "
-                "neckline, sleeve, hem, etc. Only empty fields get filled — your "
-                "existing selections aren't overwritten."
+                "AI reads the first uploaded photo automatically when you upload it. "
+                "Click this button to re-trigger (e.g. after changing the first image). "
+                "Only empty fields get filled — your existing selections aren't overwritten."
             )
 
         ai_col_a, ai_col_b = st.columns([2, 3])
         ai_col_a.button(
-            "🔍 Auto-fill from first photo",
+            "🔍 Re-analyze first photo",
             on_click=ai_autofill_callback,
             disabled=(not ai_ready) or (not has_image),
             use_container_width=True,
-            type="primary" if (ai_ready and has_image) else "secondary",
             help=ai_help,
         )
         ai_col_b.caption(ai_help)

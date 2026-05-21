@@ -44,11 +44,12 @@ _FALLBACK_DRAWING = Path(__file__).parent.parent / "sample_data" / "images" / "c
 DEMO_LATENCY_SECONDS = 2.2
 
 
-# Gemini image-generation model. Verified via list_models on 2026-05-21.
-# Also valid: "gemini-3-pro-image-preview" (higher quality, slower/pricier)
-# or "gemini-3.1-flash-image-preview" (newest). Swap here if you want to
-# trade speed vs quality — the SDK call interface is identical.
-MODEL = "gemini-2.5-flash-image"
+# Gemini image-generation model. Pro variant chosen for stronger fidelity
+# to the reference photo (the Flash variant tends to draw the same generic
+# pullover regardless of input). Alternatives: "gemini-2.5-flash-image"
+# (faster/cheaper) or "gemini-3.1-flash-image-preview" (newest). Swap here
+# if quality/speed/cost trade-off changes — SDK call interface is identical.
+MODEL = "gemini-3-pro-image-preview"
 
 
 # =============================================================================
