@@ -491,11 +491,15 @@ with tab_editor:
             _scope = _selected_cat if _selected_cat else "all knitwear"
             st.caption(f"💰 **Market reference** · {_scope} · n={_mkt_stats['n']}")
             _c1, _c2 = st.columns(2)
-            _c1.metric("Median", f"€{_mkt_stats['median']:.2f}")
-            _c2.metric("Range", f"€{_mkt_stats['low']:.0f}–{_mkt_stats['high']:.0f}")
+            _c1.metric("Median", f"${_mkt_stats['median']:.2f}")
+            _c2.metric("Range", f"${_mkt_stats['low']:.0f}–{_mkt_stats['high']:.0f}")
             _meta = market_pricing.get_metadata()
-            if _meta.get("pulled_on"):
-                st.caption(f"_Marie Lund / PNC, pulled {_meta['pulled_on']}_")
+            _fx = _mkt_stats.get("fx_rate")
+            _date = _meta.get("pulled_on")
+            if _fx and _date:
+                st.caption(f"_Marie Lund / PNC ({_date}) · USD via EUR×{_fx:.2f}_")
+            elif _date:
+                st.caption(f"_Marie Lund / PNC ({_date})_")
         elif market_pricing.is_available() and _selected_cat:
             st.caption(f"💰 No market data for *{_selected_cat}* yet.")
 

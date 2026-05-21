@@ -24,6 +24,13 @@ import streamlit as st
 _DATA_FILE = Path(__file__).parent.parent / "data" / "marie_lund_pricing.json"
 
 
+# Source data is in EUR (PNC.de). Tech pack ships prices in USD, so we
+# convert at read time. Update this rate periodically — last refreshed
+# 2026-05-21. ECB / live API would be more accurate but is overkill for a
+# reference widget. Off by a couple of cents either way is fine.
+EUR_TO_USD = 1.08
+
+
 @st.cache_data(show_spinner=False)
 def _load() -> dict:
     """Lazily load the bundled pricing JSON. Cached so the file is read once."""
@@ -87,11 +94,13 @@ def get_price_stats(category: str | None = None) -> dict | None:
 
     return {
         "n": n,
-        "median": statistics.median(prices),
-        "mean": statistics.mean(prices),
-        "low": prices[0],
-        "high": prices[-1],
-        "p25": p25,
-        "p75": p75,
-        "currency": "EUR",
+        "median": statistics.median(prices) * EUR_TO_USD,
+        "mean": statistics.mean(prices) * EUR_TO_USD,
+        "low": prices[0] * EUR_TO_USD,
+        "high": prices[-1] * EUR_TO_USD,
+        "p25": p25 * EUR_TO_USD,
+        "p75": p75 * EUR_TO_USD,
+        "currency": "USD",
+        "fx_rate": EUR_TO_USD,
+        "fx_base": "EUR",
     }
