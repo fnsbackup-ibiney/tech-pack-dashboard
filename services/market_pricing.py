@@ -1,15 +1,22 @@
 """
-Market Pricing Reference — show what similar garments are selling for now.
+Market Pricing Reference — find the most similar selling item to the tech
+pack being built, and show its current price.
 
 Data source: ``data/marie_lund_pricing.json`` (120 SKUs scraped from
-peek-und-cloppenburg.de on 2026-05-21). When the user picks a garment
-sub-category in the Editor, we show count / median / range / average from
-that bucket so they have a sanity check while filling target_price_usd.
+peek-und-cloppenburg.de on 2026-05-21). For each row we have category,
+color name, price (EUR), image_url, and product url.
 
-If you want to refresh the data, re-scrape page 1+2 of the Marie Lund
-knitwear listing, dedupe color variants from each style's detail page, and
-overwrite the JSON. The keys we depend on are ``items[].category`` (matched
-against KNITWEAR_SUB_CATEGORIES) and ``items[].price_eur``.
+Matching strategy (``find_similar_item``):
+  1. Hard filter — must be the same garment_sub_category. No cross-category
+     matches (a Cardigan and a Knit Shirt are not similar regardless of
+     color, so we never let them collide).
+  2. Score remaining candidates by color overlap with the user's color_name.
+  3. Return the highest-scored candidate. If the user hasn't filled a color
+     yet, fall back to the median-priced item in the category as a
+     "representative" — better than showing nothing.
+
+Aggregate stats (``get_price_stats``) still exposed for callers that want
+them, but the primary widget is the per-match view.
 """
 
 from __future__ import annotations
@@ -104,3 +111,81 @@ def get_price_stats(category: str | None = None) -> dict | None:
         "fx_rate": EUR_TO_USD,
         "fx_base": "EUR",
     }
+
+
+# =============================================================================
+# SIMILAR-ITEM MATCHING
+# =============================================================================
+
+def _color_score(user_color: str, item_color: str) -> int:
+    """How well does the user's color match this item's color?
+
+    100 — exact match (case-insensitive after normalize)
+     70 — one is substring of the other (e.g. "navy" vs "navy blue")
+     30+ — at least one shared word
+      0 — no overlap
+    """
+    u = (user_color or "").lower().strip()
+    i = (item_color or "").lower().strip()
+    if not u or not i:
+        return 0
+    if u == i:
+        return 100
+    if u in i or i in u:
+        return 70
+    u_words = set(u.split())
+    i_words = set(i.split())
+    overlap = u_words & i_words
+    if overlap:
+        return 30 + 10 * len(overlap)
+    return 0
+
+
+def find_similar_item(form_data: dict) -> dict | None:
+    """Return the catalog SKU most similar to the user's tech pack inputs,
+    or ``None`` if no category is selected / category has no entries.
+
+    The returned dict has price_eur AND price_usd — the latter is computed
+    here so the caller doesn't have to know the FX rate.
+    """
+    cat = form_data.get("garment_sub_category")
+    if not cat:
+        return None
+
+    items = _load().get("items", [])
+    candidates = [it for it in items if it.get("category", "").lower() == cat.lower()]
+    if not candidates:
+        return None
+
+    user_color = (form_data.get("color_name") or "").strip()
+
+    if user_color:
+        # Score and pick the best
+        scored = [(_color_score(user_color, c.get("color", "")), c) for c in candidates]
+        scored.sort(key=lambda pair: pair[0], reverse=True)
+        top_score, top_item = scored[0]
+        match_reason = (
+            "exact color match" if top_score >= 100 else
+            "close color match"  if top_score >= 70  else
+            "partial color match" if top_score >= 30 else
+            f"no color match — showing median-priced {cat.lower()}"
+        )
+        # If even the best score is 0, fall back to median-priced
+        if top_score == 0:
+            sorted_by_price = sorted(candidates, key=lambda c: c["price_eur"])
+            top_item = sorted_by_price[len(sorted_by_price) // 2]
+    else:
+        # No color filter — pick the median-priced item in the category
+        sorted_by_price = sorted(candidates, key=lambda c: c["price_eur"])
+        top_item = sorted_by_price[len(sorted_by_price) // 2]
+        match_reason = f"category match — showing median-priced {cat.lower()}"
+        top_score = 0
+
+    return {
+        **top_item,
+        "price_usd": top_item["price_eur"] * EUR_TO_USD,
+        "match_score": top_score,
+        "match_reason": match_reason,
+        "fx_rate": EUR_TO_USD,
+    }
+

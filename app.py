@@ -485,23 +485,35 @@ with tab_editor:
     with _hdr_col:
         st.header("Build your tech pack")
     with _mkt_col:
-        _selected_cat = st.session_state.get("garment_sub_category") or ""
-        _mkt_stats = market_pricing.get_price_stats(_selected_cat or None) if market_pricing.is_available() else None
-        if _mkt_stats:
-            _scope = _selected_cat if _selected_cat else "all knitwear"
-            st.caption(f"💰 **Market reference** · {_scope} · n={_mkt_stats['n']}")
-            _c1, _c2 = st.columns(2)
-            _c1.metric("Median", f"${_mkt_stats['median']:.2f}")
-            _c2.metric("Range", f"${_mkt_stats['low']:.0f}–{_mkt_stats['high']:.0f}")
-            _meta = market_pricing.get_metadata()
-            _fx = _mkt_stats.get("fx_rate")
-            _date = _meta.get("pulled_on")
-            if _fx and _date:
-                st.caption(f"_Marie Lund / PNC ({_date}) · USD via EUR×{_fx:.2f}_")
-            elif _date:
-                st.caption(f"_Marie Lund / PNC ({_date})_")
-        elif market_pricing.is_available() and _selected_cat:
-            st.caption(f"💰 No market data for *{_selected_cat}* yet.")
+        if market_pricing.is_available():
+            # Pull whatever's been filled so far. We don't need every field —
+            # just category and color drive the match.
+            _form_snapshot = {
+                "garment_sub_category": st.session_state.get("garment_sub_category"),
+                "color_name": st.session_state.get("color_name"),
+            }
+            _match = market_pricing.find_similar_item(_form_snapshot)
+            if _match:
+                st.caption("💰 **Closest item selling now**")
+                # Photo thumbnail. Falls back gracefully if the image URL 404s.
+                if _match.get("image_url"):
+                    try:
+                        st.image(_match["image_url"], use_container_width=True)
+                    except Exception:
+                        pass
+                st.metric("Price", f"${_match['price_usd']:.2f}")
+                # Short, single-line context: color + match reason
+                _color_label = _match.get("color") or "—"
+                st.caption(f"{_color_label} · {_match['match_reason']}")
+                if _match.get("url"):
+                    st.markdown(f"[🔗 View on PNC]({_match['url']})")
+                _meta = market_pricing.get_metadata()
+                _fx = _match.get("fx_rate")
+                if _meta.get("pulled_on") and _fx:
+                    st.caption(f"_Source: PNC, {_meta['pulled_on']} · USD via EUR×{_fx:.2f}_")
+            else:
+                st.caption("💰 **Closest item selling now**")
+                st.caption("Pick a *garment sub-category* (and optionally a *color*) above to see the closest match in our backend catalog.")
 
     form_unlocked = st.session_state.get("_form_unlocked", False)
 
