@@ -25,16 +25,16 @@ PRODUCT_TYPES = [
     "T-shirt / Jersey",
 ]
 
-# Sub-categories derived from the customer's own brand catalog (Marie Lund,
-# 252 SKUs on P&C). These are the buckets the buyer side already thinks in.
+# Sub-categories derived from data-driven analysis of customer's actual catalog
+# (Marie Lund, 132 active SKUs grouped into 5 buckets). Kept GENERAL on purpose —
+# stakeholder feedback was that finer splits like "Short-Sleeve Cardigan" or
+# "Chunky Knit" create too many buttons without adding clarity.
 KNITWEAR_SUB_CATEGORIES = [
-    "Cardigan",                    # Strickjacke — most common (43%)
-    "Pullover / Sweater",          # Strickpullover — pullover crew/V neck
-    "Knit Wrap / Cape",            # Strickhülle — open wrap, no closure
-    "Short-Sleeve Cardigan",       # Kurzarm-Strickjacke
-    "Bolero / Shrug",              # Strick-Bolero — short cropped open jacket
-    "Knit Shirt",                  # Strickshirt — knit version of a tee/shirt
-    "Knit Vest",                   # sleeveless knit
+    "Cardigan",            # Strickjacke + Kurzarm-Strickjacke — ~47% of catalog
+    "Pullover / Sweater",  # Strickpullover + Pullover + Grobstrick + Kurzarm — ~31%
+    "Knit Shirt",          # Strickshirt + Strick-Langarmshirt — ~13%
+    "Knit Wrap / Cape",    # Strickhülle — ~8%
+    "Bolero",              # Strick-Bolero — ~2%
 ]
 
 TSHIRT_SUB_CATEGORIES = [
