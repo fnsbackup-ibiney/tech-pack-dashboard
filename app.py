@@ -38,6 +38,7 @@ from config.dropdown_options import (
     NECKLINES,
     PACKING,
     PLACKETS,
+    PLACKET_INTERLINING,
     PRINT_EMBROIDERY,
     KNITWEAR_SUB_CATEGORIES,
     PRODUCT_TYPES,
@@ -46,6 +47,7 @@ from config.dropdown_options import (
     SIZE_RANGES,
     SLEEVE_LENGTHS,
     SLEEVE_TYPES,
+    STITCHING_TYPES,
     SUPPLIER_ACTIONS,
     TSHIRT_DYE_METHODS,
     TSHIRT_MEASUREMENT_POINTS,
@@ -319,8 +321,8 @@ def collect_data() -> dict:
         "fabric_structure", "fabric_weight_gsm", "dye_method",
         "neckline", "neckline_rib_cm", "sleeve_length", "sleeve_type",
         "hem_style", "hem_height_cm", "cuff_style", "cuff_height_cm",
-        "placket", "button_size_l", "button_count", "button_material",
-        "button_color", "print_embroidery", "wash_finishing",
+        "placket", "placket_interlining", "button_size_l", "button_count", "button_material",
+        "button_color", "print_embroidery", "wash_finishing", "stitching_type",
         "shoulder_reinforcement", "base_size", "measurements",
         "labels", "packing", "supplier_actions",
         "target_quantity", "target_price_usd", "delivery_date", "notes",
@@ -817,7 +819,7 @@ with tab_editor:
         "Sleeve type", opts,
         index=safe_index(opts, st.session_state.get("sleeve_type")),
         key="sleeve_type",
-        help="Set-in = standard. Raglan = diagonal seam. Drop shoulder = relaxed.",
+        help="Set-in = standard. Raglan = diagonal seam. Dropped Shoulder = relaxed.",
     )
 
     c1, c2, c3, c4 = st.columns(4)
@@ -831,6 +833,13 @@ with tab_editor:
     c1, c2 = st.columns(2)
     opts = with_blank(PLACKETS)
     c1.selectbox("Placket / closure", opts, index=safe_index(opts, st.session_state.get("placket")), key="placket")
+    opts = with_blank(PLACKET_INTERLINING)
+    c2.selectbox(
+        "Placket interlining / construction", opts,
+        index=safe_index(opts, st.session_state.get("placket_interlining")),
+        key="placket_interlining",
+        help="How the placket is built — fabric type + interlining layer.",
+    )
 
     # Button details (only show if placket uses buttons)
     placket_has_buttons = "button" in (st.session_state.get("placket") or "").lower()
@@ -855,7 +864,15 @@ with tab_editor:
     c1.selectbox("Print / embroidery", opts, index=safe_index(opts, st.session_state.get("print_embroidery")), key="print_embroidery")
     opts = with_blank(WASH_FINISHING)
     c2.selectbox("Wash / finishing", opts, index=safe_index(opts, st.session_state.get("wash_finishing")), key="wash_finishing")
-    c3.checkbox("Shoulder reinforcement required", key="shoulder_reinforcement")
+    opts = with_blank(STITCHING_TYPES)
+    c3.selectbox(
+        "Stitching / construction", opts,
+        index=safe_index(opts, st.session_state.get("stitching_type")),
+        key="stitching_type",
+        help="How the panels are joined. 'Standard knitwear construction' is the customer's default.",
+    )
+
+    st.checkbox("Shoulder reinforcement required", key="shoulder_reinforcement")
 
     # --- Section 4: Measurements ---
     st.divider()
@@ -1028,15 +1045,19 @@ with tab_preview:
     cols[1].markdown(f"**Cuff:** {data.get('cuff_style') or '—'} ({data.get('cuff_height_cm') or 0} cm)")
     cols = st.columns(2)
     cols[0].markdown(f"**Placket:** {data.get('placket') or '—'}")
+    cols[1].markdown(f"**Placket interlining:** {data.get('placket_interlining') or '—'}")
     if "button" in (data.get("placket") or "").lower():
-        cols[1].markdown(
+        cols = st.columns(2)
+        cols[0].markdown(
             f"**Buttons:** {data.get('button_count') or 0} × {data.get('button_size_l') or '—'} "
             f"{data.get('button_material') or ''} ({data.get('button_color') or ''})"
         )
     cols = st.columns(3)
     cols[0].markdown(f"**Print / Embroidery:** {data.get('print_embroidery') or '—'}")
     cols[1].markdown(f"**Wash / Finishing:** {data.get('wash_finishing') or '—'}")
-    cols[2].markdown(f"**Shoulder Reinforcement:** {'Yes' if data.get('shoulder_reinforcement') else 'No'}")
+    cols[2].markdown(f"**Stitching:** {data.get('stitching_type') or '—'}")
+    cols = st.columns(3)
+    cols[0].markdown(f"**Shoulder Reinforcement:** {'Yes' if data.get('shoulder_reinforcement') else 'No'}")
 
     st.header(f"4. Measurements (Size {data.get('base_size') or 'M'})")
     measurements = data.get("measurements") or {}

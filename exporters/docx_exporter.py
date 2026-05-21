@@ -193,6 +193,7 @@ def generate_docx(data: dict) -> bytes:
         ("Hem", f"{data.get('hem_style') or '—'} ({data.get('hem_height_cm') or 0} cm)"),
         ("Cuff", f"{data.get('cuff_style') or '—'} ({data.get('cuff_height_cm') or 0} cm)"),
         ("Placket / Closure", data.get("placket")),
+        ("Placket interlining", data.get("placket_interlining")),
     ]
     if "button" in (data.get("placket") or "").lower():
         details.append((
@@ -203,6 +204,7 @@ def generate_docx(data: dict) -> bytes:
     details.extend([
         ("Print / Embroidery", data.get("print_embroidery")),
         ("Wash / Finishing", data.get("wash_finishing")),
+        ("Stitching / Construction", data.get("stitching_type")),
         ("Shoulder Reinforcement", "Yes" if data.get("shoulder_reinforcement") else "No"),
     ])
     _add_kv_table(doc, details)

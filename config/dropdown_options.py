@@ -64,8 +64,10 @@ FITS = [
     "Regular",
     "Slim",
     "Oversized",
+    "Loose Fit",          # broader cut than "Relaxed" — customer's term
     "Relaxed",
     "Cropped",
+    "Slightly cropped",   # softer than full crop, hem just above waistband
     "Fitted",
 ]
 
@@ -123,9 +125,12 @@ SLEEVE_LENGTHS = [
 SLEEVE_TYPES = [
     "Set-in",            # Standard fitted sleeve cap
     "Raglan",            # Diagonal seam from neck to underarm
-    "Drop shoulder",     # Shoulder seam falls below natural shoulder
+    "Dropped Shoulder",  # Shoulder seam falls below natural shoulder (customer's notation)
     "Saddle shoulder",   # Sleeve extends across the shoulder
     "Kimono",            # No shoulder seam, sleeve is part of bodice
+    "Relaxed",           # Set-in but with extra ease at armhole / sleeve
+    "Balloon",           # Wide volume, tapering at the wrist
+    "Bishop",            # Gathered at the cuff
 ]
 
 HEM_STYLES = [
@@ -153,6 +158,30 @@ PLACKETS = [
     "Half zip",
     "Snap",
     "Henley placket",
+]
+
+# How the placket is constructed — separate from the placket "type" above.
+# Customer's example: "Self-fabric, light interlining"
+PLACKET_INTERLINING = [
+    "Self-fabric, no interlining",
+    "Self-fabric, light interlining",
+    "Self-fabric, heavy interlining",
+    "Contrast fabric, no interlining",
+    "Contrast fabric, light interlining",
+    "Contrast fabric, heavy interlining",
+    "Bound (with binding tape)",
+]
+
+# Garment assembly / seam construction. Knitwear has its own conventions
+# distinct from cut-and-sew wovens.
+STITCHING_TYPES = [
+    "Standard knitwear construction",   # customer's term — generic linked + serged
+    "Linked (hand-linked seams)",       # smoother, higher quality
+    "Linked + overlocked",
+    "Fully fashioned",                  # shaped on the knit machine, no cut-sew
+    "Cut and sew",                      # cut from knit panels and sewn
+    "Overlocked",
+    "Flat-locked",                      # flat seams (athletic / sportswear)
 ]
 
 # Button options
@@ -254,11 +283,14 @@ YARN_COUNTS = [
     "Custom",
 ]
 
-# GG = needles per inch on the knitting machine. Lower = chunkier, higher = finer
+# GG = needles per inch on the knitting machine. Lower = chunkier, higher = finer.
+# Ranges (e.g. "5-7GG") are common when the customer is OK with either gauge.
 GAUGES = [
     "3GG (chunky)",
     "5GG",
+    "5-7GG (range)",     # customer's notation in the brief
     "7GG",
+    "7-9GG (range)",
     "9GG",
     "12GG (fine)",
     "14GG",

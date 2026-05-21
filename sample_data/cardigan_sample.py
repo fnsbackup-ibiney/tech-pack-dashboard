@@ -28,6 +28,7 @@ _DEMO_IMAGES = [
 CARDIGAN_SAMPLE = {
     # Style Overview
     "product_type": "Knitwear (Sweater / Cardigan)",
+    "garment_sub_category": "Cardigan",
     "style_name": "Cotton Knit Cardigan",
     "style_number": "KW-SS26-001",
     "season": "SS26",
@@ -50,18 +51,20 @@ CARDIGAN_SAMPLE = {
     "neckline": "Deep V-neck",
     "neckline_rib_cm": 2.5,
     "sleeve_length": "Long sleeve",
-    "sleeve_type": "Drop shoulder",
+    "sleeve_type": "Dropped Shoulder",
     "hem_style": "Ribbed hem",
     "hem_height_cm": 2.0,
     "cuff_style": "Ribbed cuff",
     "cuff_height_cm": 2.0,
     "placket": "Half button placket",
+    "placket_interlining": "Self-fabric, light interlining",
     "button_size_l": "32L",  # ~20mm, standard for cardigan
     "button_count": 2,
     "button_material": "Mother of Pearl (MOP)",
     "button_color": "Natural",
     "print_embroidery": "None",
     "wash_finishing": "Anti-pilling treatment",
+    "stitching_type": "Standard knitwear construction",
     "shoulder_reinforcement": True,
 
     # Measurements (Size M baseline)
