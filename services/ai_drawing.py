@@ -75,84 +75,82 @@ def is_demo_mode() -> bool:
 # PROMPT
 # =============================================================================
 
-# Visual fields — these are things you can SEE in a photo. When a reference
-# photo is provided, the photo is the ground truth for these and we don't
-# echo them from the form (to avoid form↔photo conflict).
-_VISUAL_FIELDS = {
-    "fit", "neckline", "sleeve_length", "sleeve_type",
-    "hem_style", "cuff_style", "placket", "rib_structure",
-}
+def _collect_spec_lines(data: dict) -> list[str]:
+    """Pull out the spec values the user has filled in (visual + construction).
+
+    These become the SPEC block in the prompt — taken as user-confirmed
+    overrides for the specific features they cover. Empty fields are skipped
+    so we don't claim "neckline: —" to the model.
+    """
+    lines = []
+    if data.get("garment_sub_category"):
+        lines.append(f"- Garment type: {data['garment_sub_category']}")
+    if data.get("fit"):
+        lines.append(f"- Fit / silhouette: {data['fit']}")
+    if data.get("neckline"):
+        lines.append(f"- Neckline: {data['neckline']}")
+    sleeve_desc = " ".join(filter(None, [data.get("sleeve_length"), data.get("sleeve_type")])).strip()
+    if sleeve_desc:
+        lines.append(f"- Sleeves: {sleeve_desc}")
+    if data.get("placket"):
+        lines.append(f"- Placket / closure: {data['placket']}")
+    if data.get("hem_style"):
+        lines.append(f"- Hem: {data['hem_style']}")
+    if data.get("cuff_style"):
+        lines.append(f"- Cuffs: {data['cuff_style']}")
+    if data.get("rib_structure"):
+        lines.append(f"- Rib detail: {data['rib_structure']}")
+    if data.get("knit_structure"):
+        lines.append(f"- Knit structure: {data['knit_structure']}")
+    if data.get("print_embroidery") and data["print_embroidery"].lower() not in ("none", ""):
+        lines.append(f"- Print / embroidery: {data['print_embroidery']}")
+    return lines
 
 
 def build_prompt(data: dict, has_reference_image: bool = False) -> str:
     """Compose a descriptive prompt from the form data — what we send to the
     image API. Also surfaced in the UI so the user can audit what AI saw.
 
-    Rule of thumb:
-      - With reference photo → photo is GROUND TRUTH for visual features.
-        Spec is only used for things you can't see (composition, knit
-        structure, print/embroidery, garment category).
-      - Without photo → spec is all we have, used directly.
+    With a reference photo:
+      The photo gives the overall look (silhouette, pattern, proportions),
+      BUT the SPEC block lists user-confirmed values for specific features.
+      When photo and spec conflict on a specific feature (e.g. photo looks
+      ambiguous but spec says "Long sleeve"), the spec wins.
+
+    Without a photo:
+      The spec is everything — assembled into a descriptive sketch prompt.
     """
     product_type = data.get("product_type") or "knitwear garment"
-    short_type = product_type.split(" (")[0]  # "Knitwear" / "T-shirt"
+    short_type = product_type.split(" (")[0]
+    spec_lines = _collect_spec_lines(data)
 
     if has_reference_image:
-        # Photo-anchored prompt — strict "no invented details" rule
         parts = [
-            "TASK: Convert the garment in the reference photo into an industry fashion CAD flat sketch — "
+            "TASK: Produce an industry fashion CAD flat sketch from the reference photo — "
             "two views side by side: FRONT (left) and BACK (right).",
-            "PRIMARY RULE: The photo is the source of truth. Match the photo exactly for: "
-            "silhouette / body length / sleeve length / sleeve width and style / neckline shape / "
-            "hem style / cuff style / placket / side seam details / any pattern (stripes, prints, textures, colorblocks).",
-            "DO NOT INVENT DETAILS: If the photo shows a plain hem, draw a plain hem (no rib, no decorative band). "
-            "If the photo shows plain cuffs, draw plain cuffs. If the photo has no side splits or vents, do not add them. "
-            "If a feature is not clearly visible in the photo AND not in the spec below, omit it rather than guessing. "
-            "It's better to draw a feature too simple than to invent one.",
-            "If the photo shows stripes or a repeating pattern, draw it as line patterns at roughly the same scale and direction.",
+            "VISUAL ANCHOR (from the photo): silhouette, body length, sleeve width, "
+            "neckline shape, pattern (stripes / prints / textures / colorblocks), "
+            "and overall proportions.",
         ]
+        if spec_lines:
+            parts.append(
+                "USER-CONFIRMED SPEC (these override the photo on any specific feature listed — "
+                "if a value here disagrees with what you 'see' in the photo, USE THE SPEC):\n"
+                + "\n".join(spec_lines)
+            )
+        parts.append(
+            "DO NOT INVENT DETAILS: if a feature is neither in the photo nor the spec, "
+            "draw it plain (no rib, no decorative band, no side splits, no extra seams). "
+            "Better simple than invented."
+        )
     else:
+        # Text-only prompt
         parts = [
-            "Industry fashion CAD flat sketch — front and back view side by side,",
-            f"of a {data.get('fit', '').lower()} {short_type.lower()}".strip(),
+            f"Industry fashion CAD flat sketch — front and back view side by side, "
+            f"of a {data.get('fit', '').lower()} {short_type.lower()}."
         ]
-
-    # Build spec list — what to include depends on whether we have a photo.
-    spec_parts = []
-    if data.get("garment_sub_category"):
-        spec_parts.append(f"category: {data['garment_sub_category'].lower()}")
-
-    if has_reference_image:
-        # Photo handles visuals — only add NON-visual / construction info
-        if data.get("print_embroidery") and data["print_embroidery"].lower() not in ("none", ""):
-            spec_parts.append(f"print/embroidery: {data['print_embroidery'].lower()}")
-        if data.get("knit_structure"):
-            spec_parts.append(f"knit structure: {data['knit_structure'].lower()}")
-    else:
-        # No photo — spec is all we have. Echo every visual field user filled.
-        if data.get("neckline"):
-            spec_parts.append(f"{data['neckline'].lower()} neckline")
-        if data.get("sleeve_length") or data.get("sleeve_type"):
-            sleeve_desc = " ".join(filter(None, [
-                (data.get("sleeve_length") or "").lower(),
-                (data.get("sleeve_type") or "").lower(),
-            ]))
-            if sleeve_desc.strip():
-                spec_parts.append(f"{sleeve_desc} sleeves")
-        if data.get("placket"):
-            spec_parts.append(f"{data['placket'].lower()} closure")
-        if data.get("rib_structure"):
-            spec_parts.append(f"{data['rib_structure'].lower()} detail")
-        if data.get("hem_style"):
-            spec_parts.append(data["hem_style"].lower())
-        if data.get("cuff_style"):
-            spec_parts.append(data["cuff_style"].lower())
-
-    if spec_parts:
-        if has_reference_image:
-            parts.append("Additional spec (for things not visible in the photo): " + "; ".join(spec_parts) + ".")
-        else:
-            parts.extend(spec_parts)
+        if spec_lines:
+            parts.append("Spec:\n" + "\n".join(spec_lines))
 
     # Hard styling rules — explicit so the image model doesn't add color/model/background
     parts.append(
@@ -162,7 +160,7 @@ def build_prompt(data: dict, has_reference_image: bool = False) -> str:
         "Label 'FRONT' under the front view and 'BACK' under the back view."
     )
 
-    return " ".join(p for p in parts if p and p.strip())
+    return "\n\n".join(p for p in parts if p and p.strip())
 
 
 # =============================================================================
