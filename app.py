@@ -486,31 +486,76 @@ with tab_editor:
         st.header("Build your tech pack")
     with _mkt_col:
         if market_pricing.is_available():
-            # Pull whatever's been filled so far. We don't need every field —
-            # just category and color drive the match.
+            # Pull what we need for matching. Category and color drive the
+            # text scoring; we pass extra fields too so Vision can use them
+            # as confirmed spec.
             _form_snapshot = {
                 "garment_sub_category": st.session_state.get("garment_sub_category"),
                 "color_name": st.session_state.get("color_name"),
+                "fit": st.session_state.get("fit"),
+                "sleeve_length": st.session_state.get("sleeve_length"),
+                "neckline": st.session_state.get("neckline"),
             }
-            _match = market_pricing.find_similar_item(_form_snapshot)
+
+            # Reuse last vision result if user already paid for it this session
+            # AND the form snapshot hasn't changed. Hash via JSON for stability.
+            _snapshot_key = json.dumps(_form_snapshot, sort_keys=True)
+            _vision_cache = st.session_state.get("_market_vision_cache", {})
+            _vision_match = _vision_cache.get(_snapshot_key)
+
+            _match = _vision_match or market_pricing.find_similar_item(_form_snapshot)
+
             if _match:
                 st.caption("💰 **Closest item selling now**")
-                # Photo thumbnail. Falls back gracefully if the image URL 404s.
                 if _match.get("image_url"):
                     try:
                         st.image(_match["image_url"], use_container_width=True)
                     except Exception:
                         pass
                 st.metric("Price", f"${_match['price_usd']:.2f}")
-                # Short, single-line context: color + match reason
                 _color_label = _match.get("color") or "—"
                 st.caption(f"{_color_label} · {_match['match_reason']}")
                 if _match.get("url"):
                     st.markdown(f"[🔗 View on PNC]({_match['url']})")
+
+                # Vision-refine button — only show if not already refined for
+                # this snapshot AND there's a photo + category to work with.
+                _first_user_image = next(
+                    (i for i in (st.session_state.get("images") or [])
+                     if "ai_generated" not in (i.get("source") or "")), None
+                )
+                _can_refine = (
+                    _form_snapshot["garment_sub_category"]
+                    and _first_user_image
+                    and not _vision_match
+                )
+                if _can_refine:
+                    if st.button(
+                        "🔬 Refine with AI Vision",
+                        use_container_width=True,
+                        help="Sends your photo + top text candidates to Gemini "
+                             "Vision to pick the most visually similar one. "
+                             "Takes 5-10 seconds and uses some API quota.",
+                    ):
+                        with st.spinner("AI Vision comparing your photo to top candidates…"):
+                            _refined = market_pricing.find_similar_item_vision(
+                                _form_snapshot,
+                                user_photo_data=_first_user_image["data"],
+                                user_photo_mime=_first_user_image.get("mime", "image/jpeg"),
+                            )
+                        if _refined:
+                            _vision_cache[_snapshot_key] = _refined
+                            st.session_state["_market_vision_cache"] = _vision_cache
+                            st.rerun()
+
                 _meta = market_pricing.get_metadata()
                 _fx = _match.get("fx_rate")
-                if _meta.get("pulled_on") and _fx:
-                    st.caption(f"_Source: PNC, {_meta['pulled_on']} · USD via EUR×{_fx:.2f}_")
+                _src = f"PNC, {_meta['pulled_on']}" if _meta.get("pulled_on") else "PNC"
+                _method = "AI Vision" if _match.get("match_method") == "vision" else "text match"
+                if _fx:
+                    st.caption(f"_Source: {_src} · matched by {_method} · USD via EUR×{_fx:.2f}_")
+                else:
+                    st.caption(f"_Source: {_src} · matched by {_method}_")
             else:
                 st.caption("💰 **Closest item selling now**")
                 st.caption("Pick a *garment sub-category* (and optionally a *color*) above to see the closest match in our backend catalog.")
