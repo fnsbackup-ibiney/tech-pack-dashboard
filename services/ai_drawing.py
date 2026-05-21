@@ -51,6 +51,13 @@ DEMO_LATENCY_SECONDS = 2.2
 # if quality/speed/cost trade-off changes — SDK call interface is identical.
 MODEL = "gemini-3-pro-image-preview"
 
+# Vision-only model used to describe the photo in detail BEFORE we ask the
+# image-gen model to draw. The description bridges visual ambiguity — pure
+# image-gen models tend to substitute generic textures for specific patterns
+# (e.g. "small dots" instead of "diagonal pointelle openwork"). Flash is
+# enough here — we only need a textual reading of the photo, not generation.
+DESCRIBER_MODEL = "gemini-2.5-flash"
+
 
 # =============================================================================
 # CONFIG CHECKS
@@ -64,6 +71,58 @@ def is_configured() -> bool:
         return "gemini_api_key" in st.secrets
     except Exception:
         return False
+
+
+@st.cache_data(show_spinner=False, ttl=3600)
+def _describe_for_sketch(image_data: str, mime: str) -> str:
+    """Use Gemini Vision to read the photo and write a detailed, sketch-focused
+    description. Cached per image hash so we only pay once per photo.
+
+    The text returned is plain prose (4-6 sentences) covering silhouette,
+    sleeve, hem, knit pattern, gauge, and any other distinctive details. We
+    feed this back into the image-gen prompt so the Pro model has explicit
+    textual cues for things it would otherwise substitute (e.g. "diagonal
+    pointelle openwork" instead of generic "knit texture").
+
+    Returns empty string on any failure — caller treats no-description as
+    photo-only mode and still works.
+    """
+    if not GENAI_AVAILABLE or not image_data:
+        return ""
+    try:
+        if "gemini_api_key" not in st.secrets:
+            return ""
+        client = genai.Client(api_key=st.secrets["gemini_api_key"])
+        image_bytes = base64.b64decode(image_data)
+        response = client.models.generate_content(
+            model=DESCRIBER_MODEL,
+            contents=[
+                genai_types.Part.from_bytes(data=image_bytes, mime_type=mime),
+                (
+                    "Describe this garment for someone drawing a fashion CAD flat sketch.\n\n"
+                    "Be SPECIFIC about visible details:\n"
+                    "1. Garment type + front opening (cardigan with buttons / pullover / wrap)\n"
+                    "2. Neckline shape and depth (deep V / shallow V / crew / scoop / etc.)\n"
+                    "3. Sleeve length, width, cuff style (e.g. 'long balloon sleeves with elasticated cuffs')\n"
+                    "4. Body length and fit (cropped at waist / regular / boxy / fitted / oversized)\n"
+                    "5. Hem style (plain straight / ribbed / curved / asymmetric / split)\n"
+                    "6. KNIT PATTERN — describe what you actually see. Examples: 'diagonal "
+                    "pointelle openwork (small holes in chevron stripes)', 'cable knit running "
+                    "vertically', 'plain stockinette', 'ribbed', 'fair isle'. Include pattern "
+                    "direction and density.\n"
+                    "7. Knit gauge (fine / medium / chunky)\n"
+                    "8. Any distinctive details (pockets, contrast trim, panels)\n\n"
+                    "CRITICAL:\n"
+                    "- If part of the garment is cut off in the photo (e.g. hem not visible "
+                    "because of cropping), say so explicitly. Do not guess hidden parts.\n"
+                    "- Describe ONLY what you can clearly see. No invention.\n\n"
+                    "Output: 4-6 sentences of plain prose. No preamble, no bullet points, no markdown."
+                ),
+            ],
+        )
+        return (response.text or "").strip()
+    except Exception:
+        return ""
 
 
 def is_demo_mode() -> bool:
@@ -108,15 +167,20 @@ def _collect_spec_lines(data: dict) -> list[str]:
     return lines
 
 
-def build_prompt(data: dict, has_reference_image: bool = False) -> str:
+def build_prompt(
+    data: dict,
+    has_reference_image: bool = False,
+    photo_description: str = "",
+) -> str:
     """Compose a descriptive prompt from the form data — what we send to the
     image API. Also surfaced in the UI so the user can audit what AI saw.
 
     With a reference photo:
-      The photo gives the overall look (silhouette, pattern, proportions),
-      BUT the SPEC block lists user-confirmed values for specific features.
-      When photo and spec conflict on a specific feature (e.g. photo looks
-      ambiguous but spec says "Long sleeve"), the spec wins.
+      We pass the photo itself AND (when available) a Vision-generated
+      written description of what's in the photo. The description gives the
+      image-gen model explicit textual cues for specific patterns/details
+      that pure-visual generation tends to substitute with generic textures.
+      Plus the user-confirmed SPEC block overrides any specific feature.
 
     Without a photo:
       The spec is everything — assembled into a descriptive sketch prompt.
@@ -129,10 +193,19 @@ def build_prompt(data: dict, has_reference_image: bool = False) -> str:
         parts = [
             "TASK: Produce an industry fashion CAD flat sketch from the reference photo — "
             "two views side by side: FRONT (left) and BACK (right).",
-            "VISUAL ANCHOR (from the photo): silhouette, body length, sleeve width, "
-            "neckline shape, pattern (stripes / prints / textures / colorblocks), "
-            "and overall proportions.",
         ]
+        if photo_description:
+            parts.append(
+                "WHAT THE PHOTO SHOWS (carefully analyzed by a vision model — match this "
+                "description precisely, especially the knit pattern and length):\n"
+                + photo_description
+            )
+        else:
+            parts.append(
+                "VISUAL ANCHOR (from the photo): silhouette, body length, sleeve width, "
+                "neckline shape, pattern (stripes / prints / textures / colorblocks), "
+                "and overall proportions."
+            )
         if spec_lines:
             parts.append(
                 "USER-CONFIRMED SPEC (these override the photo on any specific feature listed — "
@@ -140,9 +213,13 @@ def build_prompt(data: dict, has_reference_image: bool = False) -> str:
                 + "\n".join(spec_lines)
             )
         parts.append(
-            "DO NOT INVENT DETAILS: if a feature is neither in the photo nor the spec, "
-            "draw it plain (no rib, no decorative band, no side splits, no extra seams). "
-            "Better simple than invented."
+            "DRAWING REQUIREMENTS:\n"
+            "- Reproduce the SPECIFIC knit pattern described — not a generic texture. "
+            "Pointelle openwork ≠ small dots. Cable knit ≠ random lines.\n"
+            "- Match the body length precisely (cropped vs regular vs long).\n"
+            "- Match the sleeve volume (slim vs balloon vs dropped vs balloon-cuffed).\n"
+            "- If a feature is neither in the photo description nor the spec, draw it plain "
+            "(no rib, no decorative band, no side splits, no extra seams)."
         )
     else:
         # Text-only prompt
@@ -153,12 +230,19 @@ def build_prompt(data: dict, has_reference_image: bool = False) -> str:
         if spec_lines:
             parts.append("Spec:\n" + "\n".join(spec_lines))
 
-    # Hard styling rules — explicit so the image model doesn't add color/model/background
+    # Hard styling rules — explicit so the image model doesn't add color/model/background.
+    # Note: Pro tends to leak the photo's color into the output ("if the input is yellow,
+    # the drawing comes out yellow"). Hammer this point until it's unambiguous.
     parts.append(
-        "STYLE: Black line art only, white background, no model, no human body, "
-        "no color filling, no shading, no gradient, no perspective. "
-        "Clean vector-style technical illustration suitable for a manufacturing tech pack. "
-        "Label 'FRONT' under the front view and 'BACK' under the back view."
+        "STYLE — STRICT MONOCHROME REQUIREMENT:\n"
+        "- Output MUST be pure BLACK linework on a WHITE background. No color whatsoever.\n"
+        "- The reference photo's color is for SHAPE and PATTERN reference only — DO NOT "
+        "reproduce its color in the sketch, even faintly. Even if the input is bright yellow / "
+        "red / blue, the output is monochrome black-and-white.\n"
+        "- No color fills, no shading, no gradients, no tinting, no perspective.\n"
+        "- No model, no human body, no background details, no props.\n"
+        "- Clean vector-style technical illustration suitable for a manufacturing tech pack.\n"
+        "- Label 'FRONT' below the front view and 'BACK' below the back view."
     )
 
     return "\n\n".join(p for p in parts if p and p.strip())
@@ -275,7 +359,23 @@ def generate_drawing(data: dict) -> dict:
       - Returns the pre-baked cardigan PNG with a clear caption
     """
     reference = _pick_reference_image(data)
-    prompt = build_prompt(data, has_reference_image=(reference is not None))
+
+    # Step 1: ask Vision to describe the photo in detail (cached per image).
+    # This bridges the gap between what the image-gen model "sees" and what
+    # it actually draws — without this, Pro tends to substitute generic
+    # textures (small dots) for specific knit patterns (chevron pointelle).
+    description = ""
+    if reference is not None and is_configured():
+        description = _describe_for_sketch(
+            reference["data"],
+            reference.get("mime", "image/jpeg"),
+        )
+
+    prompt = build_prompt(
+        data,
+        has_reference_image=(reference is not None),
+        photo_description=description,
+    )
 
     if not is_configured():
         return _demo_drawing(prompt)
@@ -295,6 +395,7 @@ def generate_drawing(data: dict) -> dict:
         entry["source"] = "ai_generated"
         entry["prompt"] = prompt
         entry["used_reference_photo"] = reference is not None
+        entry["photo_description"] = description
         return entry
     except Exception as e:
         # Any failure (network, quota, JSON shape, etc.) → demo fallback so the
