@@ -165,7 +165,16 @@ def reset_to_blank():
     _snapshot()
     for k in [k for k in st.session_state.keys() if k not in PROTECTED_KEYS]:
         del st.session_state[k]
+    # Streamlit forbids ASSIGNING widget-only keys but allows DELETING them.
+    # Without this, the file_uploader visually retains the old filename and
+    # re-processes it on next render, defeating the whole point of "start new".
+    for widget_key in ("_image_uploader", "measurements_editor"):
+        try:
+            del st.session_state[widget_key]
+        except KeyError:
+            pass
     st.session_state["_form_unlocked"] = False
+    st.session_state["_just_reset"] = True
 
 
 def load_sample():
@@ -387,10 +396,13 @@ with st.sidebar:
         help="Fill the form with an example tech pack (the cotton cardigan).",
     )
     col_b.button(
-        "🧹 Reset",
+        "🆕 Start new",
         on_click=reset_to_blank,
         use_container_width=True,
-        help="Clear all fields back to '— Not specified —'.",
+        help=(
+            "Clear all fields, photos, and the AI sketch so you can build a "
+            "fresh tech pack. The previous state is kept in Undo."
+        ),
     )
 
     # Undo — only enabled if there's a snapshot to restore
@@ -482,9 +494,27 @@ with tab_editor:
     # Header on the left, market-pricing reference card on the right.
     # Stakeholder asked for a "top-right tool" — Streamlit doesn't do floating
     # widgets, so we approximate with a two-column header row.
+    # Show a brief confirmation after a reset (set by reset_to_blank).
+    # Use pop() so it disappears on the next render.
+    if st.session_state.pop("_just_reset", False):
+        st.success("✅ Cleared. Ready for the next tech pack — drop a new photo above.")
+
     _hdr_col, _mkt_col = st.columns([3, 1])
     with _hdr_col:
-        st.header("Build your tech pack")
+        _title_col, _new_col = st.columns([3, 2])
+        _title_col.header("Build your tech pack")
+        # Prominent "start a new tech pack" button so customers don't have to
+        # hunt for it in the sidebar. Undo (snapshot) still catches accidents.
+        _new_col.button(
+            "🆕 Start a new tech pack",
+            on_click=reset_to_blank,
+            use_container_width=True,
+            help=(
+                "Clears everything (photo, form fields, AI sketch) so you can "
+                "build the next tech pack. The previous state is kept in Undo — "
+                "click '↩ Undo' in the sidebar to restore if needed."
+            ),
+        )
     with _mkt_col:
         if market_pricing.is_available():
             # Pull what we need for matching. Category and color drive the
