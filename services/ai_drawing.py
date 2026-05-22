@@ -304,17 +304,40 @@ def build_prompt(
                     "INTERPRETATION GLOSSARY (some spec terms get misread — here's exactly "
                     "what they mean for the sketch):\n" + "\n".join(glossary)
                 )
+        # Build a sleeve-specific instruction based on the spec value.
+        # If the user picked a NON-volumetric sleeve type (Set-in, Raglan,
+        # Drop/Dropped Shoulder, Saddle, Kimono), the AI MUST draw straight
+        # slim sleeves regardless of fluffy yarn in the photo. This is the
+        # #1 source of "AI added puff sleeves" complaints — mohair / brushed
+        # yarn LOOKS voluminous, the model interprets that as bishop cut.
+        _slim_sleeve_types = {
+            "Set-in", "Raglan", "Drop shoulder", "Dropped Shoulder",
+            "Saddle shoulder", "Kimono",
+        }
+        _user_sleeve = (data.get("sleeve_type") or "").strip()
+        sleeve_rule = ""
+        if _user_sleeve in _slim_sleeve_types:
+            sleeve_rule = (
+                f"- SLEEVES MUST BE STRAIGHT AND SLIM. The spec says sleeve type is "
+                f"'{_user_sleeve}', which is a regular non-volumetric cut. Draw the "
+                f"sleeves with normal slim width and NO added volume — NO bishop, NO "
+                f"balloon, NO puff at the shoulder, NO gathering at the cuff. "
+                f"VERY IMPORTANT: if the reference photo's yarn texture is FLUFFY (mohair, "
+                f"brushed, alpaca, fuzzy), that's the YARN looking voluminous — the SLEEVE "
+                f"CUT is still slim/straight. Fluffy texture is NOT balloon cut. Do NOT "
+                f"add sleeve volume just because the yarn looks fluffy.\n"
+            )
         parts.append(
             "DRAWING REQUIREMENTS:\n"
             "- Reproduce the SPECIFIC knit pattern described — not a generic texture. "
             "Pointelle openwork ≠ small dots. Cable knit ≠ random lines.\n"
             "- Match the body length precisely (cropped vs regular vs long).\n"
-            "- Match the sleeve volume (slim vs balloon vs dropped vs balloon-cuffed).\n"
-            "- BODY STITCH ≠ HEM/CUFF BAND. If the body is ribbed all over but the spec "
+            + sleeve_rule
+            + "- BODY STITCH ≠ HEM/CUFF BAND. If the body is ribbed all over but the spec "
             "says 'Hem: Clean finish', the bottom edge ends WITHOUT a separate rib band. "
             "Same for cuffs: 'Plain cuff' means no separate band even if the body is ribbed.\n"
             "- If a feature is neither in the photo description nor the spec, draw it plain "
-            "(no rib, no decorative band, no side splits, no extra seams)."
+            "(no rib, no decorative band, no side splits, no extra seams, no balloon)."
         )
     else:
         # Text-only prompt

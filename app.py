@@ -154,7 +154,7 @@ WIDGET_ONLY_KEYS = {"measurements_editor", "_image_uploader"}
 # key as f"_image_uploader_{version}" so a reset gives the widget a brand
 # new key, forcing Streamlit to rebuild it empty. The version key itself is
 # protected from being cleared by the reset loop.
-PROTECTED_KEYS = {"initialized", "_snapshot", "_uploader_version"} | WIDGET_ONLY_KEYS
+PROTECTED_KEYS = {"initialized", "_snapshot", "_uploader_version", "_measurements_version"} | WIDGET_ONLY_KEYS
 
 
 def _snapshot():
@@ -179,6 +179,11 @@ def reset_to_blank():
     # the widget a different key forces a clean rebuild.
     st.session_state["_uploader_version"] = (
         st.session_state.get("_uploader_version", 0) + 1
+    )
+    # Also bump the measurements-editor version so its data_editor rebuilds
+    # from the cleared session_state["measurements"] (= empty dict).
+    st.session_state["_measurements_version"] = (
+        st.session_state.get("_measurements_version", 0) + 1
     )
     # Also try to delete the OLD widget keys (belt-and-suspenders — harmless
     # even if they're already gone).
@@ -361,6 +366,13 @@ def ai_autofill_callback():
             "brand_debug": brand_debug,
             "raw": suggestions,
         }
+        # Bump the measurements-editor version so the data_editor picks up
+        # the new measurements we just wrote into session_state. Without this
+        # the data_editor keeps its own widget state and ignores our update.
+        if isinstance(brand_applied.get("measurements"), dict) and brand_applied["measurements"]:
+            st.session_state["_measurements_version"] = (
+                st.session_state.get("_measurements_version", 0) + 1
+            )
         # Unlock the rest of the form so the user can review what AI filled.
         st.session_state["_form_unlocked"] = True
     except Exception as e:
@@ -1310,6 +1322,13 @@ with tab_editor:
         })
     df = pd.DataFrame(rows)
 
+    # Versioned key so external writes to st.session_state["measurements"]
+    # (e.g. apply_brand_defaults filling from a matched MC item) actually
+    # show up in the editor. Without this, the data_editor's internal
+    # widget state takes precedence once it's been rendered, and our
+    # programmatic update is silently ignored.
+    _meas_version = st.session_state.get("_measurements_version", 0)
+    _meas_key = f"measurements_editor_{_meas_version}"
     edited_df = st.data_editor(
         df,
         hide_index=True,
@@ -1320,7 +1339,7 @@ with tab_editor:
             "Unit": st.column_config.TextColumn(disabled=True),
             "Tolerance (±)": st.column_config.NumberColumn(format="%.1f", min_value=0.0),
         },
-        key="measurements_editor",
+        key=_meas_key,
     )
 
     new_measurements = {}
