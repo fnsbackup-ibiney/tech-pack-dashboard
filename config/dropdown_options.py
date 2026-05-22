@@ -371,24 +371,28 @@ TSHIRT_DYE_METHODS = [
 # =============================================================================
 
 # Each entry: (point_name, default_unit, default_tolerance_cm)
+# Points aligned with the team's actual spec-sheet template
+# (see ~/Desktop/RWS-...-190325-R1.xls). Names follow the team's vocabulary
+# where it diverges from generic industry terms (e.g. "Front body Length
+# (fm HPS)" matches the team's row 1, even though the generic name is
+# "Body length"). Added Bicep, Cuff width, Back Neck drop — three points
+# the team measures but our form previously omitted.
 KNITWEAR_MEASUREMENT_POINTS = [
-    ("Body length (CB)", "cm", 1.0),
-    ("Body length (HPS)", "cm", 1.0),
-    ("Chest width", "cm", 1.0),
-    ("Waist width", "cm", 1.0),
-    ("Hem width", "cm", 1.0),
-    ("Shoulder width", "cm", 0.5),
-    ("Shoulder drop", "cm", 0.5),
-    ("Sleeve length (CB)", "cm", 1.0),
-    ("Sleeve length (from armhole)", "cm", 1.0),
-    ("Armhole", "cm", 0.5),
-    ("Sleeve opening", "cm", 0.5),
-    ("Neckline drop", "cm", 0.5),
-    ("Neck width", "cm", 0.5),
-    ("Placket length", "cm", 0.5),
-    ("Hem rib height", "cm", 0.3),
-    ("Cuff rib height", "cm", 0.3),
-    ("Neck rib height", "cm", 0.3),
+    ("Front body Length (fm HPS)", "cm", 1.0),
+    ("Shoulder (seam to seam)", "cm", 0.5),
+    ("1/2 Chest Width (below armhole)", "cm", 1.0),
+    ("1/2 Bottom Width (at edge)", "cm", 1.0),
+    ("Hem rib Height", "cm", 0.3),
+    ("Sleeve length (from CB)", "cm", 1.0),
+    ("Armhole (straight)", "cm", 0.5),
+    ("Bicep (below armhole)", "cm", 0.5),
+    ("Cuff width (at edge)", "cm", 0.5),
+    ("Cuff trim Height", "cm", 0.3),
+    ("Neck Width (seam to seam)", "cm", 0.5),
+    ("Front neck drop (fm HPS)", "cm", 0.5),
+    ("Back Neck drop (fm HPS)", "cm", 0.5),
+    ("Neck Height", "cm", 0.3),
+    ("Placket width", "cm", 0.3),
 ]
 
 TSHIRT_MEASUREMENT_POINTS = [

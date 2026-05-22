@@ -46,6 +46,95 @@ def _styles():
     return styles
 
 
+def _sizes_for_range(size_range: str) -> list[str]:
+    """Expand size_range label into the column headers for the spec sheet."""
+    return {
+        "S - XL":     ["S", "M", "L", "XL"],
+        "XS - XXL":   ["XS", "S", "M", "L", "XL", "XXL"],
+        "XXS - XXXL": ["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+    }.get(size_range, ["S", "M", "L", "XL", "XXL"])
+
+
+def _team_spec_sheet(data: dict, styles) -> list:
+    """Render a spec sheet block matching the team's RWS .xls template.
+
+    Returns a list of flowables to extend into the story.
+    """
+    from config.dropdown_options import KNITWEAR_MEASUREMENT_POINTS
+
+    out = [Paragraph("Spec Sheet (factory-ready)", styles["h2"])]
+
+    # Header info — 2-column key-value, same labels and order as the team's .xls
+    header_rows = [
+        ("Buyer's style # :",  data.get("style_number") or ""),
+        ("Factory style # :",  ""),
+        ("Composition :",      data.get("composition") or ""),
+        ("Final Content:",     ""),
+        ("Gauge & Ends :",     f"{data.get('gauge') or ''}  {data.get('ends') or '2 ends'}".strip()),
+        ("Remarks :",          "size spec"),
+        ("Date :",             datetime.now().strftime("%Y-%b-%d")),
+        ("Maker :",            data.get("maker") or "New world"),
+        ("Unit:",              "CM"),
+    ]
+    info = Table(
+        [[Paragraph(f"<b>{l}</b>", styles["normal"]), Paragraph(str(v), styles["normal"])]
+         for l, v in header_rows],
+        colWidths=(4.5 * cm, 13 * cm),
+    )
+    info.setStyle(TableStyle([
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+        ("TOPPADDING", (0, 0), (-1, -1), 2),
+    ]))
+    out.append(info)
+    out.append(Spacer(1, 8))
+
+    # Measurement table — rows = points, columns = sizes
+    sizes = _sizes_for_range(data.get("size_range") or "S - XL")
+    base_size = data.get("base_size") or "M"
+    measurements = data.get("measurements") or {}
+
+    # Header
+    table_rows = [
+        ["#", "Measurement Point", "Description"] + sizes
+    ]
+    base_col_idx = (sizes.index(base_size) if base_size in sizes else len(sizes) // 2) + 3
+
+    for i, (point, _unit, _tol) in enumerate(KNITWEAR_MEASUREMENT_POINTS, start=1):
+        # Split "Front body Length (fm HPS)" into name + description
+        if "(" in point and point.endswith(")"):
+            name, desc = point.rsplit("(", 1)
+            name = name.strip()
+            desc = desc.rstrip(")").strip()
+        else:
+            name = point
+            desc = ""
+        row = [f"{i}.0", name, desc] + ["" for _ in sizes]
+        val_entry = measurements.get(point)
+        if isinstance(val_entry, dict) and val_entry.get("value"):
+            row[base_col_idx] = str(val_entry["value"])
+        table_rows.append(row)
+
+    n_cols = len(table_rows[0])
+    # Width budget: 17.5 cm content width on A4 with 2cm margins
+    col_widths = [1 * cm, 5 * cm, 4 * cm] + [(17.5 - 10) / len(sizes) * cm for _ in sizes]
+    meas_table = Table(table_rows, colWidths=col_widths, repeatRows=1)
+    meas_table.setStyle(TableStyle([
+        ("FONTSIZE", (0, 0), (-1, -1), 7),
+        ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#888888")),
+        ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#EFEFEF")),
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        # Highlight base size column
+        ("BACKGROUND", (base_col_idx, 0), (base_col_idx, -1), colors.HexColor("#FFF7E6")),
+        ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+        ("ALIGN", (0, 0), (0, -1), "CENTER"),
+        ("ALIGN", (3, 0), (-1, -1), "CENTER"),
+    ]))
+    out.append(meas_table)
+    out.append(Spacer(1, 10))
+    return out
+
+
 def _kv_table(items: list, col_widths=(5 * cm, 7 * cm)) -> Table:
     """Render a list of (label, value) tuples as a 2-column table."""
     rows = [[label, value if value is not None else "—"] for label, value in items]
@@ -170,6 +259,10 @@ def generate_pdf(data: dict) -> bytes:
     story.append(Spacer(1, 8))
 
     is_knitwear = (data.get("product_type") or "").startswith("Knitwear")
+
+    # --- Spec sheet (team factory-ready format) — renders first ---
+    if is_knitwear:
+        story.extend(_team_spec_sheet(data, styles))
 
     # --- Images (rendered before the textual sections) ---
     images = data.get("images") or []

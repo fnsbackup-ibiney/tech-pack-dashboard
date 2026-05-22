@@ -54,6 +54,105 @@ def _add_measurement_table(doc: Document, measurements: dict, base_size: str):
                     run.font.size = Pt(10)
 
 
+def _sizes_for_range(size_range: str) -> list[str]:
+    """Expand a size_range label into the column headers used in spec sheets."""
+    return {
+        "S - XL":     ["S", "M", "L", "XL"],
+        "XS - XXL":   ["XS", "S", "M", "L", "XL", "XXL"],
+        "XXS - XXXL": ["XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"],
+    }.get(size_range, ["S", "M", "L", "XL", "XXL"])
+
+
+def _add_team_spec_sheet(doc: Document, data: dict):
+    """Render a spec sheet section matching the team's RWS .xls template.
+
+    Layout:
+      - Header info (Buyer's style #, Composition, Gauge & Ends, Maker, etc.)
+      - Multi-size measurement table: rows = measurement points,
+        columns = sizes, base_size column populated, others blank.
+    """
+    # Import the measurement-point list here so we don't need a top-level import
+    # cycle (this module's caller already has it via the form).
+    from config.dropdown_options import KNITWEAR_MEASUREMENT_POINTS
+
+    _add_h2(doc, "Spec Sheet (factory-ready)")
+
+    # 9-row key-value header — same labels and order the team uses
+    header_rows = [
+        ("Buyer's style # :",  data.get("style_number") or ""),
+        ("Factory style # :",  ""),
+        ("Composition :",      data.get("composition") or ""),
+        ("Final Content:",     ""),
+        ("Gauge & Ends :",     f"{data.get('gauge') or ''}  {data.get('ends') or '2 ends'}".strip()),
+        ("Remarks :",          "size spec"),
+        ("Date :",             datetime.now().strftime("%Y-%b-%d")),
+        ("Maker :",            data.get("maker") or "New world"),
+        ("Unit:",              "CM"),
+    ]
+    info_table = doc.add_table(rows=len(header_rows), cols=2)
+    info_table.autofit = False
+    info_table.columns[0].width = Cm(4.5)
+    info_table.columns[1].width = Cm(10)
+    for i, (label, value) in enumerate(header_rows):
+        row = info_table.rows[i]
+        row.cells[0].width = Cm(4.5)
+        row.cells[1].width = Cm(10)
+        c0 = row.cells[0].paragraphs[0]
+        run = c0.add_run(label)
+        run.bold = True
+        run.font.size = Pt(10)
+        c1 = row.cells[1].paragraphs[0]
+        run = c1.add_run(str(value))
+        run.font.size = Pt(10)
+
+    doc.add_paragraph()  # spacer
+
+    # Multi-size measurement table
+    sizes = _sizes_for_range(data.get("size_range") or "S - XL")
+    base_size = data.get("base_size") or "M"
+    measurements = data.get("measurements") or {}
+
+    n_cols = 3 + len(sizes)  # # | Measurement Point | Description | <sizes>
+    n_rows = 1 + len(KNITWEAR_MEASUREMENT_POINTS)
+    table = doc.add_table(rows=n_rows, cols=n_cols)
+    table.style = "Light Grid"
+
+    # Header row
+    header = table.rows[0].cells
+    header[0].text = "#"
+    header[1].text = "Measurement Point"
+    header[2].text = "Description"
+    for i, sz in enumerate(sizes):
+        header[3 + i].text = sz
+    for cell in header:
+        for paragraph in cell.paragraphs:
+            for run in paragraph.runs:
+                run.bold = True
+                run.font.size = Pt(9)
+
+    # One row per known measurement point
+    base_col = sizes.index(base_size) if base_size in sizes else len(sizes) // 2
+    for i, (point, _unit, _tol) in enumerate(KNITWEAR_MEASUREMENT_POINTS, start=1):
+        row = table.rows[i].cells
+        row[0].text = f"{i}.0"
+        # Split "Front body Length (fm HPS)" into name + description in parens
+        if "(" in point and point.endswith(")"):
+            name, desc = point.rsplit("(", 1)
+            row[1].text = name.strip()
+            row[2].text = desc.rstrip(")").strip()
+        else:
+            row[1].text = point
+            row[2].text = ""
+        # Fill base_size column if we have a value
+        val = measurements.get(point, {}).get("value") if isinstance(measurements.get(point), dict) else None
+        if val:
+            row[3 + base_col].text = f"{val}"
+        for cell in row:
+            for paragraph in cell.paragraphs:
+                for run in paragraph.runs:
+                    run.font.size = Pt(9)
+
+
 def _add_h2(doc: Document, text: str):
     p = doc.add_paragraph()
     run = p.add_run(text)
@@ -139,6 +238,11 @@ def generate_docx(data: dict) -> bytes:
     ts_run.font.color.rgb = RGBColor(0x80, 0x80, 0x80)
 
     is_knitwear = (data.get("product_type") or "").startswith("Knitwear")
+
+    # Spec sheet (team factory-ready format) — produced first so factories
+    # who only need the standard layout can stop reading right there.
+    if is_knitwear:
+        _add_team_spec_sheet(doc, data)
 
     # Images (placed before the textual sections so they're seen first)
     images = data.get("images") or []

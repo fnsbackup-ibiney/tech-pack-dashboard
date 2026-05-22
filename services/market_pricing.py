@@ -237,30 +237,77 @@ def _expand_to_groups(tokens: set[str]) -> set[frozenset[str]]:
 # names we have in KNITWEAR_MEASUREMENT_POINTS. We only map the ones PNC
 # actually exposes on product detail pages — the rest of the points are
 # left for the user to fill in.
+# Updated to match the team's vocabulary (RWS spec sheets) after we renamed
+# the measurement points in KNITWEAR_MEASUREMENT_POINTS. Where the German
+# term doesn't have a clean team-spec equivalent (e.g. Taillenweite = waist
+# width — team doesn't track separately), we drop it rather than guess.
 _DE_TO_FORM_MEASUREMENT = {
-    "Rückenlänge":     "Body length (CB)",
-    "Vorderlänge":     "Body length (HPS)",
-    "Brustweite":      "Chest width",
-    "Taillenweite":    "Waist width",
-    "Hüftweite":       "Hem width",
-    "Schulterbreite":  "Shoulder width",
-    "Ärmellänge":      "Sleeve length (CB)",
-    "Armlänge":        "Sleeve length (CB)",
-    "Armausschnitt":   "Armhole",
-    "Ärmelöffnung":    "Sleeve opening",
-    "Halsausschnitt":  "Neckline drop",
+    "Rückenlänge":     "Front body Length (fm HPS)",  # back length ≈ body length on flat-laid garments
+    "Vorderlänge":     "Front body Length (fm HPS)",
+    "Brustweite":      "1/2 Chest Width (below armhole)",
+    "Hüftweite":       "1/2 Bottom Width (at edge)",
+    "Schulterbreite":  "Shoulder (seam to seam)",
+    "Ärmellänge":      "Sleeve length (from CB)",
+    "Armlänge":        "Sleeve length (from CB)",
+    "Armausschnitt":   "Armhole (straight)",
+    "Ärmelöffnung":    "Cuff width (at edge)",
+    "Halsausschnitt":  "Front neck drop (fm HPS)",
 }
+
+
+# PNC ships composition labels in German ("100% Baumwolle"). The form's
+# COMPOSITIONS dropdown is English, so anything we paste verbatim from the
+# scraped data fails the selectbox match and renders blank. We translate the
+# fabric noun tokens here. Order matters where one term is a substring of
+# another (e.g. "Merinowolle" before "Wolle").
+_FABRIC_DE_TO_EN: list[tuple[str, str]] = [
+    ("Merinowolle",   "Merino Wool"),
+    ("Lambswool",     "Lambswool"),
+    ("Schurwolle",    "Virgin Wool"),
+    ("Kaschmir",      "Cashmere"),
+    ("Baumwolle",     "Cotton"),
+    ("Bio-Baumwolle", "Organic Cotton"),
+    ("Wolle",         "Wool"),
+    ("Viskose",       "Viscose"),
+    ("Polyester",     "Polyester"),
+    ("Polyamid",      "Polyamide"),
+    ("Acryl",         "Acrylic"),
+    ("Polyacryl",     "Acrylic"),
+    ("Leinen",        "Linen"),
+    ("Seide",         "Silk"),
+    ("Elasthan",      "Elastane"),
+    ("Mohair",        "Mohair"),
+    ("Alpaka",        "Alpaca"),
+    ("Hanf",          "Hemp"),
+    ("Modal",         "Modal"),
+    ("Lyocell",       "Lyocell"),
+    ("Tencel",        "Tencel"),
+    ("Metallisiert",  "Metallic"),
+    ("Metall",        "Metallic"),
+    ("Nylon",         "Nylon"),
+]
+
+
+def _translate_fabric_text(text: str) -> str:
+    """Translate German fabric nouns to English in a composition string.
+    Leaves numbers, percent signs, and separators alone."""
+    if not text:
+        return text
+    out = text
+    for de, en in _FABRIC_DE_TO_EN:
+        out = out.replace(de, en)
+    return out
 
 
 def _composition_to_text(composition_list) -> str:
     """Flatten the [{group:..., text:'70% Viskose|30% Polyamid'}, ...] form into
-    a single readable string. Keeps secondary groups (Futter / Verzierung) when
-    they exist."""
+    a single readable English string. Keeps secondary groups (Futter /
+    Verzierung) when they exist."""
     if not composition_list:
         return ""
     parts = []
     for entry in composition_list:
-        text = (entry.get("text") or "").replace("|", " / ").strip()
+        text = _translate_fabric_text((entry.get("text") or "").replace("|", " / ").strip())
         group = (entry.get("group") or "").strip()
         if not text:
             continue
@@ -270,6 +317,20 @@ def _composition_to_text(composition_list) -> str:
         else:
             parts.append(text)
     return ", ".join(parts)
+
+
+def _derive_yarn_type(composition_list) -> str:
+    """Pick a yarn-type label from the matched item's primary composition.
+    The form's YARN_TYPES list is English and percentage-prefixed (e.g.
+    "100% Cotton"). We use the translated primary fibre — if it matches a
+    known yarn-type label we return that, otherwise we return the verbatim
+    primary composition string so the dropdown can show it dynamically.
+    """
+    if not composition_list:
+        return ""
+    primary = composition_list[0]
+    text = _translate_fabric_text((primary.get("text") or "").replace("|", " / ").strip())
+    return text
 
 
 def _sizes_to_range(available_sizes) -> str | None:
@@ -291,6 +352,31 @@ def _sizes_to_range(available_sizes) -> str | None:
         if letters.issubset(supported):
             return label
     return "Custom"
+
+
+# Hardcoded brand standards derived from the team's own internal spec sheets
+# (RWS-M21xx / NC2xxx series, March 2025). These are the values they actually
+# use every time — no variation across the 9 styles inspected. Used as a
+# fallback default when no per-SKU detail overrides them.
+#
+# Source: ~/Desktop/RWS-...-190325-R1.xls
+_TEAM_KNITWEAR_DEFAULTS = {
+    "composition":   "2/26Nm 100% RWS Wool",   # all 9 wool styles use this
+    "gauge":         "7GG",                    # form's gauge dropdown
+    "yarn_count":    "2/26Nm",                 # form's yarn-count dropdown
+    "ends":          "2 ends",                 # not yet a form field but kept for export
+    "maker":         "New world",              # factory name (not yet a form field)
+    "unit":          "CM",                     # measurements unit
+}
+
+
+def team_default(field: str, product_type: str = "Knitwear (Sweater / Cardigan)") -> str:
+    """Return the team's standard default for a given field, or empty string.
+    Currently only knitwear has documented defaults — T-shirts fall through to ''.
+    """
+    if product_type and "Knitwear" in product_type:
+        return _TEAM_KNITWEAR_DEFAULTS.get(field, "")
+    return ""
 
 
 def apply_brand_defaults(match: dict, session_state, overwrite: bool = False) -> dict:
@@ -367,6 +453,23 @@ def apply_brand_defaults(match: dict, session_state, overwrite: bool = False) ->
         if applied_meas:
             session_state["measurements"] = new_meas
             applied["measurements"] = applied_meas
+
+    # 5. Team hardcoded defaults — composition / gauge / yarn_count baseline
+    # (from the RWS-M21xx spec sheets). Filled ONLY when still empty AFTER
+    # the per-SKU pass above, so a more specific match always wins.
+    pt = session_state.get("product_type") or match.get("product_type") or ""
+    if "Knitwear" in pt:
+        for field in ("composition", "gauge", "yarn_count"):
+            if _empty(session_state.get(field)):
+                fallback = team_default(field, pt)
+                if fallback:
+                    session_state[field] = fallback
+                    applied.setdefault(field, fallback)
+
+    # 6. Gender — Marie Lund is exclusively women's wear, so set safely
+    if _empty(session_state.get("gender")):
+        session_state["gender"] = "Women"
+        applied["gender"] = "Women"
 
     return applied
 
