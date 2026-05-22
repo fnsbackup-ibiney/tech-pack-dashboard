@@ -327,25 +327,38 @@ def ai_autofill_callback():
         # measurements, size range) to fill the CONSTRUCTION fields the photo
         # can't reveal. The user only edits what's actually different.
         brand_applied = {}
-        if market_pricing.is_available():
+        brand_debug = {}
+        if not market_pricing.is_available():
+            brand_debug["is_available"] = False
+        else:
             try:
                 # Build the match query from what photo_analyzer just filled
                 form_snapshot = {
                     "garment_sub_category": st.session_state.get("garment_sub_category"),
                     "color_name": st.session_state.get("color_name"),
+                    "product_type": st.session_state.get("product_type"),
                 }
+                brand_debug["form_snapshot"] = form_snapshot
                 match = market_pricing.find_similar_item(form_snapshot)
+                brand_debug["matched_sku"] = match.get("sku") if match else None
                 if match:
                     brand_applied = market_pricing.apply_brand_defaults(
                         match, st.session_state, overwrite=False
                     )
-            except Exception:
-                # Non-fatal — if MC lookup fails we still have photo-analyzer output
-                pass
+                    brand_debug["applied_keys"] = list(brand_applied.keys())
+                else:
+                    brand_debug["error"] = "find_similar_item returned None"
+            except Exception as _e:
+                # Stop swallowing this silently — surface the error to UI so
+                # we can actually diagnose why brand defaults aren't firing.
+                import traceback
+                brand_debug["exception"] = f"{type(_e).__name__}: {_e}"
+                brand_debug["traceback"] = traceback.format_exc()
 
         st.session_state["_ai_autofill_result"] = {
             "applied": applied,
             "brand_applied": brand_applied,
+            "brand_debug": brand_debug,
             "raw": suggestions,
         }
         # Unlock the rest of the form so the user can review what AI filled.
@@ -805,6 +818,12 @@ with tab_editor:
                 )
             if last.get("raw", {}).get("confidence_notes"):
                 st.caption(f"AI notes: _{last['raw']['confidence_notes']}_")
+            # Surface brand-defaults debug info so we can see what happened
+            # when the brand-defaults block didn't fire as expected.
+            _bd = last.get("brand_debug") or {}
+            if _bd:
+                with st.expander("🔧 Brand-defaults debug (what the MC lookup did)"):
+                    st.json(_bd)
 
         # Image list with per-image controls
         if not images:
