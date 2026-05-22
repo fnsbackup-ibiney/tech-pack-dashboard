@@ -915,10 +915,28 @@ with tab_editor:
 
     c1, c2, c3, c4 = st.columns(4)
     opts = with_blank(HEM_STYLES)
-    c1.selectbox("Hem style", opts, index=safe_index(opts, st.session_state.get("hem_style")), key="hem_style")
+    c1.selectbox(
+        "Hem style", opts,
+        index=safe_index(opts, st.session_state.get("hem_style")),
+        key="hem_style",
+        help=(
+            "'Ribbed hem' = a SEPARATE ribbed band at the bottom (e.g. 3 cm strip "
+            "of tighter ribbing). If the body fabric itself is ribbed all over and "
+            "just ends without a separate band, pick 'Clean finish' instead."
+        ),
+    )
     c2.number_input("Hem rib height (cm)", min_value=0.0, max_value=20.0, step=0.5, key="hem_height_cm")
     opts = with_blank(CUFF_STYLES)
-    c3.selectbox("Cuff style", opts, index=safe_index(opts, st.session_state.get("cuff_style")), key="cuff_style")
+    c3.selectbox(
+        "Cuff style", opts,
+        index=safe_index(opts, st.session_state.get("cuff_style")),
+        key="cuff_style",
+        help=(
+            "'Ribbed cuff' = a SEPARATE ribbed band at the wrist. If the sleeve "
+            "fabric itself is ribbed and just ends at the wrist without a separate "
+            "tighter band, pick 'Clean finish' instead."
+        ),
+    )
     c4.number_input("Cuff rib height (cm)", min_value=0.0, max_value=20.0, step=0.5, key="cuff_height_cm")
 
     c1, c2 = st.columns(2)

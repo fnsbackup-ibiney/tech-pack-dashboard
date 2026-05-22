@@ -102,6 +102,13 @@ Important rules:
 - Only return one of the exact options listed, or null. Do not invent new values.
 - For colour, just describe what you see in plain language — don't try to match a Pantone code.
 - If the garment is hanging on a rack (not flat-laid or on a model), be more conservative with fit estimates.
+
+CRITICAL — body stitch is NOT a hem/cuff band:
+- "Ribbed hem" means a SEPARATE horizontal ribbed band at the bottom, distinct from the body fabric (e.g. a 3 cm strip in tighter ribbing sewn at the bottom edge).
+- "Ribbed cuff" means a SEPARATE ribbed band at the wrist, distinct from the sleeve fabric.
+- If the WHOLE body is ribbed (rib stitch all over) and just ENDS at the bottom without a separate band, that is "Clean finish", NOT "Ribbed hem". The rib pattern is the body fabric, not a hem band.
+- Same for cuffs: if the whole sleeve is ribbed and just ends at the wrist without a separate tighter band, that is "Clean finish", NOT "Ribbed cuff".
+- Only pick "Ribbed hem" / "Ribbed cuff" when you can clearly see a SEPARATE strip with different fabric / tighter stitch from the body.
 """
 
 
