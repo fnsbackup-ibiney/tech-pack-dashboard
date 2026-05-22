@@ -1,7 +1,7 @@
 {
   "source": "peek-und-cloppenburg.de/m/damenmode/marie-lund/bekleidung/pullover-strickjacken/",
   "pulled_on": "2026-05-21",
-  "total": 120,
+  "total": 235,
   "items": [
     {
       "sku": "470131-0018",
@@ -4586,6 +4586,4419 @@
         "S",
         "XXL"
       ]
+    },
+    {
+      "sku": "655965-0006",
+      "name": "Marie Lund Damen Strickhülle silber uni",
+      "category": "Knit Wrap / Cape",
+      "color": "grau",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/655965-0001/marie-lund-damen-strickhuelle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_pdstandard_655965-0006_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "71% Nylon|20% Viskose|9% Polyester"
+        }
+      ],
+      "description": "Ob zum Abendkleid oder beim legeren Freizeit-Styling, die flauschig-weiche Strickhülle von Marie Lund bringt eine spannende Textur zum Outfit.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 42,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "40",
+        "42",
+        "34",
+        "36",
+        "44",
+        "38"
+      ]
+    },
+    {
+      "sku": "662295-0009",
+      "name": "Marie Lund Damen Pullover marine uni",
+      "category": "Pullover / Sweater",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 19.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/662295-0001/marie-lund-damen-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_pdstandard_662295-0009_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Der schmale Rippstrick-Pullover von Marie Lund ist eine schöne Basis für die stilvolle Casual-Garderobe.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 61,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 30,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "S",
+        "L",
+        "XL",
+        "XS",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "709528-0003",
+      "name": "Marie Lund Damen Strickpullover beige uni",
+      "category": "Pullover / Sweater",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/709528-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_709528-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Dieser Pullover, gefertigt aus 100% feiner Baumwolle, verkörpert die hohe Qualitätsphilosophie von Marie Lund und verspricht zeitlose Eleganz sowie außergewöhnliche Langlebigkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XXL",
+        "XL",
+        "L",
+        "S",
+        "XS"
+      ]
+    },
+    {
+      "sku": "709528-0009",
+      "name": "Marie Lund Damen Strickpullover marine uni",
+      "category": "Pullover / Sweater",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/709528-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_709528-0009_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Dieser Pullover, gefertigt aus 100% feiner Baumwolle, verkörpert die hohe Qualitätsphilosophie von Marie Lund und verspricht zeitlose Eleganz sowie außergewöhnliche Langlebigkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XL",
+        "XXL",
+        "XS",
+        "S",
+        "M"
+      ]
+    },
+    {
+      "sku": "709528-0010",
+      "name": "Marie Lund Damen Strickpullover lind uni",
+      "category": "Pullover / Sweater",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/709528-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_709528-0010_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Dieser Pullover, gefertigt aus 100% feiner Baumwolle, verkörpert die hohe Qualitätsphilosophie von Marie Lund und verspricht zeitlose Eleganz sowie außergewöhnliche Langlebigkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "L",
+        "XS",
+        "XXL",
+        "XL",
+        "M"
+      ]
+    },
+    {
+      "sku": "709528-0011",
+      "name": "Marie Lund Damen Strickpullover aubergine uni",
+      "category": "Pullover / Sweater",
+      "color": "lila|rot",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/709528-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_709528-0011_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Dieser Pullover, gefertigt aus 100% feiner Baumwolle, verkörpert die hohe Qualitätsphilosophie von Marie Lund und verspricht zeitlose Eleganz sowie außergewöhnliche Langlebigkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XXL",
+        "XL",
+        "L",
+        "M",
+        "S"
+      ]
+    },
+    {
+      "sku": "709528-0012",
+      "name": "Marie Lund Damen Strickpullover hellgrau meliert",
+      "category": "Pullover / Sweater",
+      "color": "grau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/709528-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_709528-0012_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Dieser Pullover, gefertigt aus 100% feiner Baumwolle, verkörpert die hohe Qualitätsphilosophie von Marie Lund und verspricht zeitlose Eleganz sowie außergewöhnliche Langlebigkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XL",
+        "M",
+        "L",
+        "XXL",
+        "S"
+      ]
+    },
+    {
+      "sku": "709528-0014",
+      "name": "Marie Lund Damen Strickpullover hellblau uni",
+      "category": "Pullover / Sweater",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/709528-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_709528-0014_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Dieser Pullover, gefertigt aus 100% feiner Baumwolle, verkörpert die hohe Qualitätsphilosophie von Marie Lund und verspricht zeitlose Eleganz sowie außergewöhnliche Langlebigkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XS",
+        "XXL",
+        "XL",
+        "M",
+        "L"
+      ]
+    },
+    {
+      "sku": "725316-0007",
+      "name": "Marie Lund Damen Strickpullover petrol uni",
+      "category": "Pullover / Sweater",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/725316-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_725316-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Der exquisite Strickpullover von Marie Lund vereint mühelos eine schlanke Silhouette mit zeitloser Eleganz und avanciert somit sowohl zum unverzichtbaren Begleiter für den Business-Look als auch zum stilvollen Highlight in der Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 31,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XXL",
+        "M",
+        "S",
+        "XL",
+        "L"
+      ]
+    },
+    {
+      "sku": "736923-0001",
+      "name": "Marie Lund Damen Strickpullover ecru uni",
+      "category": "Pullover / Sweater",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736923-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_736923-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Der Strickpullover von Marie Lund mit weichem Mohair-Anteil überzeugt mit zeitloser Eleganz und hält wunderbar warm, während die gröbere Maschenstruktur für eine klassische, stilvolle Optik sorgt.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M/L",
+        "XS/S",
+        "XL/XXL"
+      ]
+    },
+    {
+      "sku": "736923-0002",
+      "name": "Marie Lund Damen Strickpullover koralle uni",
+      "category": "Pullover / Sweater",
+      "color": "rosa",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736923-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_736923-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Der Strickpullover von Marie Lund mit weichem Mohair-Anteil überzeugt mit zeitloser Eleganz und hält wunderbar warm, während die gröbere Maschenstruktur für eine klassische, stilvolle Optik sorgt.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL/XXL",
+        "M/L",
+        "XS/S"
+      ]
+    },
+    {
+      "sku": "736923-0003",
+      "name": "Marie Lund Damen Strickpullover kitt uni",
+      "category": "Pullover / Sweater",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736923-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_736923-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Der Strickpullover von Marie Lund mit weichem Mohair-Anteil überzeugt mit zeitloser Eleganz und hält wunderbar warm, während die gröbere Maschenstruktur für eine klassische, stilvolle Optik sorgt.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL/XXL",
+        "M/L",
+        "XS/S"
+      ]
+    },
+    {
+      "sku": "739546-0005",
+      "name": "Marie Lund Damen Strickjacke orange uni",
+      "category": "Cardigan",
+      "color": "orange",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/739546-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_739546-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch und durch ein Klassiker: Die Marie Lund Strickjacke zeigt sich mit formschönem Rundhalsausschnitt und komfortablen Rippbündchen im beliebten Basic-Design.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 41,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "S",
+        "XL",
+        "XXXL",
+        "M",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "746494-0001",
+      "name": "Marie Lund Damen Strickjacke marine uni",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/746494-0001/marie-lund-collection-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_746494-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Marie Lund Strickjacke aus Viskose-Mix vereint klassisches Design mit höchstem Tragekomfort und vielseitiger Kombinierbarkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 54,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "L",
+        "XS",
+        "M",
+        "S"
+      ]
+    },
+    {
+      "sku": "747165-0003",
+      "name": "Marie Lund Damen Kurzarm-Strickjacke rot uni",
+      "category": "Cardigan",
+      "color": "rot",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/747165-0001/marie-lund-damen-kurzarm-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_pdstandard_747165-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Diese stilvolle kurzärmelige Strickjacke von Marie Lund überzeugt mit einem groben Zopfstrickmuster, einem modernen Kurzarmdesign und einem markanten Verschluss mit großen Knöpfen – perfekt für einen lässigen, aber eleganten Look.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 52,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "L",
+        "XS",
+        "S",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "749507-0002",
+      "name": "Marie Lund Damen Strickjacke weiß marine gestreift",
+      "category": "Cardigan",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/749507-0002/marie-lund-collection-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_749507-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Marie Lund Strickjacke aus Viskose-Mix vereint klassisches Design mit höchstem Tragekomfort und vielseitiger Kombinierbarkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 54,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "L",
+        "XXL",
+        "S",
+        "M",
+        "XS"
+      ]
+    },
+    {
+      "sku": "750910-0001",
+      "name": "Marie Lund Damen Strickjacke marine uni",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/750910-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_750910-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Marie Lund Rippstrick-Jacke aus Baumwolle mit edlen Wappenknöpfen ist ideal für den Alltag oder das Büro und bietet eine klassisch-moderne Optik, die sich gut in verschiedene Outfits integrieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 45,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XXL",
+        "S",
+        "XL",
+        "XS",
+        "M"
+      ]
+    },
+    {
+      "sku": "750914-0002",
+      "name": "Marie Lund Damen Strickpullover rot ecru gestreift",
+      "category": "Pullover / Sweater",
+      "color": "rot|weiß",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/750914-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_750914-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der Marie Lund Kurzarmpullover ist ein stilvolles und vielseitiges Strickshirt – ideal für legere bis bürotaugliche Looks, mit goldenen Knöpfen an der Schulter, die dem Design einen eleganten Touch verleihen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 59,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "M",
+        "S",
+        "L",
+        "XS",
+        "XL"
+      ]
+    },
+    {
+      "sku": "750916-0002",
+      "name": "Marie Lund Damen Strickpullover ecru uni",
+      "category": "Pullover / Sweater",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/750916-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_750916-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der Marie Lund Kurzarmpullover ist ein stilvolles und vielseitiges Strickshirt – ideal für legere bis bürotaugliche Looks, mit goldenen Knöpfen an der Schulter, die dem Design einen eleganten Touch verleihen.  ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 37,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "L",
+        "XXL",
+        "XL",
+        "M",
+        "S"
+      ]
+    },
+    {
+      "sku": "750931-0008",
+      "name": "Marie Lund Damen Strickjacke schilf uni",
+      "category": "Cardigan",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/750931-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_750931-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Klassiker, der immer passt: die leger geschnittene Strickjacke von Marie Lund aus reiner Baumwolle mit durchgehendem Zipper und gerippten Bündchen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 59,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XS",
+        "M",
+        "XL",
+        "L",
+        "S"
+      ]
+    },
+    {
+      "sku": "751781-0002",
+      "name": "Marie Lund Damen Strickjacke kitt strukturiert",
+      "category": "Cardigan",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/751781-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_751781-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Baumwolle|50% Polyacryl"
+        }
+      ],
+      "description": "Diese lockere, kurzarm Strickjacke von Marie Lund besticht durch ihr luftiges Lochmuster, den V-Ausschnitt und die elegante Knopfleiste – perfekt für einen lässigen, aber stilvollen Look.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "L",
+        "XS",
+        "S",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "751781-0003",
+      "name": "Marie Lund Damen Strickjacke marine strukturiert",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/751781-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_751781-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Baumwolle|50% Polyacryl"
+        }
+      ],
+      "description": "Diese lockere, kurzarm Strickjacke von Marie Lund besticht durch ihr luftiges Lochmuster, den V-Ausschnitt und die elegante Knopfleiste – perfekt für einen lässigen, aber stilvollen Look.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "XS",
+        "S",
+        "XXL",
+        "L"
+      ]
+    },
+    {
+      "sku": "751781-0004",
+      "name": "Marie Lund Damen Strickjacke lind strukturiert",
+      "category": "Cardigan",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/751781-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_751781-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Baumwolle|50% Polyacryl"
+        }
+      ],
+      "description": "Diese lockere, kurzarm Strickjacke von Marie Lund besticht durch ihr luftiges Lochmuster, den V-Ausschnitt und die elegante Knopfleiste – perfekt für einen lässigen, aber stilvollen Look.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "S",
+        "XXL",
+        "XL",
+        "M",
+        "L"
+      ]
+    },
+    {
+      "sku": "752538-0001",
+      "name": "Marie Lund Damen Strickhülle silber uni",
+      "category": "Knit Wrap / Cape",
+      "color": "silber",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/752538-0001/marie-lund-damen-strickhuelle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_pdstandard_752538-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "77% Viskose|17% Polyester|6% Metall"
+        }
+      ],
+      "description": "Funkelnder Auftritt garantiert – die Strickhülle von Marie Lund setzt mit edlem Glitzergarn schimmernde Akzente und verleiht sowohl Abendkleidern als auch legeren Freizeit-Looks eine elegante Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "40",
+        "38",
+        "34",
+        "46",
+        "44",
+        "36",
+        "42"
+      ]
+    },
+    {
+      "sku": "752538-0004",
+      "name": "Marie Lund Damen Strickhülle rosa uni",
+      "category": "Knit Wrap / Cape",
+      "color": "rosa",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/752538-0001/marie-lund-damen-strickhuelle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_pdstandard_752538-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "77% Viskose|17% Polyester|6% Metall"
+        }
+      ],
+      "description": "Funkelnder Auftritt garantiert – die Strickhülle von Marie Lund setzt mit edlem Glitzergarn schimmernde Akzente und verleiht sowohl Abendkleidern als auch legeren Freizeit-Looks eine elegante Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "36",
+        "44",
+        "40",
+        "38",
+        "34",
+        "42"
+      ]
+    },
+    {
+      "sku": "755147-0002",
+      "name": "Marie Lund Damen Strickjacke rot weiß gestreift",
+      "category": "Cardigan",
+      "color": "rot",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/755147-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_755147-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Marie Lund Streifen-Strickjacke aus reiner Baumwolle vereint maritimes Design mit höchstem Tragekomfort und vielseitiger Kombinierbarkeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 53,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "L",
+        "XXL",
+        "XS",
+        "M",
+        "S"
+      ]
+    },
+    {
+      "sku": "757446-0001",
+      "name": "Marie Lund Damen Pullover kitt uni",
+      "category": "Pullover / Sweater",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/757446-0001/marie-lund-damen-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_pdstandard_757446-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        },
+        {
+          "group": "Rückseite",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der leichte Marie Lund Pullover aus purer Baumwolle im Ripp-Design ist ein komfortables und modernes Basic-Piece für vielseitige Outfit-Kreationen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 79,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "S",
+        "L",
+        "M",
+        "XS",
+        "XL"
+      ]
+    },
+    {
+      "sku": "757446-0004",
+      "name": "Marie Lund Damen Pullover mint uni",
+      "category": "Pullover / Sweater",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/757446-0001/marie-lund-damen-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_pdstandard_757446-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        },
+        {
+          "group": "Rückseite",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der leichte Marie Lund Pullover aus purer Baumwolle im Ripp-Design ist ein komfortables und modernes Basic-Piece für vielseitige Outfit-Kreationen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 79,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XS",
+        "L",
+        "XL",
+        "S",
+        "M"
+      ]
+    },
+    {
+      "sku": "757446-0005",
+      "name": "Marie Lund Damen Pullover gelb uni",
+      "category": "Pullover / Sweater",
+      "color": "gelb",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/757446-0001/marie-lund-damen-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_pdstandard_757446-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        },
+        {
+          "group": "Rückseite",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der leichte Marie Lund Pullover aus purer Baumwolle im Ripp-Design ist ein komfortables und modernes Basic-Piece für vielseitige Outfit-Kreationen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 79,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "S",
+        "XXL",
+        "L",
+        "M"
+      ]
+    },
+    {
+      "sku": "757447-0001",
+      "name": "Marie Lund Damen Strickjacke beige uni",
+      "category": "Cardigan",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/757447-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_757447-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein moderner Klassiker: Die Strickjacke von Marie Lund punktet mit cleanem Rundhalsausschnitt, lässiger Rippstrick und hochwertiger Baumwolle – ein vielseitiges Basic für zeitgemäße Everyday-Looks.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 34,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "M",
+        "L",
+        "XS",
+        "S"
+      ]
+    },
+    {
+      "sku": "757447-0002",
+      "name": "Marie Lund Damen Strickjacke schwarz uni",
+      "category": "Cardigan",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/757447-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_757447-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein moderner Klassiker: Die Strickjacke von Marie Lund punktet mit cleanem Rundhalsausschnitt, lässiger Rippstrick und hochwertiger Baumwolle – ein vielseitiges Basic für zeitgemäße Everyday-Looks.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 34,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "L",
+        "XXL",
+        "M",
+        "S"
+      ]
+    },
+    {
+      "sku": "757447-0003",
+      "name": "Marie Lund Damen Strickjacke hellblau uni",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/757447-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_757447-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein moderner Klassiker: Die Strickjacke von Marie Lund punktet mit cleanem Rundhalsausschnitt, lässiger Rippstrick und hochwertiger Baumwolle – ein vielseitiges Basic für zeitgemäße Everyday-Looks.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 34,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XS",
+        "XL",
+        "S",
+        "M",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "757447-0004",
+      "name": "Marie Lund Damen Strickjacke mint uni",
+      "category": "Cardigan",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/757447-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_757447-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein moderner Klassiker: Die Strickjacke von Marie Lund punktet mit cleanem Rundhalsausschnitt, lässiger Rippstrick und hochwertiger Baumwolle – ein vielseitiges Basic für zeitgemäße Everyday-Looks.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 34,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XXL",
+        "XL",
+        "S",
+        "M",
+        "XS"
+      ]
+    },
+    {
+      "sku": "759773-0002",
+      "name": "Marie Lund Damen Strickjacke marine strukturiert",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/759773-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_759773-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Stylische Strickjacke von Marie Lund – der grobe Strick, der Reißverschluss und die funkelnden Schmuckknöpfe an den Taschen machen sie zum absoluten Lieblingsstück! Rundhalsausschnitt und lässiger Schnitt runden den Look perfekt ab.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "L",
+        "XXL",
+        "XS",
+        "S"
+      ]
+    },
+    {
+      "sku": "759774-0001",
+      "name": "Marie Lund Damen Kurzarm-Strickjacke schwarz uni",
+      "category": "Cardigan",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/759774-0001/marie-lund-damen-kurzarm-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_pdstandard_759774-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "60% Baumwolle|40% Polyacryl"
+        }
+      ],
+      "description": "Die Kurzarm-Strickjacke von Marie Lund aus weichem Baumwoll-Mix überzeugt mit stilvoller Struktur und vielseitiger Kombinierbarkeit für elegante Alltagslooks.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "S",
+        "L",
+        "XS",
+        "M"
+      ]
+    },
+    {
+      "sku": "759774-0005",
+      "name": "Marie Lund Damen Kurzarm-Strickjacke hellgrau uni",
+      "category": "Cardigan",
+      "color": "grau",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/759774-0001/marie-lund-damen-kurzarm-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_pdstandard_759774-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "60% Baumwolle|40% Polyacryl"
+        }
+      ],
+      "description": "Die Kurzarm-Strickjacke von Marie Lund aus weichem Baumwoll-Mix überzeugt mit stilvoller Struktur und vielseitiger Kombinierbarkeit für elegante Alltagslooks.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "XXL",
+        "L",
+        "XL",
+        "XS"
+      ]
+    },
+    {
+      "sku": "766249-0009",
+      "name": "Marie Lund Damen Strickjacke erbse uni",
+      "category": "Cardigan",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766249-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_766249-0009_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund aus einem weichen Viskose-Mix gehört zu den Basics, die sich nonchalant dazu stylen lassen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXL",
+        "S",
+        "L",
+        "XXXL",
+        "M"
+      ]
+    },
+    {
+      "sku": "766250-0002",
+      "name": "Marie Lund Damen Strickjacke marine beige gestreift",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766250-0002/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_766250-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Der klassische Marie Lund Cardigan aus softem Feinstrick setzt mit seinem frischen Streifen-Design modische Akzente und rundet jedes Outfit stilvoll ab.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "L",
+        "S",
+        "XXL",
+        "XXXL"
+      ]
+    },
+    {
+      "sku": "768709-0004",
+      "name": "Marie Lund Damen Strickpullover hellgrau meliert",
+      "category": "Pullover / Sweater",
+      "color": "grau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/768709-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_768709-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der Strickpullover von Marie Lund überzeugt mit lässigen Strickdetails und einer entspannten Passform – der ideale Allrounder für viele Gelegenheiten.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "XXL",
+        "M",
+        "S",
+        "L"
+      ]
+    },
+    {
+      "sku": "769855-0003",
+      "name": "Marie Lund Damen Strickjacke schwarz uni",
+      "category": "Cardigan",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/769855-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_769855-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die applizierten Schmucksteine bringen die klassische Strickjacke von Marie Lund aus feinem Viskose-Mix wunderschön zum Funkeln.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "S",
+        "L",
+        "M",
+        "XXXL"
+      ]
+    },
+    {
+      "sku": "769896-0009",
+      "name": "Marie Lund Damen Strickpullover oliv uni",
+      "category": "Pullover / Sweater",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/769896-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_769896-0009_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Der Rollkragenpullover von Marie Lund aus feinem Viskose-Kunstfaser-Mix besticht durch zeitlose Eleganz und bietet zugleich angenehme Leichtigkeit sowie soften Tragekomfort – ein vielseitiger Klassiker für jede Garderobe.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 64,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "S",
+        "XXL",
+        "XL",
+        "L"
+      ]
+    },
+    {
+      "sku": "769897-0001",
+      "name": "Marie Lund Damen Pullover beige schwarz gemustert",
+      "category": "Pullover / Sweater",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/769897-0001/marie-lund-damen-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_pdstandard_769897-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Marie Lund Feinstrickpullover im klassischen Design mit modernem Twist – stilvoll, leicht und vielseitig kombinierbar.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XXL",
+        "S",
+        "M",
+        "XL"
+      ]
+    },
+    {
+      "sku": "769947-0001",
+      "name": "Marie Lund Damen Pullover marine ecru gestreift",
+      "category": "Pullover / Sweater",
+      "color": "blau|weiß",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/769947-0001/marie-lund-damen-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_pdstandard_769947-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Perfekt für Büro und Freizeit: der lässig-elegante Feinstrickpullover von Marie Lund aus einem leichten Viskose-Mix mit Stehkragen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 45,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XL",
+        "S",
+        "XXL",
+        "M"
+      ]
+    },
+    {
+      "sku": "773482-0003",
+      "name": "Marie Lund Damen Strickhülle melange meliert",
+      "category": "Knit Wrap / Cape",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/773482-0001/marie-lund-damen-strickhuelle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_pdstandard_773482-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "65% Polyester|13% Polyacryl|13% Nylon|6% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Die Marie Lund Strickhülle bietet mit ihrer kuschelweichen, leichten Qualität und dem langen Schnitt ein cozy Styling-Finish.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 89,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 54,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "XXL",
+        "S",
+        "L",
+        "M"
+      ]
+    },
+    {
+      "sku": "777453-0003",
+      "name": "Marie Lund Damen Strickpullover schwarz uni",
+      "category": "Pullover / Sweater",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/777453-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_777453-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Der Rippstrickpullover von Marie Lund mit Stehkragen und Raglanärmeln schmiegt sich dank der schmalen Passform und der Viskose-Mix-Qualität angenehm an den Körper.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 30,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "L",
+        "XL",
+        "M",
+        "XXL",
+        "S"
+      ]
+    },
+    {
+      "sku": "777453-0004",
+      "name": "Marie Lund Damen Strickpullover bordeaux uni",
+      "category": "Pullover / Sweater",
+      "color": "rot",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/777453-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_777453-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Der Rippstrickpullover von Marie Lund mit Stehkragen und Raglanärmeln schmiegt sich dank der schmalen Passform und der Viskose-Mix-Qualität angenehm an den Körper.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 30,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XS",
+        "S",
+        "XL",
+        "XXL",
+        "M"
+      ]
+    },
+    {
+      "sku": "777453-0006",
+      "name": "Marie Lund Damen Strickpullover aubergine uni",
+      "category": "Pullover / Sweater",
+      "color": "lila",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/777453-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_777453-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Der Rippstrickpullover von Marie Lund mit Stehkragen und Raglanärmeln schmiegt sich dank der schmalen Passform und der Viskose-Mix-Qualität angenehm an den Körper.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 30,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XXL",
+        "XL",
+        "XS",
+        "M",
+        "S"
+      ]
+    },
+    {
+      "sku": "777454-0001",
+      "name": "Marie Lund Damen Pullover schwarz kitt gestreift",
+      "category": "Pullover / Sweater",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 19.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/777454-0001/marie-lund-damen-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_pdstandard_777454-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Der Feinstrick-Pullover aus weichem Vikose-Mix von Marie Lund mit Rippstrick und Stehkragen verbindet zeitlose Eleganz mit gemütlichem Komfort.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 64,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 61,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XXL",
+        "S",
+        "XL",
+        "L",
+        "XS"
+      ]
+    },
+    {
+      "sku": "777454-0002",
+      "name": "Marie Lund Damen Pullover kitt braun gestreift",
+      "category": "Pullover / Sweater",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 19.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/777454-0001/marie-lund-damen-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_pdstandard_777454-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Der Feinstrick-Pullover aus weichem Vikose-Mix von Marie Lund mit Rippstrick und Stehkragen verbindet zeitlose Eleganz mit gemütlichem Komfort.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 64,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 61,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "L",
+        "XS",
+        "XL",
+        "M",
+        "S"
+      ]
+    },
+    {
+      "sku": "795693-0003",
+      "name": "Marie Lund Damen Strick-Langarmshirt nougat strukturiert",
+      "category": "Knit Shirt",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/795693-0001/marie-lund-damen-strick-langarmshirt/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_pdstandard_795693-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Das Stricklangarmshirt von Marie Lund besticht durch zeitlose Eleganz und Vielseitigkeit – ein stilvoller Allrounder für Business und Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 29,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "M",
+        "XL",
+        "XS",
+        "S",
+        "L"
+      ]
+    },
+    {
+      "sku": "795693-0004",
+      "name": "Marie Lund Damen Strick-Langarmshirt beige strukturiert",
+      "category": "Knit Shirt",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/795693-0001/marie-lund-damen-strick-langarmshirt/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_pdstandard_795693-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Das Stricklangarmshirt von Marie Lund besticht durch zeitlose Eleganz und Vielseitigkeit – ein stilvoller Allrounder für Business und Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 29,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "S",
+        "L",
+        "M",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "795693-0005",
+      "name": "Marie Lund Damen Strick-Langarmshirt rosa strukturiert",
+      "category": "Knit Shirt",
+      "color": "rosa",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/795693-0001/marie-lund-damen-strick-langarmshirt/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_pdstandard_795693-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Das Stricklangarmshirt von Marie Lund besticht durch zeitlose Eleganz und Vielseitigkeit – ein stilvoller Allrounder für Business und Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 29,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XS",
+        "XL",
+        "XXL",
+        "S",
+        "L"
+      ]
+    },
+    {
+      "sku": "795693-0006",
+      "name": "Marie Lund Damen Strick-Langarmshirt hellblau strukturiert",
+      "category": "Knit Shirt",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/795693-0001/marie-lund-damen-strick-langarmshirt/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_pdstandard_795693-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Das Stricklangarmshirt von Marie Lund besticht durch zeitlose Eleganz und Vielseitigkeit – ein stilvoller Allrounder für Business und Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 29,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "XXL",
+        "L",
+        "S",
+        "M"
+      ]
+    },
+    {
+      "sku": "795693-0007",
+      "name": "Marie Lund Damen Strick-Langarmshirt indigo strukturiert",
+      "category": "Knit Shirt",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/795693-0001/marie-lund-damen-strick-langarmshirt/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_pdstandard_795693-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Das Stricklangarmshirt von Marie Lund besticht durch zeitlose Eleganz und Vielseitigkeit – ein stilvoller Allrounder für Business und Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 29,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XXL",
+        "XL",
+        "S",
+        "M",
+        "L"
+      ]
+    },
+    {
+      "sku": "795693-0008",
+      "name": "Marie Lund Damen Strick-Langarmshirt lind strukturiert",
+      "category": "Knit Shirt",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/795693-0001/marie-lund-damen-strick-langarmshirt/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_pdstandard_795693-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Das Stricklangarmshirt von Marie Lund besticht durch zeitlose Eleganz und Vielseitigkeit – ein stilvoller Allrounder für Business und Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 29,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XL",
+        "S",
+        "L",
+        "M",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "809646-0001",
+      "name": "Marie Lund Damen Strickpullover marine uni",
+      "category": "Pullover / Sweater",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/809646-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_809646-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Funkelnde Strasssteine zieren die Front des Marie Lund Strickpullovers und verleihen dem Essential eine glamouröse Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 37,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "L",
+        "XL",
+        "XXL",
+        "XXXL",
+        "M"
+      ]
+    },
+    {
+      "sku": "809646-0002",
+      "name": "Marie Lund Damen Strickpullover taupe uni",
+      "category": "Pullover / Sweater",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/809646-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_809646-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Funkelnde Strasssteine zieren die Front des Marie Lund Strickpullovers und verleihen dem Essential eine glamouröse Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 37,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "L",
+        "M",
+        "XXXL",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "809646-0003",
+      "name": "Marie Lund Damen Strickpullover schwarz uni",
+      "category": "Pullover / Sweater",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/809646-0001/marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_809646-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Funkelnde Strasssteine zieren die Front des Marie Lund Strickpullovers und verleihen dem Essential eine glamouröse Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 37,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXXL",
+        "S",
+        "L",
+        "XXL",
+        "M"
+      ]
+    },
+    {
+      "sku": "811264-0002",
+      "name": "Marie Lund Damen Strickshirt taupe uni",
+      "category": "Knit Shirt",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/811264-0001/marie-lund-damen-strickshirt/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_pdstandard_811264-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Baumwolle|50% Polyacryl"
+        }
+      ],
+      "description": "Verschiedene Lochmuster prägen den sommerlichen Look des Strickshirts von Marie Lund, das aus komfortablem Baumwollmix mit Knopfleiste und V-Ausschnitt aufwartet.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "L",
+        "S",
+        "XL",
+        "M",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "811264-0004",
+      "name": "Marie Lund Damen Strickshirt schilf uni",
+      "category": "Knit Shirt",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/811264-0001/marie-lund-damen-strickshirt/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_pdstandard_811264-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Baumwolle|50% Polyacryl"
+        }
+      ],
+      "description": "Verschiedene Lochmuster prägen den sommerlichen Look des Strickshirts von Marie Lund, das aus komfortablem Baumwollmix mit Knopfleiste und V-Ausschnitt aufwartet.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "L",
+        "M",
+        "XS",
+        "S"
+      ]
+    },
+    {
+      "sku": "814906-0001",
+      "name": "Marie Lund Damen Kurzarm-Strickjacke ecru marine gemustert",
+      "category": "Cardigan",
+      "color": "weiß|blau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/814906-0001/marie-lund-damen-kurzarm-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_pdstandard_814906-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Die stretchige Viskose verleiht der Kurzarm-Strickjacke von Marie Lund ein angenehmes Trage-Feeling – das perfekte Piece für wärmere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "828308-0001",
+      "name": "Marie Lund Damen Strickjacke marine uni",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/828308-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_828308-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit ihrer weichen Baumwollqualität und dem angenehmen Kuschelfaktor – ein unverzichtbares Layering-Piece, das sich lässig über jeden Look werfen lässt und ihn mühelos abrundet.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XL",
+        "XXXL",
+        "L",
+        "M",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "828308-0002",
+      "name": "Marie Lund Damen Strickjacke ecru uni",
+      "category": "Cardigan",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/828308-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_828308-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit ihrer weichen Baumwollqualität und dem angenehmen Kuschelfaktor – ein unverzichtbares Layering-Piece, das sich lässig über jeden Look werfen lässt und ihn mühelos abrundet.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXL",
+        "S",
+        "M",
+        "XXXL",
+        "L"
+      ]
+    },
+    {
+      "sku": "828308-0003",
+      "name": "Marie Lund Damen Strickjacke rot uni",
+      "category": "Cardigan",
+      "color": "rot",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/828308-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_828308-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit ihrer weichen Baumwollqualität und dem angenehmen Kuschelfaktor – ein unverzichtbares Layering-Piece, das sich lässig über jeden Look werfen lässt und ihn mühelos abrundet.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "M",
+        "S",
+        "XXL",
+        "L",
+        "XXXL"
+      ]
+    },
+    {
+      "sku": "828308-0004",
+      "name": "Marie Lund Damen Strickjacke blau uni",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/828308-0001/marie-lund-damen-strickjacke/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_pdstandard_828308-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit ihrer weichen Baumwollqualität und dem angenehmen Kuschelfaktor – ein unverzichtbares Layering-Piece, das sich lässig über jeden Look werfen lässt und ihn mühelos abrundet.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "S",
+        "L",
+        "M",
+        "XXXL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "707555-0003",
+      "name": "Marie Lund Damen Pullover aus Merinowolle gelb uni",
+      "category": "Pullover / Sweater",
+      "color": "gelb",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/707555-0003/marie-lund-damen-pullover-aus-merinowolle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover-aus-Merinowolle_pdstandard_707555-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Wolle"
+        }
+      ],
+      "description": "Der Strickpullover aus reiner Merinowolle von Marie Lund hält wunderbar warm und ist durch sein schlichtes Design leicht zu kombinieren.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 63,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 53,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "XXL",
+        "XS",
+        "XL",
+        "L"
+      ]
+    },
+    {
+      "sku": "709602-0001",
+      "name": "Marie Lund Damen Strickpullover aus Wolle schoko uni",
+      "category": "Pullover / Sweater",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 69.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/709602-0001/marie-lund-damen-strickpullover-aus-wolle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-aus-Wolle_pdstandard_709602-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Wolle"
+        }
+      ],
+      "description": "Der Pullover von Marie Lund aus warmer Merinowolle ist ein toller Begleiter für den Winter und sorgt mit seinem Zopfmuster für Aufsehen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 59,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 61,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "L",
+        "M",
+        "XS",
+        "XL"
+      ]
+    },
+    {
+      "sku": "724350-0004",
+      "name": "Marie Lund Damen Strickjacke mit Alpaka-Anteil indigo uni",
+      "category": "Cardigan",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/724350-0004/marie-lund-collection-damen-strickjacke-mit-alpaka-anteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Alpaka-Anteil_pdstandard_724350-0004_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "43% Nylon|26% Polyacryl|13% Alpaka|13% Wolle|5% Elasthan"
+        }
+      ],
+      "description": "Macht jeden Look gleich eine Nuance kuscheliger: der oversized Cardigan von Marie Lund in Feinstrick-Qualität mit Alpaka-Anteil.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XXL",
+        "L",
+        "S",
+        "M",
+        "XL"
+      ]
+    },
+    {
+      "sku": "724350-0005",
+      "name": "Marie Lund Damen Strickjacke mit Alpaka-Anteil ecru uni",
+      "category": "Cardigan",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/724350-0005/marie-lund-collection-damen-strickjacke-mit-alpaka-anteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Alpaka-Anteil_pdstandard_724350-0005_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "43% Nylon|26% Polyacryl|13% Alpaka|13% Wolle|5% Elasthan"
+        }
+      ],
+      "description": "Macht jeden Look gleich eine Nuance kuscheliger: der oversized Cardigan von Marie Lund in Feinstrick-Qualität mit Alpaka-Anteil.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "L",
+        "XS",
+        "S",
+        "XL",
+        "M"
+      ]
+    },
+    {
+      "sku": "724386-0001",
+      "name": "Marie Lund Damen Strickpullover sand uni",
+      "category": "Pullover / Sweater",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 45.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/724386-0001/marie-lund-collection-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_pdstandard_724386-0001_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "33% Polyester|25% Polyacryl|25% Wolle|17% Nylon"
+        }
+      ],
+      "description": "Der Pullover von Marie Lund besticht durch seine hochwertige Strickqualität mit Wollanteil und Details wie Fransenverzierungen an den Ärmeln - Look and Feel par excellence.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 56,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "S",
+        "XS",
+        "XXL",
+        "XL",
+        "L"
+      ]
+    },
+    {
+      "sku": "730824-0005",
+      "name": "Marie Lund Damen Strickpullover - Nak weiß uni",
+      "category": "Pullover / Sweater",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/730824-0005/marie-lund-damen-strickpullover-nak/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-Nak_pdstandard_730824-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der Strickpullover Nak von Marie Lund besticht durch kleine Design-Details und überzeugt durch seine tolle Baumwollqualität - ein Must-Have für kühlere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXL",
+        "S",
+        "XS",
+        "L",
+        "M"
+      ]
+    },
+    {
+      "sku": "730824-0006",
+      "name": "Marie Lund Damen Strickpullover - Nak vanille uni",
+      "category": "Pullover / Sweater",
+      "color": "gelb",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/730824-0006/marie-lund-damen-strickpullover-nak/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-Nak_pdstandard_730824-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der Strickpullover Nak von Marie Lund besticht durch kleine Design-Details und überzeugt durch seine tolle Baumwollqualität - ein Must-Have für kühlere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "L",
+        "S",
+        "XS",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "730828-0001",
+      "name": "Marie Lund Marie Lund - Damen Strickpullover blau weiß gestreift",
+      "category": "Pullover / Sweater",
+      "color": "weiß|blau",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/730828-0001/marie-lund-marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Marie-Lund-Damen-Strickpullover_pdstandard_730828-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der Strickpullover von Marie Lund verzaubert durch seine kleinen Design-Details und überzeugt durch seine tolle Baumwollqualität. Er ist ein echter Hingucker und ein Must-Have für kühlere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "S",
+        "L",
+        "XL",
+        "M",
+        "XS"
+      ]
+    },
+    {
+      "sku": "730828-0002",
+      "name": "Marie Lund Marie Lund - Damen Strickpullover rosa weiß gestreift",
+      "category": "Pullover / Sweater",
+      "color": "weiß|rosa",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/730828-0002/marie-lund-marie-lund-damen-strickpullover/",
+      "image_url": "https://static.vangraaf.com/img/Marie-Lund-Damen-Strickpullover_pdstandard_730828-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Der Strickpullover von Marie Lund verzaubert durch seine kleinen Design-Details und überzeugt durch seine tolle Baumwollqualität. Er ist ein echter Hingucker und ein Must-Have für kühlere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XS",
+        "L",
+        "M",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "734167-0001",
+      "name": "Marie Lund Damen Strickjacke mit Alpaka-Anteil - Vipinna ecru gold gestreift",
+      "category": "Cardigan",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/734167-0001/marie-lund-damen-strickjacke-mit-alpaka-anteil-vipinna/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Alpaka-Anteil-Vipinna_pdstandard_734167-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "39% Nylon|29% Wolle|13% Alpaka|11% Polyester|6% metallisiertes Garn|2% Elasthan"
+        }
+      ],
+      "description": "Der klassische Stil der Strickjacke mit Alpaka-Anteil von Marie Lund wird durch Streifen aus metallisiertem Garn gekonnt aufgelockert.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 49,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "L",
+        "XS",
+        "XL",
+        "M"
+      ]
+    },
+    {
+      "sku": "736924-0001",
+      "name": "Marie Lund Damen Strickpullover mit Mohairanteil ecru strukturiert",
+      "category": "Pullover / Sweater",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736924-0001/marie-lund-damen-strickpullover-mit-mohairanteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-mit-Mohairanteil_pdstandard_736924-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Der kurzärmelige Strickpullover Kunstfaserqualität mit hohem Moahair- und Wollanteil von Marie Lund kann zu fast jeder Jahreszeit getragen werden: kuschelig im Winter, luftig im Frühling.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS/S",
+        "XL/XXL",
+        "M/L"
+      ]
+    },
+    {
+      "sku": "736924-0002",
+      "name": "Marie Lund Damen Strickpullover mit Mohairanteil koralle strukturiert",
+      "category": "Pullover / Sweater",
+      "color": "rot",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736924-0002/marie-lund-damen-strickpullover-mit-mohairanteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-mit-Mohairanteil_pdstandard_736924-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Der kurzärmelige Strickpullover Kunstfaserqualität mit hohem Moahair- und Wollanteil von Marie Lund kann zu fast jeder Jahreszeit getragen werden: kuschelig im Winter, luftig im Frühling.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M/L",
+        "XL/XXL",
+        "XS/S"
+      ]
+    },
+    {
+      "sku": "736924-0003",
+      "name": "Marie Lund Damen Strickpullover mit Mohairanteil melange strukturiert",
+      "category": "Pullover / Sweater",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736924-0003/marie-lund-damen-strickpullover-mit-mohairanteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-mit-Mohairanteil_pdstandard_736924-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Der kurzärmelige Strickpullover Kunstfaserqualität mit hohem Moahair- und Wollanteil von Marie Lund kann zu fast jeder Jahreszeit getragen werden: kuschelig im Winter, luftig im Frühling.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL/XXL",
+        "XS/S",
+        "M/L"
+      ]
+    },
+    {
+      "sku": "736925-0001",
+      "name": "Marie Lund Damen Strickjacke mit Mohair-Anteil weiß strukturiert",
+      "category": "Cardigan",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 69.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736925-0001/marie-lund-damen-strickjacke-mit-mohair-anteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Mohair-Anteil_pdstandard_736925-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Die Marie Lund Strickjacke mit Mohair und Wolle überzeugt nicht nur durch ihren hervorragenden Tragekomfort, sondern auch durch das durchscheinende Strickmuster.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 54,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "M",
+        "XS",
+        "L",
+        "XL",
+        "S"
+      ]
+    },
+    {
+      "sku": "736925-0002",
+      "name": "Marie Lund Damen Strickjacke mit Mohair-Anteil koralle strukturiert",
+      "category": "Cardigan",
+      "color": "rot",
+      "color_hex": "",
+      "price_eur": 69.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736925-0002/marie-lund-damen-strickjacke-mit-mohair-anteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Mohair-Anteil_pdstandard_736925-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Die Marie Lund Strickjacke mit Mohair und Wolle überzeugt nicht nur durch ihren hervorragenden Tragekomfort, sondern auch durch das durchscheinende Strickmuster.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 54,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XXL",
+        "M",
+        "L",
+        "XL",
+        "S"
+      ]
+    },
+    {
+      "sku": "736925-0003",
+      "name": "Marie Lund Damen Strickjacke mit Mohair-Anteil kitt strukturiert",
+      "category": "Cardigan",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 69.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/736925-0003/marie-lund-damen-strickjacke-mit-mohair-anteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Mohair-Anteil_pdstandard_736925-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "40% Polyamid|30% Mohair|30% Wolle"
+        }
+      ],
+      "description": "Die Marie Lund Strickjacke mit Mohair und Wolle überzeugt nicht nur durch ihren hervorragenden Tragekomfort, sondern auch durch das durchscheinende Strickmuster.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 54,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "XS",
+        "L",
+        "XXL",
+        "XL"
+      ]
+    },
+    {
+      "sku": "747161-0002",
+      "name": "Marie Lund Damen Kurzarm-Pullover rosa ecru gestreift",
+      "category": "Pullover / Sweater",
+      "color": "rosa",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/747161-0002/marie-lund-damen-kurzarm-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Pullover_pdstandard_747161-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "60% Baumwolle|40% Viskose"
+        }
+      ],
+      "description": "Der Marie Lund Kurzarm-Pullover aus Baumwoll-Viskose-Mix mit Polokragen bietet einen modernen Look kombiniert mit angenehmem Tragekomfort und einer leichten, atmungsaktiven feinstrick-Textur.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "M",
+        "XL",
+        "S",
+        "L",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "750913-0001",
+      "name": "Marie Lund Damen Pullunder ecru marine gestreift",
+      "category": "Pullover / Sweater",
+      "color": "weiß|blau",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/750913-0001/marie-lund-damen-pullunder/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullunder_pdstandard_750913-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "81% Baumwolle|19% Nylon"
+        }
+      ],
+      "description": "Der Pullunder von Marie Lund überzeugt als modisches Styling-Piece und ist dank der Baumwollmischqualität angenehm zu tragen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 52,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XXL",
+        "M",
+        "XL",
+        "S",
+        "L"
+      ]
+    },
+    {
+      "sku": "754759-0001",
+      "name": "Marie Lund Damen Strickhülle ecru uni",
+      "category": "Knit Wrap / Cape",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/754759-0001/marie-lund-collection-damen-strickhuelle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_pdstandard_754759-0001_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "49% Polyacryl|25% Polyester|22% Nylon|4% Wolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund aus Wolle zeichnet sich durch ihren außergewöhnlichen Tragekomfort aus und wird durch das einzigartige Strickmuster sowie die auffälligen Fransensäume zu einem echten Hingucker.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "M",
+        "S",
+        "XS",
+        "XL",
+        "L"
+      ]
+    },
+    {
+      "sku": "754759-0002",
+      "name": "Marie Lund Damen Strickhülle rot uni",
+      "category": "Knit Wrap / Cape",
+      "color": "rot",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/754759-0002/marie-lund-collection-damen-strickhuelle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_pdstandard_754759-0002_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "49% Polyacryl|25% Polyester|22% Nylon|4% Wolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund aus Wolle zeichnet sich durch ihren außergewöhnlichen Tragekomfort aus und wird durch das einzigartige Strickmuster sowie die auffälligen Fransensäume zu einem echten Hingucker.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "S",
+        "M",
+        "XXL",
+        "L"
+      ]
+    },
+    {
+      "sku": "766176-0003",
+      "name": "Marie Lund Damen Pure Cashmere Pullover camel meliert",
+      "category": "Pullover / Sweater",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 89.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766176-0003/marie-lund-damen-pure-cashmere-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pure-Cashmere-Pullover_pdstandard_766176-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Der Pure Cashmere Pullover von Marie Lund ist ein zeitloser Style, der Looks von casual bis smart nonchalant ein kuscheliges Finish verleiht.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XS",
+        "L",
+        "XL",
+        "M",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "766176-0004",
+      "name": "Marie Lund Damen Pure Cashmere Pullover mais uni",
+      "category": "Pullover / Sweater",
+      "color": "gelb",
+      "color_hex": "",
+      "price_eur": 89.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766176-0004/marie-lund-damen-pure-cashmere-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pure-Cashmere-Pullover_pdstandard_766176-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Der Pure Cashmere Pullover von Marie Lund ist ein zeitloser Style, der Looks von casual bis smart nonchalant ein kuscheliges Finish verleiht.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "S",
+        "XS",
+        "XL",
+        "XXL",
+        "M"
+      ]
+    },
+    {
+      "sku": "766176-0008",
+      "name": "Marie Lund Damen Pure Cashmere Pullover braun meliert",
+      "category": "Pullover / Sweater",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 89.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766176-0008/marie-lund-damen-pure-cashmere-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pure-Cashmere-Pullover_pdstandard_766176-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Der Pure Cashmere Pullover von Marie Lund ist ein zeitloser Style, der Looks von casual bis smart nonchalant ein kuscheliges Finish verleiht.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XL",
+        "L",
+        "XXL",
+        "XS",
+        "M"
+      ]
+    },
+    {
+      "sku": "766176-0009",
+      "name": "Marie Lund Damen Pure Cashmere Pullover erbse uni",
+      "category": "Pullover / Sweater",
+      "color": "grün",
+      "color_hex": "",
+      "price_eur": 89.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766176-0009/marie-lund-damen-pure-cashmere-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pure-Cashmere-Pullover_pdstandard_766176-0009_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Der Pure Cashmere Pullover von Marie Lund ist ein zeitloser Style, der Looks von casual bis smart nonchalant ein kuscheliges Finish verleiht.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "S",
+        "M",
+        "L",
+        "XS",
+        "XL"
+      ]
+    },
+    {
+      "sku": "766176-0010",
+      "name": "Marie Lund Damen Pure Cashmere Pullover anthrazit meliert",
+      "category": "Pullover / Sweater",
+      "color": "grau",
+      "color_hex": "",
+      "price_eur": 89.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766176-0010/marie-lund-damen-pure-cashmere-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pure-Cashmere-Pullover_pdstandard_766176-0010_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Der Pure Cashmere Pullover von Marie Lund ist ein zeitloser Style, der Looks von casual bis smart nonchalant ein kuscheliges Finish verleiht.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "M",
+        "XS",
+        "S",
+        "L",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "766184-0001",
+      "name": "Marie Lund Damen Pure Cashmere Pullover ecru anthrazit gestreift",
+      "category": "Pullover / Sweater",
+      "color": "grau|weiß",
+      "color_hex": "",
+      "price_eur": 89.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766184-0001/marie-lund-damen-pure-cashmere-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pure-Cashmere-Pullover_pdstandard_766184-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Der Pure Cashmere Pullover von Marie Lund mit Bretonstreifen verleiht dem Look maritime Coziness.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XXL",
+        "S",
+        "XL",
+        "XS",
+        "M"
+      ]
+    },
+    {
+      "sku": "766270-0001",
+      "name": "Marie Lund Damen Strickpullover aus Cashmere camel uni",
+      "category": "Pullover / Sweater",
+      "color": "beige|braun",
+      "color_hex": "",
+      "price_eur": 179.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766270-0001/marie-lund-damen-strickpullover-aus-cashmere/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-aus-Cashmere_pdstandard_766270-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Kuschelpartner: Durch die Cashmere-Qualität avanciert der Strickpullover von Marie Lund zum absoluten Wohlfühl-Piece - der zarte Rollsaum verleiht dem Design eine leichte, feminine Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 61,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "L",
+        "S",
+        "M",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "766270-0002",
+      "name": "Marie Lund Damen Strickpullover aus Cashmere anthrazit meliert",
+      "category": "Pullover / Sweater",
+      "color": "grau",
+      "color_hex": "",
+      "price_eur": 179.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/766270-0002/marie-lund-damen-strickpullover-aus-cashmere/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-aus-Cashmere_pdstandard_766270-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Kuschelpartner: Durch die Cashmere-Qualität avanciert der Strickpullover von Marie Lund zum absoluten Wohlfühl-Piece - der zarte Rollsaum verleiht dem Design eine leichte, feminine Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 61,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "S",
+        "XS",
+        "XXL",
+        "M",
+        "L"
+      ]
+    },
+    {
+      "sku": "768899-0004",
+      "name": "Marie Lund Damen Strickjacke mit Wollanteil rosa meliert",
+      "category": "Cardigan",
+      "color": "rosa",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/768899-0004/marie-lund-damen-strickjacke-mit-wollanteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Wollanteil_pdstandard_768899-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "65% Polyester|13% Nylon|13% Polyacryl|6% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund besticht mit trendiger Oversized-Silhouette und softem Strick – ein vielseitig kombinierbares Basic für jeden Tag.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL/XXL",
+        "M/L",
+        "XS/S"
+      ]
+    },
+    {
+      "sku": "769856-0001",
+      "name": "Marie Lund Damen Kurzarmpullover kitt uni",
+      "category": "Pullover / Sweater",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/769856-0001/marie-lund-damen-kurzarmpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarmpullover_pdstandard_769856-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die applizierten Schmucksteine bringen den puristischen Feinstrickpullover von Marie Lund aus Viskose-Mix mit halblangen Ärmeln schön zum Funkeln.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXXL",
+        "S",
+        "XL",
+        "L",
+        "XXL",
+        "M"
+      ]
+    },
+    {
+      "sku": "769856-0003",
+      "name": "Marie Lund Damen Kurzarmpullover schwarz uni",
+      "category": "Pullover / Sweater",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/769856-0003/marie-lund-damen-kurzarmpullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarmpullover_pdstandard_769856-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die applizierten Schmucksteine bringen den puristischen Feinstrickpullover von Marie Lund aus Viskose-Mix mit halblangen Ärmeln schön zum Funkeln.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XXXL",
+        "XXL",
+        "XL",
+        "S",
+        "L"
+      ]
+    },
+    {
+      "sku": "769963-0001",
+      "name": "Marie Lund Damen Cardigan marine ecru gestreift",
+      "category": "Cardigan",
+      "color": "blau|weiß",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/769963-0001/marie-lund-damen-cardigan/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Cardigan_pdstandard_769963-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Extraweicher Viskose-Mix macht den Marie Lund Feinstrick-Cardigan zum komfortablen Begleiter mit stilvoller Ausstrahlung.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 82,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 49,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "L",
+        "M",
+        "XL",
+        "XXXL",
+        "S"
+      ]
+    },
+    {
+      "sku": "773613-0001",
+      "name": "Marie Lund Damen Strickpullover mit Woll-Anteil schwarz uni",
+      "category": "Pullover / Sweater",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/773613-0001/marie-lund-damen-strickpullover-mit-woll-anteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-mit-Woll-Anteil_pdstandard_773613-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "47% Polyacryl|25% Polyester|25% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Kuscheliger Favorit: Der Pullover von Marie Lund aus flauschigem Boucl&eacute;-Strick mit wärmendem Woll-Anteil ist ein Lieblingsstück zum Wohlfühlen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "S",
+        "XXL",
+        "L",
+        "M",
+        "XL"
+      ]
+    },
+    {
+      "sku": "773613-0002",
+      "name": "Marie Lund Damen Strickpullover mit Woll-Anteil ecru uni",
+      "category": "Pullover / Sweater",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 49.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/773613-0002/marie-lund-damen-strickpullover-mit-woll-anteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-mit-Woll-Anteil_pdstandard_773613-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "47% Polyacryl|25% Polyester|25% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Kuscheliger Favorit: Der Pullover von Marie Lund aus flauschigem Boucl&eacute;-Strick mit wärmendem Woll-Anteil ist ein Lieblingsstück zum Wohlfühlen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "774969-0001",
+      "name": "Marie Lund Damen Bolero beige uni",
+      "category": "Bolero",
+      "color": "beige",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/774969-0001/marie-lund-damen-bolero/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Bolero_pdstandard_774969-0001_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "71% Nylon|20% Viskose|9% Polyester"
+        }
+      ],
+      "description": "Der kuschelweiche Strick-Bolero von Marie Lund mit einem Knopf ergänzt die Abendgarderobe stilvoll um ein wärmendes Element.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 37,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "36",
+        "38",
+        "44",
+        "34",
+        "40",
+        "42"
+      ]
+    },
+    {
+      "sku": "776321-0001",
+      "name": "Marie Lund Damen Strickpullover aus Merinowolle melange meliert",
+      "category": "Pullover / Sweater",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 69.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/776321-0001/marie-lund-damen-strickpullover-aus-merinowolle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-aus-Merinowolle_pdstandard_776321-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100%  Wolle (Merinowolle)"
+        }
+      ],
+      "description": "Der Marie Lund Troyerpullover setzt mit der relaxten Passform und der weichen Merino-Qualität auf Tragekomfort pur – perfekt für den gemütlichen Feinschliff im Look.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 61,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 55,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XS",
+        "M",
+        "XL",
+        "L"
+      ]
+    },
+    {
+      "sku": "776653-0001",
+      "name": "Marie Lund Damen Pure Cashmere Pullover anthrazit meliert",
+      "category": "Pullover / Sweater",
+      "color": "grau",
+      "color_hex": "",
+      "price_eur": 99.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/776653-0001/marie-lund-damen-pure-cashmere-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pure-Cashmere-Pullover_pdstandard_776653-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Der Pure Cashmere Pullover von Marie Lund erweist sich als edler und gleichzeitig angenehm wärmender Begleiter für die Herbst- und Wintergarderobe.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 55,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS/S",
+        "M/L",
+        "XL/XXL"
+      ]
+    },
+    {
+      "sku": "776653-0002",
+      "name": "Marie Lund Damen Pure Cashmere Pullover camel meliert",
+      "category": "Pullover / Sweater",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 99.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/776653-0002/marie-lund-damen-pure-cashmere-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pure-Cashmere-Pullover_pdstandard_776653-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Cashmere"
+        }
+      ],
+      "description": "Der Pure Cashmere Pullover von Marie Lund erweist sich als edler und gleichzeitig angenehm wärmender Begleiter für die Herbst- und Wintergarderobe.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 55,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M/L",
+        "XL/XXL",
+        "XS/S"
+      ]
+    },
+    {
+      "sku": "776681-0001",
+      "name": "Marie Lund Damen Strickjacke aus Merinowolle taupe ecru gestreift",
+      "category": "Cardigan",
+      "color": "braun|weiß",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/776681-0001/marie-lund-damen-strickjacke-aus-merinowolle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-aus-Merinowolle_pdstandard_776681-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100%  Wolle (Merinowolle)"
+        }
+      ],
+      "description": "Perfektes Kombi-Piece für cozy Looks: die Strickjacke von Marie Lund aus reiner Merinowolle sorgt für Wärme und Stil.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "L",
+        "S",
+        "XXL",
+        "M",
+        "XL"
+      ]
+    },
+    {
+      "sku": "776681-0002",
+      "name": "Marie Lund Damen Strickjacke aus Merinowolle ecru schwarz gestreift",
+      "category": "Cardigan",
+      "color": "weiß|schwarz",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/776681-0002/marie-lund-damen-strickjacke-aus-merinowolle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-aus-Merinowolle_pdstandard_776681-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100%  Wolle (Merinowolle)"
+        }
+      ],
+      "description": "Perfektes Kombi-Piece für cozy Looks: die Strickjacke von Marie Lund aus reiner Merinowolle sorgt für Wärme und Stil.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "S",
+        "M",
+        "XS",
+        "L",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "778037-0001",
+      "name": "Marie Lund Damen Strickjacke mit Wollanteil ecru uni",
+      "category": "Cardigan",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 69.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/778037-0001/marie-lund-collection-damen-strickjacke-mit-wollanteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Wollanteil_pdstandard_778037-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "48% Wolle|20% Polyacryl|17% Nylon|15% Polyester"
+        }
+      ],
+      "description": "Rundet mit klassischer Eleganz jedes Outfit ab: die kuschelige Marie Lund Strickjacke aus Kunstfaser-Mischung mit Wollanteil.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "M",
+        "XXL",
+        "L",
+        "XS",
+        "S"
+      ]
+    },
+    {
+      "sku": "778037-0002",
+      "name": "Marie Lund Damen Strickjacke mit Wollanteil aubergine uni",
+      "category": "Cardigan",
+      "color": "lila",
+      "color_hex": "",
+      "price_eur": 69.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/778037-0002/marie-lund-collection-damen-strickjacke-mit-wollanteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Wollanteil_pdstandard_778037-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "48% Wolle|20% Polyacryl|17% Nylon|15% Polyester"
+        }
+      ],
+      "description": "Rundet mit klassischer Eleganz jedes Outfit ab: die kuschelige Marie Lund Strickjacke aus Kunstfaser-Mischung mit Wollanteil.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXL",
+        "S",
+        "M",
+        "XS",
+        "L"
+      ]
+    },
+    {
+      "sku": "778039-0001",
+      "name": "Marie Lund Damen Strickpullover mit Alpakaanteil camel meliert",
+      "category": "Pullover / Sweater",
+      "color": "braun",
+      "color_hex": "",
+      "price_eur": 35.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/778039-0001/marie-lund-collection-damen-strickpullover-mit-alpakaanteil/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover-mit-Alpakaanteil_pdstandard_778039-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "62% Polyester|16% Polyacryl|10% Wolle|10% Alpaka|2% Elasthan"
+        }
+      ],
+      "description": "Der kuschelige Strickpullover mit kurzen Ärmeln schenkt jedem Look eine Extraportion Wärme und Stil, während der edle Kunstfaser-Mix mit Woll- und Alpakaanteil für ein besonders softes, angenehmes Tragegefühl sorgt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XL",
+        "M",
+        "XXL",
+        "XS",
+        "L"
+      ]
+    },
+    {
+      "sku": "781340-0002",
+      "name": "Marie Lund Damen Pullover aus Merinowolle schwarz kariert",
+      "category": "Pullover / Sweater",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 59.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/781340-0002/marie-lund-damen-pullover-aus-merinowolle/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover-aus-Merinowolle_pdstandard_781340-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100%  Wolle (Merinowolle)"
+        }
+      ],
+      "description": "Der Merino-Pullover von Marie Lund zeigt sich im oversized Fit mit Stehkragen und erweist sich als kuscheliges Upgrade für den Freizeit-Look.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 58,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M/L",
+        "XL/XXL",
+        "XS/S"
+      ]
+    },
+    {
+      "sku": "783608-0003",
+      "name": "Marie Lund Damen Lochstrick-Pullover schwarz uni",
+      "category": "Pullover / Sweater",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/783608-0003/marie-lund-damen-lochstrick-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Lochstrick-Pullover_pdstandard_783608-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Der Lochstrickpullover von Marie Lund aus Viskose-Mix ist modern, leicht und vielseitig kombinierbar.  ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 35,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "S",
+        "L",
+        "XS",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "783608-0005",
+      "name": "Marie Lund Damen Lochstrick-Pullover himbeer uni",
+      "category": "Pullover / Sweater",
+      "color": "rot",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/783608-0005/marie-lund-damen-lochstrick-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Lochstrick-Pullover_pdstandard_783608-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Der Lochstrickpullover von Marie Lund aus Viskose-Mix ist modern, leicht und vielseitig kombinierbar.  ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 35,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "M",
+        "L",
+        "S",
+        "XXL",
+        "XS"
+      ]
+    },
+    {
+      "sku": "783608-0006",
+      "name": "Marie Lund Damen Lochstrick-Pullover rosa uni",
+      "category": "Pullover / Sweater",
+      "color": "rosa",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/783608-0006/marie-lund-damen-lochstrick-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Lochstrick-Pullover_pdstandard_783608-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Der Lochstrickpullover von Marie Lund aus Viskose-Mix ist modern, leicht und vielseitig kombinierbar.  ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 35,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "S",
+        "XL",
+        "XS",
+        "XXL",
+        "L"
+      ]
+    },
+    {
+      "sku": "783608-0007",
+      "name": "Marie Lund Damen Lochstrick-Pullover ecru uni",
+      "category": "Pullover / Sweater",
+      "color": "weiß",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/783608-0007/marie-lund-damen-lochstrick-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Lochstrick-Pullover_pdstandard_783608-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Der Lochstrickpullover von Marie Lund aus Viskose-Mix ist modern, leicht und vielseitig kombinierbar.  ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 35,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "L",
+        "XXL",
+        "XL",
+        "XS",
+        "S"
+      ]
+    },
+    {
+      "sku": "783608-0008",
+      "name": "Marie Lund Damen Lochstrick-Pullover marine uni",
+      "category": "Pullover / Sweater",
+      "color": "blau",
+      "color_hex": "",
+      "price_eur": 39.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/783608-0008/marie-lund-damen-lochstrick-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Lochstrick-Pullover_pdstandard_783608-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Der Lochstrickpullover von Marie Lund aus Viskose-Mix ist modern, leicht und vielseitig kombinierbar.  ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 54,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 35,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XXL"
+      ]
+    },
+    {
+      "sku": "808797-0001",
+      "name": "Marie Lund Damen Kurzarm-Pullover schwarz uni",
+      "category": "Pullover / Sweater",
+      "color": "schwarz",
+      "color_hex": "",
+      "price_eur": 29.99,
+      "url": "https://www.peek-und-cloppenburg.de/p/808797-0001/marie-lund-damen-kurzarm-pullover/",
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Pullover_pdstandard_808797-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Zarte Ziersteine bringen die Frontpartie des Marie Lund Pullovers zum Funkeln und harmonieren schön mit der feinen Strick-Qualität.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXXL",
+        "S",
+        "L",
+        "XL",
+        "XXL",
+        "M"
+      ]
     }
   ],
   "enriched_on": "2026-05-22",
@@ -4594,5 +9007,6 @@
     "description",
     "sample_measurements",
     "available_sizes"
-  ]
+  ],
+  "expanded_on": "2026-05-22"
 }
