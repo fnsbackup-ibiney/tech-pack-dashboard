@@ -633,6 +633,32 @@ with tab_editor:
                     except Exception:
                         # Non-fatal — description editor will just be empty
                         pass
+
+                    # Check the approved-sketch cache: if this exact photo
+                    # already has a sketch the user marked as approved in a
+                    # past session, auto-load it instead of making the user
+                    # regenerate. Saves 25+ seconds and an API call.
+                    if firestore_client.is_configured():
+                        try:
+                            _ph = firestore_client.compute_photo_hash(images[0]["data"])
+                            _saved = firestore_client.load_approved_sketch(_ph)
+                            if _saved and _saved.get("data"):
+                                st.session_state["technical_drawing"] = {
+                                    "id": images[0]["id"] + "_approved",
+                                    "data": _saved["data"],
+                                    "mime": _saved.get("mime") or "image/png",
+                                    "caption": _saved.get("caption") or "✅ Loaded from your approved version for this photo",
+                                    "source": "ai_generated_approved",
+                                    "photo_description": _saved.get("photo_description") or "",
+                                    "_approved": True,
+                                    "_photo_hash": _ph,
+                                }
+                                # Match the description editor too
+                                if _saved.get("photo_description"):
+                                    st.session_state["_photo_description"] = _saved["photo_description"]
+                        except Exception:
+                            pass
+
                 st.session_state["_autoanalyzed_ids"] = _analyzed_ids | {_first_id}
                 st.rerun()
 
@@ -888,12 +914,76 @@ with tab_editor:
         else:
             st.error(f"❌ Generation failed: {payload}")
 
+    # Define callbacks for the approve / un-approve buttons. Need closures
+    # over the existing_drawing so they can read its photo hash.
+    def _do_approve():
+        # Hash the current first user photo so we can store the drawing
+        # against it. Re-uploading the same photo later will auto-load.
+        imgs = st.session_state.get("images") or []
+        ref = next((i for i in imgs if "ai_generated" not in (i.get("source") or "")), None)
+        drawing = st.session_state.get("technical_drawing")
+        if not (ref and drawing and firestore_client.is_configured()):
+            return
+        ph = firestore_client.compute_photo_hash(ref["data"])
+        firestore_client.save_approved_sketch(ph, drawing)
+        drawing["_approved"] = True
+        drawing["_photo_hash"] = ph
+        st.session_state["technical_drawing"] = drawing
+        st.session_state["_approval_status"] = ("saved", None)
+
+    def _do_unapprove():
+        drawing = st.session_state.get("technical_drawing") or {}
+        ph = drawing.get("_photo_hash")
+        if ph and firestore_client.is_configured():
+            firestore_client.delete_approved_sketch(ph)
+        # Keep the drawing on screen but clear the approval flag
+        drawing.pop("_approved", None)
+        drawing.pop("_photo_hash", None)
+        st.session_state["technical_drawing"] = drawing
+        st.session_state["_approval_status"] = ("unapproved", None)
+
     # Display the current drawing
     if existing_drawing:
         disp_cols = st.columns([2, 3])
         with disp_cols[0]:
             st.image(to_data_url(existing_drawing), use_container_width=True)
             st.caption(existing_drawing.get("caption") or "—")
+
+            # === Approve / un-approve state ===
+            # Only available when Firestore is configured. Without it we have
+            # nowhere to persist the approval.
+            if firestore_client.is_configured():
+                _approval_status = st.session_state.pop("_approval_status", None)
+                if _approval_status:
+                    if _approval_status[0] == "saved":
+                        st.success("✅ Saved as the approved version for this photo.")
+                    elif _approval_status[0] == "unapproved":
+                        st.info("Un-approved. You can mark a different generation later.")
+
+                if existing_drawing.get("_approved"):
+                    st.success(
+                        "✅ **This drawing is the approved version for this photo.** "
+                        "It will auto-appear next time the same photo is uploaded."
+                    )
+                    st.button(
+                        "🔄 Un-approve (allows a fresh generation)",
+                        on_click=_do_unapprove,
+                        use_container_width=True,
+                    )
+                else:
+                    st.button(
+                        "👍 Looks good — save as the approved version",
+                        on_click=_do_approve,
+                        use_container_width=True,
+                        type="primary",
+                        help=(
+                            "Saves this drawing keyed to your reference photo. "
+                            "Re-uploading the same photo later (any session, any "
+                            "device) will auto-load this exact sketch instead of "
+                            "re-running the AI pipeline."
+                        ),
+                    )
+
         with disp_cols[1]:
             # AI self-critique transparency. If a critique was run, show what
             # the second pass spotted and whether it triggered a re-draw.

@@ -26,6 +26,7 @@ downloaded service account JSON pasted in.
 
 from __future__ import annotations
 
+import hashlib
 from datetime import datetime
 from typing import Any
 
@@ -40,6 +41,11 @@ except ImportError:
 
 
 COLLECTION = "tech_packs"
+
+# Approved technical-drawing cache. Keyed by photo content hash so that
+# re-uploading the same reference photo auto-returns the previously approved
+# sketch instead of re-running the (slow, costly) AI pipeline.
+APPROVED_COLLECTION = "approved_sketches"
 
 
 # =============================================================================
@@ -151,6 +157,79 @@ def delete_tech_pack(doc_id: str) -> None:
     """Permanently delete a tech pack record."""
     client = _get_client()
     client.collection(COLLECTION).document(doc_id).delete()
+
+
+# =============================================================================
+# APPROVED SKETCH CACHE  (keyed by reference photo)
+# =============================================================================
+#
+# When a user marks an AI-generated technical drawing as "approved" for a
+# given reference photo, we persist (photo_hash → drawing dict) so that
+# uploading the same reference again later auto-loads the approved sketch
+# instead of regenerating it. Customer pattern: PNC reviews a photo, gets
+# happy with the sketch, locks it in. Next time anyone uploads the same
+# reference (could be a different session, different device), the
+# pre-approved sketch shows up automatically.
+
+def compute_photo_hash(image_data_b64: str) -> str:
+    """Stable hash of a photo's base64 payload.
+
+    Same photo through the same compress_to_base64 pipeline → same hash,
+    even across sessions. Truncated to 24 hex chars (~96 bits) which is
+    plenty for our scale and keeps the Firestore doc IDs short.
+    """
+    if not image_data_b64:
+        return ""
+    return hashlib.sha256(image_data_b64.encode("utf-8")).hexdigest()[:24]
+
+
+def save_approved_sketch(photo_hash: str, drawing: dict) -> None:
+    """Persist an approved AI drawing keyed by its source photo's hash.
+
+    We only keep the small/useful subset of the drawing dict — the full
+    prompt and critique JSON would bloat the doc without adding value
+    on load.
+    """
+    if not photo_hash:
+        return
+    client = _get_client()
+    payload = {
+        "data": drawing.get("data"),
+        "mime": drawing.get("mime") or "image/png",
+        "caption": drawing.get("caption") or "AI-generated technical drawing",
+        "photo_description": drawing.get("photo_description") or "",
+        "approved_at": firestore.SERVER_TIMESTAMP,
+    }
+    client.collection(APPROVED_COLLECTION).document(photo_hash).set(payload)
+
+
+def load_approved_sketch(photo_hash: str) -> dict | None:
+    """Return the approved drawing for this photo hash, or None.
+
+    Returns the raw Firestore doc dict — caller is responsible for wrapping
+    it back into a session-state image entry shape.
+    """
+    if not photo_hash:
+        return None
+    try:
+        client = _get_client()
+        snap = client.collection(APPROVED_COLLECTION).document(photo_hash).get()
+        if not snap.exists:
+            return None
+        return snap.to_dict()
+    except Exception:
+        return None
+
+
+def delete_approved_sketch(photo_hash: str) -> None:
+    """Remove the approval for this photo (user wants to redo the sketch)."""
+    if not photo_hash:
+        return
+    try:
+        client = _get_client()
+        client.collection(APPROVED_COLLECTION).document(photo_hash).delete()
+    except Exception:
+        pass
 
 
 # =============================================================================
