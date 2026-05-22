@@ -471,6 +471,33 @@ def apply_brand_defaults(match: dict, session_state, overwrite: bool = False) ->
         session_state["gender"] = "Women"
         applied["gender"] = "Women"
 
+    # 7. Season — derived purely from the current date. Fashion convention
+    # is SS (spring/summer) for Jan-Jun, AW (autumn/winter) for Jul-Dec.
+    # User can override to next-season if they're working ahead.
+    if _empty(session_state.get("season")):
+        from datetime import date as _date
+        today = _date.today()
+        yr2 = str(today.year)[-2:]
+        season = f"SS{yr2}" if 1 <= today.month <= 6 else f"AW{yr2}"
+        session_state["season"] = season
+        applied["season"] = season
+
+    # 8. Style Name — placeholder so the form doesn't look unfinished.
+    # Built from "Color + Sub-category" (e.g. "Yellow Cardigan").
+    # User typically overrides with the customer's internal style name.
+    if _empty(session_state.get("style_name")):
+        sub_cat = session_state.get("garment_sub_category") or ""
+        color = session_state.get("color_name") or ""
+        if sub_cat:
+            # Take first word of color (e.g. "Bright yellow" → "Yellow"),
+            # title-case the sub-category, glue them.
+            first_color = color.split()[-1].title() if color else ""
+            cat_clean = sub_cat.split("/")[0].strip().title()  # "Pullover / Sweater" → "Pullover"
+            sn = f"{first_color} {cat_clean}".strip()
+            if sn:
+                session_state["style_name"] = sn
+                applied["style_name"] = sn
+
     return applied
 
 
