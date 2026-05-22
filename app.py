@@ -923,8 +923,15 @@ with tab_editor:
     c1, c2, c3 = st.columns(3)
     c1.text_input("Color name", key="color_name", placeholder="e.g. Sunshine Yellow")
     c2.text_input("Pantone code", key="pantone_code", placeholder="e.g. 13-0859 TCX")
+    # Composition uses dynamic options: brand defaults often write non-standard
+    # values like "67% Cotton / 33% Polyester" or "2/26Nm 100% RWS Wool" that
+    # aren't in COMPOSITIONS. If the current value isn't in the standard list,
+    # append it so the selectbox can render it.
     opts = with_blank(COMPOSITIONS)
-    c3.selectbox("Composition", opts, index=safe_index(opts, st.session_state.get("composition")), key="composition")
+    _cur_comp = st.session_state.get("composition")
+    if _cur_comp and _cur_comp not in opts:
+        opts = opts + [_cur_comp]
+    c3.selectbox("Composition", opts, index=safe_index(opts, _cur_comp), key="composition")
 
     # --- AI Technical Drawing section ---
     st.divider()

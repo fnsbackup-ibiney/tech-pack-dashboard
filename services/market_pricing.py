@@ -361,12 +361,15 @@ def _sizes_to_range(available_sizes) -> str | None:
 #
 # Source: ~/Desktop/RWS-...-190325-R1.xls
 _TEAM_KNITWEAR_DEFAULTS = {
-    "composition":   "2/26Nm 100% RWS Wool",   # all 9 wool styles use this
-    "gauge":         "7GG",                    # form's gauge dropdown
-    "yarn_count":    "2/26Nm",                 # form's yarn-count dropdown
-    "ends":          "2 ends",                 # not yet a form field but kept for export
-    "maker":         "New world",              # factory name (not yet a form field)
-    "unit":          "CM",                     # measurements unit
+    # composition: kept in the team's preferred "2/26Nm 100% RWS Wool" format.
+    # The form's selectbox dynamically accepts values not in COMPOSITIONS, so
+    # this displays even though it's not a standard dropdown option.
+    "composition":   "2/26Nm 100% RWS Wool",
+    "gauge":         "7GG",                # in GAUGES dropdown exactly
+    "yarn_count":    "Nm 2/26",            # YARN_COUNTS dropdown format (Nm-prefixed)
+    "ends":          "2 ends",             # not yet a form field but kept for export
+    "maker":         "New world",          # factory name (not yet a form field)
+    "unit":          "CM",                 # measurements unit
 }
 
 
