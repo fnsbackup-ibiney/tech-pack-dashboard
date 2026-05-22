@@ -108,7 +108,8 @@ def _describe_for_sketch(image_data: str, mime: str) -> str:
                     "Describe this garment for someone drawing a fashion CAD flat sketch. "
                     "Image-gen models tend to substitute generic 'typical' details when "
                     "they're uncertain (4 buttons instead of 2, regular length instead of "
-                    "cropped). Your job is to PIN DOWN exact specifics so they can't drift.\n\n"
+                    "cropped, ribbed hem band even when there isn't one). Your job is to "
+                    "PIN DOWN exact specifics so they can't drift.\n\n"
                     "Cover every item below. Use ALL CAPS for the critical numeric/length "
                     "values so they stand out to the downstream model:\n\n"
                     "1. Garment type + front opening (cardigan / pullover / wrap). "
@@ -118,21 +119,31 @@ def _describe_for_sketch(image_data: str, mime: str) -> str:
                     "If V-neck, note roughly how far down the V dips relative to the "
                     "bust line.\n"
                     "3. Sleeve LENGTH (short / three-quarter / long / extra-long), VOLUME "
-                    "(slim / regular / balloon / bishop / dolman), and cuff style. Use ALL "
-                    "CAPS for the length.\n"
+                    "(slim / regular / balloon / bishop / dolman). Use ALL CAPS for the length.\n"
                     "4. Body LENGTH RATIO — estimate the body length from neckline to hem "
                     "as a multiple of shoulder width. E.g. 'BODY LENGTH ≈ 1.0× shoulder "
                     "width (CROPPED, ends at natural waist)'. Use ALL CAPS for the "
                     "qualitative label (CROPPED / REGULAR / LONG / TUNIC).\n"
-                    "5. Hem style (plain straight / ribbed / curved / asymmetric / split). "
-                    "Note rib band height if any.\n"
-                    "6. KNIT PATTERN — be specific. Examples: 'diagonal pointelle "
-                    "openwork in chevron stripes', 'vertical cable knit', 'plain "
-                    "stockinette', 'ribbed', 'fair isle', 'jacquard intarsia'. Include "
-                    "pattern direction (vertical / diagonal / horizontal) and density "
-                    "(sparse / medium / dense).\n"
-                    "7. Knit gauge (fine / medium / chunky).\n"
-                    "8. Distinctive details — pockets (count them), contrast trim, "
+                    "5. HEM FINISHING — this is the CRITICAL distinction to call out:\n"
+                    "   - 'CLEAN FINISH' = bottom edge ends with the same fabric as the "
+                    "body. NO separate horizontal rib band even if the body itself is "
+                    "ribbed.\n"
+                    "   - 'RIBBED HEM BAND' = a visibly separate horizontal strip of "
+                    "ribbing at the bottom, distinct from the body fabric. Note the "
+                    "approximate band height.\n"
+                    "   Look hard before deciding — body-rib-stitch ≠ ribbed hem band.\n"
+                    "6. CUFF FINISHING — same critical distinction:\n"
+                    "   - 'CLEAN' = sleeve ends with the same fabric, no separate band.\n"
+                    "   - 'RIBBED CUFF BAND' = a visibly separate ribbed strip at the wrist.\n"
+                    "7. BODY KNIT PATTERN — be specific. Examples: 'vertical 2x2 rib "
+                    "throughout the body', 'diagonal pointelle openwork in chevron stripes', "
+                    "'vertical cable knit', 'plain stockinette', 'fair isle', 'jacquard "
+                    "intarsia'. Include pattern direction (vertical / diagonal / horizontal) "
+                    "and density (sparse / medium / dense). This is INDEPENDENT of items "
+                    "5 and 6 — the body can be ribbed all over but still have a clean "
+                    "(non-band) hem.\n"
+                    "8. Knit gauge (fine / medium / chunky).\n"
+                    "9. Distinctive details — pockets (count them), contrast trim, "
                     "panels, seam placement, any embellishment.\n\n"
                     "STRICT RULES:\n"
                     "- If part of the garment is cut off in the photo (hem not visible, "
@@ -140,7 +151,7 @@ def _describe_for_sketch(image_data: str, mime: str) -> str:
                     "- Count carefully. If you can only count 2 buttons, write 2 — "
                     "never round to a 'typical' number.\n"
                     "- Describe ONLY what you can clearly see. No filling-in.\n\n"
-                    "Output: 5-8 sentences of plain prose. No preamble, no bullet points, "
+                    "Output: 5-9 sentences of plain prose. No preamble, no bullet points, "
                     "no markdown."
                 ),
             ],
@@ -159,6 +170,55 @@ def is_demo_mode() -> bool:
 # =============================================================================
 # PROMPT
 # =============================================================================
+
+# Common spec values that image-gen models routinely misinterpret. Each entry
+# is the literal sketch instruction the model should follow for that value.
+# Only the values listed here get a glossary line — others go through with
+# just their plain spec name and that's fine.
+_HEM_GLOSSARY = {
+    "Clean finish": "Hem 'Clean finish' = bottom edge ends with the same body fabric. "
+                    "Draw NO separate horizontal rib band at the bottom, even if the "
+                    "body fabric is itself ribbed.",
+    "Ribbed hem":   "Hem 'Ribbed hem' = a visibly separate horizontal rib band at the "
+                    "bottom, distinct from the body fabric.",
+    "Curved hem":   "Hem 'Curved hem' = bottom edge is curved (longer at sides, shorter "
+                    "at front/back center), not straight.",
+    "Split hem (side vents)": "Hem 'Split hem' = straight bottom edge with side vents — "
+                              "short vertical splits at the side seams.",
+    "Raw edge":     "Hem 'Raw edge' = no finishing at the bottom — unfinished cut edge.",
+}
+_CUFF_GLOSSARY = {
+    "Ribbed cuff":  "Cuff 'Ribbed cuff' = a visibly separate ribbed band at the wrist, "
+                    "distinct from the sleeve fabric.",
+    "Plain cuff":   "Cuff 'Plain cuff' = sleeve ends with the same fabric, no separate band.",
+    "Elasticated cuff": "Cuff 'Elasticated cuff' = a gathered cuff at the wrist (elastic "
+                        "inside), tighter than the sleeve body.",
+    "Folded cuff":  "Cuff 'Folded cuff' = a folded-back cuff, double layer at the wrist.",
+}
+_PLACKET_GLOSSARY = {
+    "Half button placket": "Placket 'Half button placket' = button placket runs from "
+                           "neckline only PART-WAY down the body (not full length).",
+    "Full button placket": "Placket 'Full button placket' = button placket runs the FULL "
+                           "length of the body, from neckline to hem.",
+    "Zip closure":  "Placket 'Zip closure' = visible zipper down the front, not buttons.",
+}
+
+
+def _spec_glossary(data: dict) -> list[str]:
+    """Pick glossary lines only for fields whose value is in our 'commonly
+    misread' dictionary. Keeps the prompt concise — we don't dump definitions
+    of every possible value.
+    """
+    out = []
+    for value, table in [
+        (data.get("hem_style"), _HEM_GLOSSARY),
+        (data.get("cuff_style"), _CUFF_GLOSSARY),
+        (data.get("placket"), _PLACKET_GLOSSARY),
+    ]:
+        if value and value in table:
+            out.append(f"- {table[value]}")
+    return out
+
 
 def _collect_spec_lines(data: dict) -> list[str]:
     """Pull out the spec values the user has filled in (visual + construction).
@@ -237,12 +297,22 @@ def build_prompt(
                 "if a value here disagrees with what you 'see' in the photo, USE THE SPEC):\n"
                 + "\n".join(spec_lines)
             )
+            # Add glossary lines only for spec values that are commonly misinterpreted.
+            glossary = _spec_glossary(data)
+            if glossary:
+                parts.append(
+                    "INTERPRETATION GLOSSARY (some spec terms get misread — here's exactly "
+                    "what they mean for the sketch):\n" + "\n".join(glossary)
+                )
         parts.append(
             "DRAWING REQUIREMENTS:\n"
             "- Reproduce the SPECIFIC knit pattern described — not a generic texture. "
             "Pointelle openwork ≠ small dots. Cable knit ≠ random lines.\n"
             "- Match the body length precisely (cropped vs regular vs long).\n"
             "- Match the sleeve volume (slim vs balloon vs dropped vs balloon-cuffed).\n"
+            "- BODY STITCH ≠ HEM/CUFF BAND. If the body is ribbed all over but the spec "
+            "says 'Hem: Clean finish', the bottom edge ends WITHOUT a separate rib band. "
+            "Same for cuffs: 'Plain cuff' means no separate band even if the body is ribbed.\n"
             "- If a feature is neither in the photo description nor the spec, draw it plain "
             "(no rib, no decorative band, no side splits, no extra seams)."
         )
@@ -319,7 +389,13 @@ def _critique_sketch(
                     "- Sleeve volume (slim vs balloon vs dolman)\n"
                     "- Neckline shape or depth\n"
                     "- Knit pattern type or direction\n"
-                    "- Hem style (plain vs ribbed)\n"
+                    "- HEM finishing: does the sketch show a separate horizontal rib BAND "
+                    "at the bottom that the photo does NOT have? (Critical: body-fabric-rib "
+                    "is different from a separate hem rib band. If the photo's body is "
+                    "ribbed all over but ends cleanly without a separate band, the sketch "
+                    "must not add one.)\n"
+                    "- CUFF finishing: same distinction — separate rib band at the wrist "
+                    "vs sleeve ending with body fabric.\n"
                     "- Pocket / panel / seam details\n\n"
                     "Don't flag color (the sketch is supposed to be black-and-white) or "
                     "framing (front+back layout vs single view in photo).\n\n"
