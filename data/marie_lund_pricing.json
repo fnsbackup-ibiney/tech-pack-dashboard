@@ -11,7 +11,37 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470131-0018/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0018_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0018_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit weicher Feinstrick-Qualität, klassischem Rundhalsausschnitt und durchgehender Knopfleiste – ein zeitloses Piece mit unwiderstehlichem Tragecharakter.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXXL",
+        "M",
+        "S",
+        "XL",
+        "L",
+        "XXL",
+        "XS"
+      ]
     },
     {
       "sku": "470131-0009",
@@ -21,7 +51,37 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470131-0009/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0009_bustfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0009_bustfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit weicher Feinstrick-Qualität, klassischem Rundhalsausschnitt und durchgehender Knopfleiste – ein zeitloses Piece mit unwiderstehlichem Tragecharakter.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "L",
+        "M",
+        "S",
+        "XL",
+        "XXXL",
+        "XS"
+      ]
     },
     {
       "sku": "470131-0016",
@@ -31,7 +91,37 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470131-0016/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0016_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0016_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit weicher Feinstrick-Qualität, klassischem Rundhalsausschnitt und durchgehender Knopfleiste – ein zeitloses Piece mit unwiderstehlichem Tragecharakter.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "M",
+        "XL",
+        "XXXL",
+        "XS",
+        "XXL",
+        "S"
+      ]
     },
     {
       "sku": "470131-0017",
@@ -41,7 +131,37 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470131-0017/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0017_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0017_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit weicher Feinstrick-Qualität, klassischem Rundhalsausschnitt und durchgehender Knopfleiste – ein zeitloses Piece mit unwiderstehlichem Tragecharakter.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXXL",
+        "XL",
+        "XXL",
+        "S",
+        "XS",
+        "M",
+        "L"
+      ]
     },
     {
       "sku": "470131-0010",
@@ -51,7 +171,37 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470131-0010/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0010_bustfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_470131-0010_bustfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeistert mit weicher Feinstrick-Qualität, klassischem Rundhalsausschnitt und durchgehender Knopfleiste – ein zeitloses Piece mit unwiderstehlichem Tragecharakter.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XXXL",
+        "L",
+        "XS",
+        "XL",
+        "M",
+        "S"
+      ]
     },
     {
       "sku": "470248-0023",
@@ -61,7 +211,37 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0023/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0023_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0023_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "S",
+        "XS",
+        "M",
+        "XXXL",
+        "L",
+        "XL"
+      ]
     },
     {
       "sku": "470248-0034",
@@ -71,7 +251,36 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0034/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0034_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0034_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "M",
+        "L",
+        "S",
+        "XXXL",
+        "XXL"
+      ]
     },
     {
       "sku": "470248-0004",
@@ -81,7 +290,36 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0004/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0004_bustfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0004_bustfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXXL",
+        "S",
+        "L",
+        "M",
+        "XXL",
+        "XL"
+      ]
     },
     {
       "sku": "470248-0032",
@@ -91,7 +329,36 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0032/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0032_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0032_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XXXL",
+        "XL",
+        "XXL"
+      ]
     },
     {
       "sku": "470248-0009",
@@ -101,7 +368,37 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0009/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0009_bustfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0009_bustfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "S",
+        "XXL",
+        "XL",
+        "XXXL",
+        "XS",
+        "M"
+      ]
     },
     {
       "sku": "470248-0035",
@@ -111,7 +408,36 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0035/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0035_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0035_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXXL",
+        "XL",
+        "M",
+        "XXL",
+        "S",
+        "L"
+      ]
     },
     {
       "sku": "470248-0010",
@@ -121,7 +447,37 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0010/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0010_bustfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0010_bustfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XS",
+        "XL",
+        "XXXL",
+        "XXL"
+      ]
     },
     {
       "sku": "470248-0033",
@@ -131,7 +487,36 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0033/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0033_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0033_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "S",
+        "XXL",
+        "XXXL",
+        "M",
+        "L"
+      ]
     },
     {
       "sku": "470248-0029",
@@ -141,7 +526,36 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/470248-0029/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0029_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_470248-0029_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Durch das kurzärmlige Design erhält der Pullover von Marie Lund einen originellen Twist – ein besonderes Knit-Piece für legere Looks im Alltag.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "XXXL",
+        "L",
+        "M",
+        "S"
+      ]
     },
     {
       "sku": "655965-0001",
@@ -151,7 +565,37 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/655965-0001/marie-lund-damen-strickhuelle/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist_655965-0001_modelfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist_655965-0001_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "71% Nylon|20% Viskose|9% Polyester"
+        }
+      ],
+      "description": "Ob zum Abendkleid oder beim legeren Freizeit-Styling, die flauschig-weiche Strickhülle von Marie Lund bringt eine spannende Textur zum Outfit.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 42,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "34",
+        "40",
+        "42",
+        "44",
+        "46",
+        "38",
+        "36"
+      ]
     },
     {
       "sku": "752538-0007",
@@ -161,7 +605,30 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/752538-0007/marie-lund-damen-strickhuelle/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist_752538-0007_modelfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist_752538-0007_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "77% Viskose|17% Polyester|6% Metall"
+        }
+      ],
+      "description": "Funkelnder Auftritt garantiert – die Strickhülle von Marie Lund setzt mit edlem Glitzergarn schimmernde Akzente und verleiht sowohl Abendkleidern als auch legeren Freizeit-Looks eine elegante Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "36",
+        "44",
+        "34",
+        "38",
+        "40",
+        "42"
+      ]
     },
     {
       "sku": "752538-0003",
@@ -171,7 +638,31 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/752538-0003/marie-lund-damen-strickhuelle/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist-bust_752538-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist-bust_752538-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "77% Viskose|17% Polyester|6% Metall"
+        }
+      ],
+      "description": "Funkelnder Auftritt garantiert – die Strickhülle von Marie Lund setzt mit edlem Glitzergarn schimmernde Akzente und verleiht sowohl Abendkleidern als auch legeren Freizeit-Looks eine elegante Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "38",
+        "46",
+        "40",
+        "42",
+        "34",
+        "44",
+        "36"
+      ]
     },
     {
       "sku": "752538-0005",
@@ -181,7 +672,31 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/752538-0005/marie-lund-damen-strickhuelle/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist_752538-0005_modelfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist_752538-0005_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "77% Viskose|17% Polyester|6% Metall"
+        }
+      ],
+      "description": "Funkelnder Auftritt garantiert – die Strickhülle von Marie Lund setzt mit edlem Glitzergarn schimmernde Akzente und verleiht sowohl Abendkleidern als auch legeren Freizeit-Looks eine elegante Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "40",
+        "46",
+        "44",
+        "34",
+        "38",
+        "42",
+        "36"
+      ]
     },
     {
       "sku": "752538-0006",
@@ -191,7 +706,31 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/752538-0006/marie-lund-damen-strickhuelle/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist_752538-0006_modelfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist_752538-0006_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "77% Viskose|17% Polyester|6% Metall"
+        }
+      ],
+      "description": "Funkelnder Auftritt garantiert – die Strickhülle von Marie Lund setzt mit edlem Glitzergarn schimmernde Akzente und verleiht sowohl Abendkleidern als auch legeren Freizeit-Looks eine elegante Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "34",
+        "42",
+        "38",
+        "44",
+        "36",
+        "46",
+        "40"
+      ]
     },
     {
       "sku": "753156-0002",
@@ -201,7 +740,30 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/753156-0002/marie-lund-damen-strickhuelle/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist-bust_753156-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist-bust_753156-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "71% Nylon|20% Viskose|9% Polyester"
+        }
+      ],
+      "description": "Weicher geht&rsquo;s nicht – die flauschige Strickhülle von Marie Lund setzt beim Abendkleid oder im legeren Freizeit-Look auf spannende Textur und höchsten Tragekomfort.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "38",
+        "40",
+        "36",
+        "42",
+        "34",
+        "44"
+      ]
     },
     {
       "sku": "753156-0005",
@@ -211,7 +773,30 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/753156-0005/marie-lund-damen-strickhuelle/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist-bust_753156-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist-bust_753156-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "71% Nylon|20% Viskose|9% Polyester"
+        }
+      ],
+      "description": "Weicher geht&rsquo;s nicht – die flauschige Strickhülle von Marie Lund setzt beim Abendkleid oder im legeren Freizeit-Look auf spannende Textur und höchsten Tragekomfort.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "42",
+        "38",
+        "40",
+        "36",
+        "44",
+        "34"
+      ]
     },
     {
       "sku": "753156-0001",
@@ -221,7 +806,30 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/753156-0001/marie-lund-damen-strickhuelle/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist-bust_753156-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickh-lle_plist-bust_753156-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "71% Nylon|20% Viskose|9% Polyester"
+        }
+      ],
+      "description": "Weicher geht&rsquo;s nicht – die flauschige Strickhülle von Marie Lund setzt beim Abendkleid oder im legeren Freizeit-Look auf spannende Textur und höchsten Tragekomfort.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "40",
+        "34",
+        "42",
+        "44",
+        "36",
+        "38"
+      ]
     },
     {
       "sku": "759443-0007",
@@ -231,7 +839,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/759443-0007/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_759443-0007_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_759443-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Baumwolle|33% Polyester"
+        }
+      ],
+      "description": "Mit stilvollem Lochmuster und verspieltem Wellensaum begeistert die Strickjacke von Marie Lund als ideales Layering-Piece für kühlere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 64,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XS",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
     },
     {
       "sku": "759443-0005",
@@ -241,7 +878,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/759443-0005/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_759443-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_759443-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Baumwolle|33% Polyester"
+        }
+      ],
+      "description": "Mit stilvollem Lochmuster und verspieltem Wellensaum begeistert die Strickjacke von Marie Lund als ideales Layering-Piece für kühlere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 64,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "L",
+        "M",
+        "XL",
+        "S",
+        "XS"
+      ]
     },
     {
       "sku": "759443-0008",
@@ -251,7 +917,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/759443-0008/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_759443-0008_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_759443-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Baumwolle|33% Polyester"
+        }
+      ],
+      "description": "Mit stilvollem Lochmuster und verspieltem Wellensaum begeistert die Strickjacke von Marie Lund als ideales Layering-Piece für kühlere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 64,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XXL",
+        "XS",
+        "M",
+        "L",
+        "XL"
+      ]
     },
     {
       "sku": "759443-0006",
@@ -261,7 +956,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/759443-0006/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_759443-0006_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_759443-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Baumwolle|33% Polyester"
+        }
+      ],
+      "description": "Mit stilvollem Lochmuster und verspieltem Wellensaum begeistert die Strickjacke von Marie Lund als ideales Layering-Piece für kühlere Tage.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 64,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXL",
+        "XS",
+        "M",
+        "L",
+        "S"
+      ]
     },
     {
       "sku": "769855-0001",
@@ -271,7 +995,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/769855-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_769855-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_769855-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die applizierten Schmucksteine bringen die klassische Strickjacke von Marie Lund aus feinem Viskose-Mix wunderschön zum Funkeln.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXL",
+        "XXXL",
+        "S",
+        "L",
+        "M"
+      ]
     },
     {
       "sku": "795000-0008",
@@ -281,7 +1034,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0008/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0008_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XL",
+        "XXL",
+        "S",
+        "XS",
+        "M"
+      ]
     },
     {
       "sku": "795000-0010",
@@ -291,7 +1073,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0010/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0010_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0010_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "L",
+        "M",
+        "S",
+        "XXL"
+      ]
     },
     {
       "sku": "795000-0004",
@@ -301,7 +1112,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0004/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XXL",
+        "L",
+        "S",
+        "XS",
+        "XL"
+      ]
     },
     {
       "sku": "795000-0001",
@@ -311,7 +1151,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0001/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XL",
+        "M",
+        "S",
+        "L",
+        "XXL"
+      ]
     },
     {
       "sku": "795000-0003",
@@ -321,7 +1190,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0003/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XXL",
+        "M",
+        "XL",
+        "S",
+        "L"
+      ]
     },
     {
       "sku": "795000-0005",
@@ -331,7 +1229,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0005/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XXL",
+        "S",
+        "M",
+        "XL",
+        "XS"
+      ]
     },
     {
       "sku": "795000-0009",
@@ -341,7 +1268,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0009/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0009_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0009_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "M",
+        "L",
+        "S",
+        "XL",
+        "XXL"
+      ]
     },
     {
       "sku": "795000-0007",
@@ -351,7 +1307,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0007/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0007_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "L",
+        "XL",
+        "M",
+        "XXL",
+        "XS"
+      ]
     },
     {
       "sku": "795000-0002",
@@ -361,7 +1346,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0002/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "L",
+        "XXL",
+        "S",
+        "XL",
+        "M"
+      ]
     },
     {
       "sku": "795000-0011",
@@ -371,7 +1385,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795000-0011/marie-lund-damen-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0011_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Pullover_plist-bust_795000-0011_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "In purer Baumwoll-Qualität im klassischen Design überzeugt der Marie Lund Pullover als kombinationsstarker Allrounder.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 46,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "S",
+        "XXL",
+        "L",
+        "XS"
+      ]
     },
     {
       "sku": "795693-0002",
@@ -381,7 +1424,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795693-0002/marie-lund-damen-strick-langarmshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_plist-bust_795693-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_plist-bust_795693-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Das Stricklangarmshirt von Marie Lund besticht durch zeitlose Eleganz und Vielseitigkeit – ein stilvoller Allrounder für Business und Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 29,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "S",
+        "L",
+        "XS",
+        "M"
+      ]
     },
     {
       "sku": "795693-0001",
@@ -391,7 +1463,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/795693-0001/marie-lund-damen-strick-langarmshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_plist-bust_795693-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Langarmshirt_plist-bust_795693-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Das Stricklangarmshirt von Marie Lund besticht durch zeitlose Eleganz und Vielseitigkeit – ein stilvoller Allrounder für Business und Freizeit.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 29,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XS",
+        "XL",
+        "S",
+        "XXL",
+        "M"
+      ]
     },
     {
       "sku": "801181-0002",
@@ -401,7 +1502,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801181-0002/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund überzeugt im unaufgeregten, komfortablen Design aus reiner Baumwolle – ein Essential, das sich leicht und vielfältig kombinieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XXL",
+        "XS",
+        "XL"
+      ]
     },
     {
       "sku": "801181-0005",
@@ -411,7 +1541,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801181-0005/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund überzeugt im unaufgeregten, komfortablen Design aus reiner Baumwolle – ein Essential, das sich leicht und vielfältig kombinieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "S",
+        "XXL",
+        "L",
+        "M",
+        "XS"
+      ]
     },
     {
       "sku": "801181-0007",
@@ -421,7 +1580,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801181-0007/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0007_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund überzeugt im unaufgeregten, komfortablen Design aus reiner Baumwolle – ein Essential, das sich leicht und vielfältig kombinieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "M",
+        "XS",
+        "S",
+        "L",
+        "XL"
+      ]
     },
     {
       "sku": "801181-0001",
@@ -431,7 +1619,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801181-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund überzeugt im unaufgeregten, komfortablen Design aus reiner Baumwolle – ein Essential, das sich leicht und vielfältig kombinieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XXL",
+        "XL",
+        "XS",
+        "M",
+        "L"
+      ]
     },
     {
       "sku": "801181-0004",
@@ -441,7 +1658,37 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801181-0004/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund überzeugt im unaufgeregten, komfortablen Design aus reiner Baumwolle – ein Essential, das sich leicht und vielfältig kombinieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "M",
+        "S",
+        "XXXL",
+        "XS",
+        "XL",
+        "L"
+      ]
     },
     {
       "sku": "801181-0006",
@@ -451,7 +1698,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801181-0006/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0006_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund überzeugt im unaufgeregten, komfortablen Design aus reiner Baumwolle – ein Essential, das sich leicht und vielfältig kombinieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "L",
+        "XS",
+        "XL",
+        "M",
+        "S"
+      ]
     },
     {
       "sku": "801181-0008",
@@ -461,7 +1737,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801181-0008/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0008_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund überzeugt im unaufgeregten, komfortablen Design aus reiner Baumwolle – ein Essential, das sich leicht und vielfältig kombinieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "L",
+        "S",
+        "M",
+        "XL",
+        "XS"
+      ]
     },
     {
       "sku": "801181-0003",
@@ -471,7 +1776,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801181-0003/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801181-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund überzeugt im unaufgeregten, komfortablen Design aus reiner Baumwolle – ein Essential, das sich leicht und vielfältig kombinieren lässt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 62,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XXL",
+        "XS",
+        "L",
+        "XL",
+        "M"
+      ]
     },
     {
       "sku": "801182-0012",
@@ -481,7 +1815,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0012/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0012_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0012_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "S",
+        "L",
+        "XXL",
+        "XS",
+        "XL"
+      ]
     },
     {
       "sku": "801182-0011",
@@ -491,7 +1854,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0011/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0011_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0011_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "M",
+        "S",
+        "L",
+        "XXL",
+        "XL"
+      ]
     },
     {
       "sku": "801182-0001",
@@ -501,7 +1893,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0001/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "S",
+        "M",
+        "XL",
+        "XS",
+        "XXL"
+      ]
     },
     {
       "sku": "801182-0004",
@@ -511,7 +1932,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0004/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "S",
+        "XS",
+        "XL",
+        "M",
+        "XXL"
+      ]
     },
     {
       "sku": "801182-0013",
@@ -521,7 +1971,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0013/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0013_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0013_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XXL",
+        "XL",
+        "XS",
+        "M",
+        "L"
+      ]
     },
     {
       "sku": "801182-0006",
@@ -531,7 +2010,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0006/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0006_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XS",
+        "XXL"
+      ]
     },
     {
       "sku": "801182-0002",
@@ -541,7 +2049,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0002/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XXL",
+        "XL",
+        "L",
+        "S",
+        "XS"
+      ]
     },
     {
       "sku": "801182-0007",
@@ -551,7 +2088,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0007/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0007_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XS",
+        "XL",
+        "XXL",
+        "S",
+        "L"
+      ]
     },
     {
       "sku": "801182-0008",
@@ -561,7 +2127,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0008/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0008_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "L",
+        "XXL",
+        "XS",
+        "S",
+        "M"
+      ]
     },
     {
       "sku": "801182-0003",
@@ -571,7 +2166,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801182-0003/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801182-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als Favorit für jeden Tag beweist sich der leichte Strickpullover von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 60,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "M",
+        "XXL",
+        "XL",
+        "S",
+        "XS"
+      ]
     },
     {
       "sku": "801183-0001",
@@ -581,7 +2205,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801183-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein Lieblingsstück für unkomplizierte Layering-Looks ist die Strickjacke von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XXL",
+        "XS",
+        "L",
+        "XL",
+        "M"
+      ]
     },
     {
       "sku": "801183-0004",
@@ -591,7 +2244,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801183-0004/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein Lieblingsstück für unkomplizierte Layering-Looks ist die Strickjacke von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "M",
+        "XXL",
+        "L",
+        "S"
+      ]
     },
     {
       "sku": "801183-0006",
@@ -601,7 +2283,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801183-0006/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0006_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein Lieblingsstück für unkomplizierte Layering-Looks ist die Strickjacke von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ]
     },
     {
       "sku": "801183-0002",
@@ -611,7 +2322,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801183-0002/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein Lieblingsstück für unkomplizierte Layering-Looks ist die Strickjacke von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "M",
+        "XXL",
+        "XL",
+        "L",
+        "S"
+      ]
     },
     {
       "sku": "801183-0007",
@@ -621,7 +2361,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801183-0007/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0007_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein Lieblingsstück für unkomplizierte Layering-Looks ist die Strickjacke von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "S",
+        "L",
+        "M",
+        "XS"
+      ]
     },
     {
       "sku": "801183-0005",
@@ -631,7 +2400,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801183-0005/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein Lieblingsstück für unkomplizierte Layering-Looks ist die Strickjacke von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "XXL",
+        "XL",
+        "L",
+        "XS"
+      ]
     },
     {
       "sku": "801183-0008",
@@ -641,7 +2439,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801183-0008/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0008_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0008_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein Lieblingsstück für unkomplizierte Layering-Looks ist die Strickjacke von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "M",
+        "XL",
+        "XXL",
+        "S",
+        "XS"
+      ]
     },
     {
       "sku": "801183-0003",
@@ -651,7 +2478,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801183-0003/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801183-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Ein Lieblingsstück für unkomplizierte Layering-Looks ist die Strickjacke von Marie Lund aus weicher Baumwolle in klassischer Ripp-Optik.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 58,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 47,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XXL",
+        "XS",
+        "L",
+        "M",
+        "XL"
+      ]
     },
     {
       "sku": "801453-0005",
@@ -661,7 +2517,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801453-0005/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund ist das perfekte Add-on für jeden Look – leicht überzuziehen und dank ihres soften Kunstfaser-Viskose-Mixes besonders angenehm zu tragen.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 52,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "L",
+        "XXXL",
+        "XXL",
+        "XL"
+      ]
     },
     {
       "sku": "801453-0007",
@@ -671,7 +2556,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801453-0007/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0007_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0007_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund ist das perfekte Add-on für jeden Look – leicht überzuziehen und dank ihres soften Kunstfaser-Viskose-Mixes besonders angenehm zu tragen.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 52,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "L",
+        "S",
+        "XXXL",
+        "XXL",
+        "XL"
+      ]
     },
     {
       "sku": "801453-0002",
@@ -681,7 +2595,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801453-0002/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund ist das perfekte Add-on für jeden Look – leicht überzuziehen und dank ihres soften Kunstfaser-Viskose-Mixes besonders angenehm zu tragen.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 52,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "XXXL",
+        "S",
+        "L",
+        "XXL"
+      ]
     },
     {
       "sku": "801453-0006",
@@ -691,7 +2634,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801453-0006/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0006_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0006_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund ist das perfekte Add-on für jeden Look – leicht überzuziehen und dank ihres soften Kunstfaser-Viskose-Mixes besonders angenehm zu tragen.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 52,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XL",
+        "XXL",
+        "M",
+        "XXXL",
+        "L"
+      ]
     },
     {
       "sku": "801453-0001",
@@ -701,7 +2673,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801453-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801453-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund ist das perfekte Add-on für jeden Look – leicht überzuziehen und dank ihres soften Kunstfaser-Viskose-Mixes besonders angenehm zu tragen.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Rückenlänge",
+          "value": 52,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXXL",
+        "XL",
+        "XXL",
+        "M",
+        "S",
+        "L"
+      ]
     },
     {
       "sku": "801455-0002",
@@ -711,7 +2712,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801455-0002/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801455-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801455-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Eine Strickjacke, die Eindruck macht: Das lockere Modell von Marie Lund verbindet einen coolen Animalprint mit einem angenehm soften Viskose-Kunstfaser-Mix und bringt so einen Hauch urbanen Dschungel stilvoll in den Look.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 41,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "S",
+        "XXL",
+        "XL",
+        "L",
+        "XXXL"
+      ]
     },
     {
       "sku": "801455-0001",
@@ -721,7 +2751,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801455-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801455-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801455-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Polyamid"
+        }
+      ],
+      "description": "Eine Strickjacke, die Eindruck macht: Das lockere Modell von Marie Lund verbindet einen coolen Animalprint mit einem angenehm soften Viskose-Kunstfaser-Mix und bringt so einen Hauch urbanen Dschungel stilvoll in den Look.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 41,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "S",
+        "XL",
+        "L",
+        "XXL",
+        "XXXL"
+      ]
     },
     {
       "sku": "801633-0002",
@@ -731,7 +2790,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801633-0002/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als bequemes Stylingpiece mit femininer Note zeigt sich die kurzärmlige Strickjacke von Marie Lund mit Zopfmuster und aus reiner Baumwolle.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 26,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "L",
+        "XS",
+        "XXL",
+        "S",
+        "M"
+      ]
     },
     {
       "sku": "801633-0004",
@@ -741,7 +2829,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801633-0004/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als bequemes Stylingpiece mit femininer Note zeigt sich die kurzärmlige Strickjacke von Marie Lund mit Zopfmuster und aus reiner Baumwolle.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 26,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "S",
+        "L",
+        "XL",
+        "XS",
+        "XXL"
+      ]
     },
     {
       "sku": "801633-0005",
@@ -751,7 +2868,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801633-0005/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als bequemes Stylingpiece mit femininer Note zeigt sich die kurzärmlige Strickjacke von Marie Lund mit Zopfmuster und aus reiner Baumwolle.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 26,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "M",
+        "L",
+        "S",
+        "XS"
+      ]
     },
     {
       "sku": "801633-0003",
@@ -761,7 +2907,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801633-0003/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als bequemes Stylingpiece mit femininer Note zeigt sich die kurzärmlige Strickjacke von Marie Lund mit Zopfmuster und aus reiner Baumwolle.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 26,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXL",
+        "L",
+        "M",
+        "XS",
+        "S"
+      ]
     },
     {
       "sku": "801633-0001",
@@ -771,7 +2946,36 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801633-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801633-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Als bequemes Stylingpiece mit femininer Note zeigt sich die kurzärmlige Strickjacke von Marie Lund mit Zopfmuster und aus reiner Baumwolle.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 26,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "XXL",
+        "L",
+        "XL",
+        "M",
+        "S"
+      ]
     },
     {
       "sku": "801634-0002",
@@ -781,7 +2985,35 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801634-0002/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "XS",
+        "L",
+        "S",
+        "XXL"
+      ]
     },
     {
       "sku": "801634-0004",
@@ -791,7 +3023,35 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801634-0004/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XXL",
+        "XL",
+        "M",
+        "L",
+        "XS"
+      ]
     },
     {
       "sku": "801634-0005",
@@ -801,7 +3061,35 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801634-0005/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "XS",
+        "M",
+        "L",
+        "S"
+      ]
     },
     {
       "sku": "801634-0003",
@@ -811,7 +3099,35 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801634-0003/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XS",
+        "L",
+        "XL",
+        "XXL",
+        "M"
+      ]
     },
     {
       "sku": "801634-0001",
@@ -821,7 +3137,35 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801634-0001/marie-lund-damen-strickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickpullover_plist-bust_801634-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 53,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "XXL",
+        "S",
+        "L",
+        "XS"
+      ]
     },
     {
       "sku": "801635-0002",
@@ -831,7 +3175,36 @@
       "color_hex": "#ffffff",
       "price_eur": 69.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801635-0002/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeitert als cozy Style-Ergänzung für legere Looks; das Zopfmuster versprüht Winter-Vibes.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 68,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "L",
+        "M",
+        "XS",
+        "S"
+      ]
     },
     {
       "sku": "801635-0004",
@@ -841,7 +3214,36 @@
       "color_hex": "#ffffff",
       "price_eur": 69.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801635-0004/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeitert als cozy Style-Ergänzung für legere Looks; das Zopfmuster versprüht Winter-Vibes.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 68,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "S",
+        "XS",
+        "L",
+        "XXL"
+      ]
     },
     {
       "sku": "801635-0005",
@@ -851,7 +3253,36 @@
       "color_hex": "#ffffff",
       "price_eur": 69.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801635-0005/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0005_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0005_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeitert als cozy Style-Ergänzung für legere Looks; das Zopfmuster versprüht Winter-Vibes.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 68,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XXL",
+        "XL",
+        "XS",
+        "M",
+        "S"
+      ]
     },
     {
       "sku": "801635-0003",
@@ -861,7 +3292,36 @@
       "color_hex": "#ffffff",
       "price_eur": 69.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801635-0003/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeitert als cozy Style-Ergänzung für legere Looks; das Zopfmuster versprüht Winter-Vibes.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 68,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XS",
+        "L",
+        "XL",
+        "S",
+        "M"
+      ]
     },
     {
       "sku": "801635-0001",
@@ -871,7 +3331,36 @@
       "color_hex": "#ffffff",
       "price_eur": 69.99,
       "url": "https://www.peek-und-cloppenburg.de/p/801635-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_801635-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Die Strickjacke von Marie Lund begeitert als cozy Style-Ergänzung für legere Looks; das Zopfmuster versprüht Winter-Vibes.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 68,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "L",
+        "XXL",
+        "S",
+        "XS",
+        "XL"
+      ]
     },
     {
       "sku": "806292-0001",
@@ -881,7 +3370,33 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/806292-0001/marie-lund-collection-damen-strickjacke-mit-woll-anteil/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806292-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806292-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Polyester|18% Nylon|12% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Cosy Chic: Die verspielten Bindebänder und die kuschelige Boucl&eacute;-Qualität mit Woll-Anteil machen die Strickjacke von Marie Lund zum stylishen Lieblingsstück.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 53,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS/S",
+        "XL/XXL",
+        "M/L"
+      ]
     },
     {
       "sku": "806292-0002",
@@ -891,7 +3406,33 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/806292-0002/marie-lund-collection-damen-strickjacke-mit-woll-anteil/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806292-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806292-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Polyester|18% Nylon|12% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Cosy Chic: Die verspielten Bindebänder und die kuschelige Boucl&eacute;-Qualität mit Woll-Anteil machen die Strickjacke von Marie Lund zum stylishen Lieblingsstück.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 53,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS/S",
+        "XL/XXL",
+        "M/L"
+      ]
     },
     {
       "sku": "806292-0003",
@@ -901,7 +3442,33 @@
       "color_hex": "#ffffff",
       "price_eur": 59.99,
       "url": "https://www.peek-und-cloppenburg.de/p/806292-0003/marie-lund-collection-damen-strickjacke-mit-woll-anteil/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806292-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806292-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Polyester|18% Nylon|12% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Cosy Chic: Die verspielten Bindebänder und die kuschelige Boucl&eacute;-Qualität mit Woll-Anteil machen die Strickjacke von Marie Lund zum stylishen Lieblingsstück.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 53,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M/L",
+        "XL/XXL",
+        "XS/S"
+      ]
     },
     {
       "sku": "806294-0002",
@@ -911,7 +3478,33 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/806294-0002/marie-lund-collection-damen-strickjacke-mit-woll-anteil/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806294-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806294-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Polyester|18% Nylon|12% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Für entspannte Layering-Looks ist die Halbarm-Strickjacke von Marie Lund aus Boucl&eacute;-Strick mit weichem Woll-Anteil der perfekte Styling-Partner.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 54,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M/L",
+        "XL/XXL",
+        "XS/S"
+      ]
     },
     {
       "sku": "806294-0001",
@@ -921,7 +3514,33 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/806294-0001/marie-lund-collection-damen-strickjacke-mit-woll-anteil/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806294-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke-mit-Woll-Anteil_plist-bust_806294-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "67% Polyester|18% Nylon|12% Wolle|3% Elasthan"
+        }
+      ],
+      "description": "Für entspannte Layering-Looks ist die Halbarm-Strickjacke von Marie Lund aus Boucl&eacute;-Strick mit weichem Woll-Anteil der perfekte Styling-Partner.",
+      "sample_measurements": [
+        {
+          "sample_size": "XSS",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "XSS",
+          "name": "Taillenweite",
+          "value": 54,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M/L",
+        "XS/S",
+        "XL/XXL"
+      ]
     },
     {
       "sku": "808795-0003",
@@ -931,7 +3550,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/808795-0003/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808795-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808795-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Die feine Marie Lund Strickjacke bekommt mit den funkelnden Ziersteinen ein elegantes Upgrade und passt sowohl zu klassischen Jeans als auch modernen Wide Fit Hosen oder zum Etuikleid.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "XL",
+        "M",
+        "XXXL",
+        "S",
+        "L"
+      ]
     },
     {
       "sku": "808795-0002",
@@ -941,7 +3589,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/808795-0002/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808795-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808795-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Die feine Marie Lund Strickjacke bekommt mit den funkelnden Ziersteinen ein elegantes Upgrade und passt sowohl zu klassischen Jeans als auch modernen Wide Fit Hosen oder zum Etuikleid.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XL",
+        "XXXL",
+        "M",
+        "S",
+        "XXL"
+      ]
     },
     {
       "sku": "808795-0001",
@@ -951,7 +3628,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/808795-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808795-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808795-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Die feine Marie Lund Strickjacke bekommt mit den funkelnden Ziersteinen ein elegantes Upgrade und passt sowohl zu klassischen Jeans als auch modernen Wide Fit Hosen oder zum Etuikleid.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 57,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "L",
+        "S",
+        "XL",
+        "M",
+        "XXXL"
+      ]
     },
     {
       "sku": "808797-0003",
@@ -961,7 +3667,36 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/808797-0003/marie-lund-damen-kurzarm-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Pullover_plist-bust_808797-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Pullover_plist-bust_808797-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Zarte Ziersteine bringen die Frontpartie des Marie Lund Pullovers zum Funkeln und harmonieren schön mit der feinen Strick-Qualität.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "S",
+        "XL",
+        "XXXL",
+        "XXL",
+        "M"
+      ]
     },
     {
       "sku": "808797-0002",
@@ -971,7 +3706,36 @@
       "color_hex": "#ffffff",
       "price_eur": 29.99,
       "url": "https://www.peek-und-cloppenburg.de/p/808797-0002/marie-lund-damen-kurzarm-pullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Pullover_plist-bust_808797-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Pullover_plist-bust_808797-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Zarte Ziersteine bringen die Frontpartie des Marie Lund Pullovers zum Funkeln und harmonieren schön mit der feinen Strick-Qualität.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 39,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XXL",
+        "XXXL",
+        "XL",
+        "L",
+        "S"
+      ]
     },
     {
       "sku": "808817-0003",
@@ -981,7 +3745,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/808817-0003/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808817-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808817-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Charmantes Layering-Piece von Marie Lund ist diese Strickjacke im Wafffel-Design mit Lochmuster und kontrastiven Wellensäumen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 63,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "XS",
+        "L",
+        "XL",
+        "XXL"
+      ]
     },
     {
       "sku": "808817-0002",
@@ -991,7 +3784,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/808817-0002/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808817-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808817-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Charmantes Layering-Piece von Marie Lund ist diese Strickjacke im Wafffel-Design mit Lochmuster und kontrastiven Wellensäumen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 63,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "S",
+        "M",
+        "XL",
+        "XXL",
+        "L"
+      ]
     },
     {
       "sku": "808817-0001",
@@ -1001,7 +3823,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/808817-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808817-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_808817-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Baumwolle"
+        }
+      ],
+      "description": "Charmantes Layering-Piece von Marie Lund ist diese Strickjacke im Wafffel-Design mit Lochmuster und kontrastiven Wellensäumen.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Armlänge",
+          "value": 63,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 51,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XL",
+        "XS",
+        "XXL",
+        "L",
+        "M"
+      ]
     },
     {
       "sku": "808817-0004",
@@ -1021,7 +3872,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/811264-0003/marie-lund-damen-strickshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_811264-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_811264-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Baumwolle|50% Polyacryl"
+        }
+      ],
+      "description": "Verschiedene Lochmuster prägen den sommerlichen Look des Strickshirts von Marie Lund, das aus komfortablem Baumwollmix mit Knopfleiste und V-Ausschnitt aufwartet.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "M",
+        "L",
+        "S",
+        "XXL"
+      ]
     },
     {
       "sku": "811264-0001",
@@ -1031,7 +3911,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/811264-0001/marie-lund-damen-strickshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_811264-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_811264-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Baumwolle|50% Polyacryl"
+        }
+      ],
+      "description": "Verschiedene Lochmuster prägen den sommerlichen Look des Strickshirts von Marie Lund, das aus komfortablem Baumwollmix mit Knopfleiste und V-Ausschnitt aufwartet.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 50,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 43,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "M",
+        "XL",
+        "XS",
+        "L",
+        "S",
+        "XXL"
+      ]
     },
     {
       "sku": "813363-0001",
@@ -1041,7 +3950,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/813363-0001/marie-lund-damen-grobstrickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Grobstrickpullover_plist-bust_813363-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Grobstrickpullover_plist-bust_813363-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "65% Baumwolle|35% Nylon"
+        }
+      ],
+      "description": "Mit seinem femininen Grobstrickmuster ist der Pullover von Marie Lund das perfekte Layering-Piece – ob lässig über einem Top oder einem Kleid, er verleiht jedem Outfit eine romantische, stilvolle Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 49,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XS",
+        "M",
+        "XXL",
+        "L",
+        "S"
+      ]
     },
     {
       "sku": "813363-0002",
@@ -1051,7 +3989,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/813363-0002/marie-lund-damen-grobstrickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Grobstrickpullover_plist-bust_813363-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Grobstrickpullover_plist-bust_813363-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "65% Baumwolle|35% Nylon"
+        }
+      ],
+      "description": "Mit seinem femininen Grobstrickmuster ist der Pullover von Marie Lund das perfekte Layering-Piece – ob lässig über einem Top oder einem Kleid, er verleiht jedem Outfit eine romantische, stilvolle Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 49,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "S",
+        "XL",
+        "M",
+        "L",
+        "XXL"
+      ]
     },
     {
       "sku": "813363-0003",
@@ -1061,7 +4028,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/813363-0003/marie-lund-damen-grobstrickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Grobstrickpullover_plist-bust_813363-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Grobstrickpullover_plist-bust_813363-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "65% Baumwolle|35% Nylon"
+        }
+      ],
+      "description": "Mit seinem femininen Grobstrickmuster ist der Pullover von Marie Lund das perfekte Layering-Piece – ob lässig über einem Top oder einem Kleid, er verleiht jedem Outfit eine romantische, stilvolle Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 49,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XL",
+        "XXL",
+        "M",
+        "XS",
+        "S"
+      ]
     },
     {
       "sku": "813363-0004",
@@ -1071,7 +4067,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/813363-0004/marie-lund-damen-grobstrickpullover/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Grobstrickpullover_plist-bust_813363-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Grobstrickpullover_plist-bust_813363-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "65% Baumwolle|35% Nylon"
+        }
+      ],
+      "description": "Mit seinem femininen Grobstrickmuster ist der Pullover von Marie Lund das perfekte Layering-Piece – ob lässig über einem Top oder einem Kleid, er verleiht jedem Outfit eine romantische, stilvolle Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 49,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "XXL",
+        "L",
+        "S",
+        "M",
+        "XS"
+      ]
     },
     {
       "sku": "814905-0001",
@@ -1081,7 +4106,35 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/814905-0001/marie-lund-damen-kurzarm-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_plist-bust_814905-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_plist-bust_814905-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "\\nDie Marie Lund Kurzarm-Strickjacke begeistert mit softer Viskose-Qualität und wirkt elegant und sportiv zugleich.\\n\\n ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XL",
+        "L",
+        "M",
+        "XXL"
+      ]
     },
     {
       "sku": "814905-0004",
@@ -1091,7 +4144,35 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/814905-0004/marie-lund-damen-kurzarm-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_plist-bust_814905-0004_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_plist-bust_814905-0004_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "\\nDie Marie Lund Kurzarm-Strickjacke begeistert mit softer Viskose-Qualität und wirkt elegant und sportiv zugleich.\\n\\n ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "M",
+        "XXL",
+        "XL",
+        "L"
+      ]
     },
     {
       "sku": "814905-0003",
@@ -1101,7 +4182,35 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/814905-0003/marie-lund-damen-kurzarm-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_plist-bust_814905-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_plist-bust_814905-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "\\nDie Marie Lund Kurzarm-Strickjacke begeistert mit softer Viskose-Qualität und wirkt elegant und sportiv zugleich.\\n\\n ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XXL",
+        "XL",
+        "M",
+        "S"
+      ]
     },
     {
       "sku": "814905-0002",
@@ -1111,7 +4220,35 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/814905-0002/marie-lund-damen-kurzarm-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_plist-bust_814905-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Kurzarm-Strickjacke_plist-bust_814905-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "\\nDie Marie Lund Kurzarm-Strickjacke begeistert mit softer Viskose-Qualität und wirkt elegant und sportiv zugleich.\\n\\n ",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 40,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XL",
+        "L",
+        "M",
+        "XXL"
+      ]
     },
     {
       "sku": "814907-0001",
@@ -1121,7 +4258,35 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/814907-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_814907-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_814907-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Die Feinstrickjacke von Marie Lund erhält durch das Muster einen verspielten Look – perfekt im Duo mit dem passenden Top.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XXL",
+        "S",
+        "XL",
+        "M",
+        "L"
+      ]
     },
     {
       "sku": "814908-0001",
@@ -1131,7 +4296,35 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/814908-0001/marie-lund-damen-strickjacke/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_814908-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickjacke_plist-bust_814908-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "70% Viskose|30% Nylon"
+        }
+      ],
+      "description": "Ob über dem passenden Top oder einer leichten Bluse – die gemusterte Marie Lund Strickjacke erweist sich als stilvolles Update des Outfits.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 42,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "S",
+        "XL",
+        "M",
+        "XXL",
+        "L"
+      ]
     },
     {
       "sku": "820783-0001",
@@ -1141,7 +4334,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/820783-0001/marie-lund-collection-damen-strickshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_820783-0001_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_820783-0001_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Viskose"
+        }
+      ],
+      "description": "Ein ansprechendes Strickmuster und Rippbündchen verleihen dem Shirt von Marie Lund Collection cozy Vibes, während die feine Viskose-Verarbeitung ein angenehmes Tragegefühl schenkt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "M",
+        "S",
+        "XL",
+        "L",
+        "XXL"
+      ]
     },
     {
       "sku": "820783-0002",
@@ -1151,7 +4373,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/820783-0002/marie-lund-collection-damen-strickshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_820783-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_820783-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Viskose"
+        }
+      ],
+      "description": "Ein ansprechendes Strickmuster und Rippbündchen verleihen dem Shirt von Marie Lund Collection cozy Vibes, während die feine Viskose-Verarbeitung ein angenehmes Tragegefühl schenkt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XL",
+        "S",
+        "L",
+        "XXL",
+        "XS",
+        "M"
+      ]
     },
     {
       "sku": "820783-0003",
@@ -1161,7 +4412,36 @@
       "color_hex": "#ffffff",
       "price_eur": 49.99,
       "url": "https://www.peek-und-cloppenburg.de/p/820783-0003/marie-lund-collection-damen-strickshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_820783-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_820783-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "100% Viskose"
+        }
+      ],
+      "description": "Ein ansprechendes Strickmuster und Rippbündchen verleihen dem Shirt von Marie Lund Collection cozy Vibes, während die feine Viskose-Verarbeitung ein angenehmes Tragegefühl schenkt.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 56,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 44,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XS",
+        "XXL",
+        "M",
+        "S",
+        "XL"
+      ]
     },
     {
       "sku": "826371-0001",
@@ -1171,7 +4451,30 @@
       "color_hex": "#ffffff",
       "price_eur": 79.99,
       "url": "https://www.peek-und-cloppenburg.de/p/826371-0001/marie-lund-damen-strick-bolero/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Bolero_plist_826371-0001_modelfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Bolero_plist_826371-0001_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "71% Nylon|20% Viskose|9% Polyester"
+        }
+      ],
+      "description": "In wunderbar weicher Qualität und mit edlen Knöpfen erweist sich die Marie Lund Strickjacke als komfortables Update des Abendlooks.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 41,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "38",
+        "44",
+        "34",
+        "40",
+        "36",
+        "42"
+      ]
     },
     {
       "sku": "826371-0002",
@@ -1181,7 +4484,30 @@
       "color_hex": "#ffffff",
       "price_eur": 79.99,
       "url": "https://www.peek-und-cloppenburg.de/p/826371-0002/marie-lund-damen-strick-bolero/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Bolero_plist_826371-0002_modelfront_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strick-Bolero_plist_826371-0002_modelfront_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "71% Nylon|20% Viskose|9% Polyester"
+        }
+      ],
+      "description": "In wunderbar weicher Qualität und mit edlen Knöpfen erweist sich die Marie Lund Strickjacke als komfortables Update des Abendlooks.",
+      "sample_measurements": [
+        {
+          "sample_size": "36",
+          "name": "Taillenweite",
+          "value": 41,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "38",
+        "42",
+        "44",
+        "34",
+        "40",
+        "36"
+      ]
     },
     {
       "sku": "827745-0003",
@@ -1191,7 +4517,36 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/827745-0003/marie-lund-collection-damen-strickshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_827745-0003_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_827745-0003_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Polyacryl|50% Baumwolle"
+        }
+      ],
+      "description": "Mit seiner luftigen Lochstrickstruktur und dem lockeren Schnitt ist das Strickshirt von Marie Lund der perfekte leichte Begleiter für warme Tage und verleiht jedem Look eine entspannte, moderne Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "XS",
+        "S",
+        "XXL",
+        "L",
+        "M",
+        "XL"
+      ]
     },
     {
       "sku": "827745-0002",
@@ -1201,7 +4556,43 @@
       "color_hex": "#ffffff",
       "price_eur": 39.99,
       "url": "https://www.peek-und-cloppenburg.de/p/827745-0002/marie-lund-collection-damen-strickshirt/",
-      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_827745-0002_bustfront-white_1.jpg"
+      "image_url": "https://static.vangraaf.com/img/Damen-Strickshirt_plist-bust_827745-0002_bustfront-white_1.jpg",
+      "composition": [
+        {
+          "group": "Obermaterial",
+          "text": "50% Polyacryl|50% Baumwolle"
+        }
+      ],
+      "description": "Mit seiner luftigen Lochstrickstruktur und dem lockeren Schnitt ist das Strickshirt von Marie Lund der perfekte leichte Begleiter für warme Tage und verleiht jedem Look eine entspannte, moderne Note.",
+      "sample_measurements": [
+        {
+          "sample_size": "S",
+          "name": "Rückenlänge",
+          "value": 55,
+          "unit": "cm"
+        },
+        {
+          "sample_size": "S",
+          "name": "Taillenweite",
+          "value": 50,
+          "unit": "cm"
+        }
+      ],
+      "available_sizes": [
+        "L",
+        "XL",
+        "M",
+        "XS",
+        "S",
+        "XXL"
+      ]
     }
+  ],
+  "enriched_on": "2026-05-22",
+  "enriched_fields": [
+    "composition",
+    "description",
+    "sample_measurements",
+    "available_sizes"
   ]
 }
