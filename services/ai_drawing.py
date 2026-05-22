@@ -19,6 +19,8 @@ replace ``_gemini_generate`` — everything else stays.
 from __future__ import annotations
 
 import base64
+import json
+import re
 import time
 from pathlib import Path
 
@@ -44,19 +46,23 @@ _FALLBACK_DRAWING = Path(__file__).parent.parent / "sample_data" / "images" / "c
 DEMO_LATENCY_SECONDS = 2.2
 
 
-# Gemini image-generation model. Pro variant chosen for stronger fidelity
-# to the reference photo (the Flash variant tends to draw the same generic
-# pullover regardless of input). Alternatives: "gemini-2.5-flash-image"
-# (faster/cheaper) or "gemini-3.1-flash-image-preview" (newest). Swap here
-# if quality/speed/cost trade-off changes — SDK call interface is identical.
-MODEL = "gemini-3-pro-image-preview"
+# Gemini image-generation model. Bench-tested gemini-3.1-flash-image-preview
+# against gemini-3-pro-image-preview on the cardigan reference — Flash 3.1
+# captured the chevron pointelle, cropped length, balloon sleeves, and rib
+# bands just as well as Pro, slightly faster and cheaper. Swap back to Pro
+# if quality regresses on a different garment type.
+MODEL = "gemini-3.1-flash-image-preview"
 
-# Vision-only model used to describe the photo in detail BEFORE we ask the
-# image-gen model to draw. The description bridges visual ambiguity — pure
-# image-gen models tend to substitute generic textures for specific patterns
-# (e.g. "small dots" instead of "diagonal pointelle openwork"). Flash is
-# enough here — we only need a textual reading of the photo, not generation.
+# Vision-only model — used both for the upfront photo DESCRIBER and the
+# post-generation CRITIC. Flash is enough; we don't need image gen here,
+# just structured text output.
 DESCRIBER_MODEL = "gemini-2.5-flash"
+
+# Maximum number of self-critique rounds. After the first sketch, we ask
+# Vision to compare it against the original photo and identify deviations.
+# If any are flagged as significant, we regenerate once with the correction
+# notes appended to the prompt. Two passes total is the cost ceiling.
+MAX_CRITIQUE_ROUNDS = 1
 
 
 # =============================================================================
@@ -99,24 +105,43 @@ def _describe_for_sketch(image_data: str, mime: str) -> str:
             contents=[
                 genai_types.Part.from_bytes(data=image_bytes, mime_type=mime),
                 (
-                    "Describe this garment for someone drawing a fashion CAD flat sketch.\n\n"
-                    "Be SPECIFIC about visible details:\n"
-                    "1. Garment type + front opening (cardigan with buttons / pullover / wrap)\n"
-                    "2. Neckline shape and depth (deep V / shallow V / crew / scoop / etc.)\n"
-                    "3. Sleeve length, width, cuff style (e.g. 'long balloon sleeves with elasticated cuffs')\n"
-                    "4. Body length and fit (cropped at waist / regular / boxy / fitted / oversized)\n"
-                    "5. Hem style (plain straight / ribbed / curved / asymmetric / split)\n"
-                    "6. KNIT PATTERN — describe what you actually see. Examples: 'diagonal "
-                    "pointelle openwork (small holes in chevron stripes)', 'cable knit running "
-                    "vertically', 'plain stockinette', 'ribbed', 'fair isle'. Include pattern "
-                    "direction and density.\n"
-                    "7. Knit gauge (fine / medium / chunky)\n"
-                    "8. Any distinctive details (pockets, contrast trim, panels)\n\n"
-                    "CRITICAL:\n"
-                    "- If part of the garment is cut off in the photo (e.g. hem not visible "
-                    "because of cropping), say so explicitly. Do not guess hidden parts.\n"
-                    "- Describe ONLY what you can clearly see. No invention.\n\n"
-                    "Output: 4-6 sentences of plain prose. No preamble, no bullet points, no markdown."
+                    "Describe this garment for someone drawing a fashion CAD flat sketch. "
+                    "Image-gen models tend to substitute generic 'typical' details when "
+                    "they're uncertain (4 buttons instead of 2, regular length instead of "
+                    "cropped). Your job is to PIN DOWN exact specifics so they can't drift.\n\n"
+                    "Cover every item below. Use ALL CAPS for the critical numeric/length "
+                    "values so they stand out to the downstream model:\n\n"
+                    "1. Garment type + front opening (cardigan / pullover / wrap). "
+                    "If there are visible buttons or zips, STATE THE EXACT COUNT in caps "
+                    "(e.g. 'EXACTLY 2 buttons visible').\n"
+                    "2. Neckline shape AND depth (deep V / shallow V / crew / scoop / boat). "
+                    "If V-neck, note roughly how far down the V dips relative to the "
+                    "bust line.\n"
+                    "3. Sleeve LENGTH (short / three-quarter / long / extra-long), VOLUME "
+                    "(slim / regular / balloon / bishop / dolman), and cuff style. Use ALL "
+                    "CAPS for the length.\n"
+                    "4. Body LENGTH RATIO — estimate the body length from neckline to hem "
+                    "as a multiple of shoulder width. E.g. 'BODY LENGTH ≈ 1.0× shoulder "
+                    "width (CROPPED, ends at natural waist)'. Use ALL CAPS for the "
+                    "qualitative label (CROPPED / REGULAR / LONG / TUNIC).\n"
+                    "5. Hem style (plain straight / ribbed / curved / asymmetric / split). "
+                    "Note rib band height if any.\n"
+                    "6. KNIT PATTERN — be specific. Examples: 'diagonal pointelle "
+                    "openwork in chevron stripes', 'vertical cable knit', 'plain "
+                    "stockinette', 'ribbed', 'fair isle', 'jacquard intarsia'. Include "
+                    "pattern direction (vertical / diagonal / horizontal) and density "
+                    "(sparse / medium / dense).\n"
+                    "7. Knit gauge (fine / medium / chunky).\n"
+                    "8. Distinctive details — pockets (count them), contrast trim, "
+                    "panels, seam placement, any embellishment.\n\n"
+                    "STRICT RULES:\n"
+                    "- If part of the garment is cut off in the photo (hem not visible, "
+                    "back not visible), say so explicitly. Do not invent hidden parts.\n"
+                    "- Count carefully. If you can only count 2 buttons, write 2 — "
+                    "never round to a 'typical' number.\n"
+                    "- Describe ONLY what you can clearly see. No filling-in.\n\n"
+                    "Output: 5-8 sentences of plain prose. No preamble, no bullet points, "
+                    "no markdown."
                 ),
             ],
         )
@@ -246,6 +271,87 @@ def build_prompt(
     )
 
     return "\n\n".join(p for p in parts if p and p.strip())
+
+
+# =============================================================================
+# SELF-CRITIQUE — compare the generated sketch against the reference photo
+# =============================================================================
+
+def _critique_sketch(
+    photo_data: str,
+    photo_mime: str,
+    sketch_bytes: bytes,
+    intent_description: str,
+) -> dict:
+    """Compare the generated sketch against the original photo. Return a dict
+    with deviations + a regeneration hint, or empty deviations if the sketch
+    is already faithful.
+
+    Output shape (parsed from Gemini's JSON response):
+      {
+        "faithful": bool,         # True if no significant deviations
+        "deviations": [str, ...], # concrete issues, e.g. "shows 4 buttons, photo has 2"
+        "correction_note": str,   # one-sentence summary to add to regen prompt
+      }
+    """
+    empty = {"faithful": True, "deviations": [], "correction_note": ""}
+    if not GENAI_AVAILABLE or not photo_data:
+        return empty
+    try:
+        if "gemini_api_key" not in st.secrets:
+            return empty
+        client = genai.Client(api_key=st.secrets["gemini_api_key"])
+        photo_bytes = base64.b64decode(photo_data)
+        response = client.models.generate_content(
+            model=DESCRIBER_MODEL,
+            contents=[
+                "REFERENCE PHOTO (the target):",
+                genai_types.Part.from_bytes(data=photo_bytes, mime_type=photo_mime),
+                "GENERATED SKETCH (what we drew so far — compare against the reference):",
+                genai_types.Part.from_bytes(data=sketch_bytes, mime_type="image/jpeg"),
+                (
+                    "Your job: spot SPECIFIC deviations between the sketch and the photo. "
+                    "We don't need style commentary — only objective mismatches in "
+                    "things like:\n"
+                    "- Button count (e.g. 'sketch has 4 buttons, photo has 2')\n"
+                    "- Body length (e.g. 'sketch is regular length, photo is cropped at waist')\n"
+                    "- Sleeve length (3/4 vs long vs short)\n"
+                    "- Sleeve volume (slim vs balloon vs dolman)\n"
+                    "- Neckline shape or depth\n"
+                    "- Knit pattern type or direction\n"
+                    "- Hem style (plain vs ribbed)\n"
+                    "- Pocket / panel / seam details\n\n"
+                    "Don't flag color (the sketch is supposed to be black-and-white) or "
+                    "framing (front+back layout vs single view in photo).\n\n"
+                    "Also use this DESCRIPTION of the intent as ground truth — if the "
+                    "sketch deviates from it, that's a deviation:\n\n"
+                    f"{intent_description or '(no description available)'}\n\n"
+                    "Output ONLY a JSON object — no markdown, no code fences — of the form:\n"
+                    '{\n'
+                    '  "faithful": <true if no significant deviations>,\n'
+                    '  "deviations": ["specific issue 1", "specific issue 2", ...],\n'
+                    '  "correction_note": "<one short sentence summarizing what to fix>"\n'
+                    '}\n\n'
+                    "If the sketch matches well, return faithful=true and deviations=[]. "
+                    "If you see only minor stylistic differences (line weight, slight "
+                    "proportion drift), still return faithful=true — we only re-render "
+                    "for meaningful misses."
+                ),
+            ],
+        )
+        text = (response.text or "").strip()
+        # Strip markdown fences if present
+        text = re.sub(r"^```(?:json)?\s*", "", text)
+        text = re.sub(r"\s*```$", "", text)
+        parsed = json.loads(text)
+        return {
+            "faithful": bool(parsed.get("faithful", True)),
+            "deviations": list(parsed.get("deviations", []) or []),
+            "correction_note": str(parsed.get("correction_note", "")).strip(),
+        }
+    except Exception:
+        # Critique failed — treat as faithful, so we don't trigger a wasted regen
+        return empty
 
 
 # =============================================================================
@@ -381,7 +487,38 @@ def generate_drawing(data: dict) -> dict:
         return _demo_drawing(prompt)
 
     try:
+        # PASS 1 — first sketch from photo + spec + description
         image_bytes = _gemini_generate(prompt, reference_image=reference)
+        final_prompt = prompt
+        critique_result = None
+
+        # PASS 2 — self-critique loop. Only runs when we have a reference photo;
+        # without one, there's nothing concrete to compare against.
+        if reference is not None and MAX_CRITIQUE_ROUNDS > 0:
+            critique_result = _critique_sketch(
+                photo_data=reference["data"],
+                photo_mime=reference.get("mime", "image/jpeg"),
+                sketch_bytes=image_bytes,
+                intent_description=description,
+            )
+            # Only regenerate if the critic found significant deviations
+            if (not critique_result.get("faithful", True)) and critique_result.get("deviations"):
+                deviations_block = "\n".join(f"- {d}" for d in critique_result["deviations"])
+                correction = critique_result.get("correction_note", "").strip()
+                final_prompt = (
+                    prompt
+                    + "\n\nCORRECTION NOTES (a previous attempt at this sketch had the "
+                    "following deviations from the reference photo — please FIX these in "
+                    "this generation):\n" + deviations_block
+                    + (f"\n\nSummary: {correction}" if correction else "")
+                )
+                # Regenerate with the correction notes added
+                try:
+                    image_bytes = _gemini_generate(final_prompt, reference_image=reference)
+                except Exception:
+                    # If the regen fails, fall back to pass-1 image rather than erroring
+                    pass
+
         caption = (
             "AI-generated technical drawing (matched to uploaded photo)"
             if reference is not None
@@ -393,9 +530,11 @@ def generate_drawing(data: dict) -> dict:
             caption=caption,
         )
         entry["source"] = "ai_generated"
-        entry["prompt"] = prompt
+        entry["prompt"] = final_prompt
         entry["used_reference_photo"] = reference is not None
         entry["photo_description"] = description
+        if critique_result is not None:
+            entry["critique"] = critique_result
         return entry
     except Exception as e:
         # Any failure (network, quota, JSON shape, etc.) → demo fallback so the
