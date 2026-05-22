@@ -542,12 +542,13 @@ def generate_drawing(data: dict) -> dict:
     """
     reference = _pick_reference_image(data)
 
-    # Step 1: ask Vision to describe the photo in detail (cached per image).
-    # This bridges the gap between what the image-gen model "sees" and what
-    # it actually draws — without this, Pro tends to substitute generic
-    # textures (small dots) for specific knit patterns (chevron pointelle).
-    description = ""
-    if reference is not None and is_configured():
+    # Step 1: get the photo description. Two sources, in priority order:
+    #   1. ``data["_photo_description_override"]`` — if the user edited the
+    #      description in the UI, use their version verbatim. This is how
+    #      a customer corrects AI's reading without regenerating from photo.
+    #   2. Otherwise auto-generate via ``_describe_for_sketch`` (cached).
+    description = (data.get("_photo_description_override") or "").strip()
+    if not description and reference is not None and is_configured():
         description = _describe_for_sketch(
             reference["data"],
             reference.get("mime", "image/jpeg"),

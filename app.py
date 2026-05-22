@@ -64,6 +64,7 @@ from services.ai_drawing import (
     build_prompt as build_drawing_prompt,
     generate_drawing,
     is_demo_mode as ai_demo_mode,
+    _describe_for_sketch as describe_for_sketch,
 )
 from services.image_helpers import (
     approximate_size_kb,
@@ -610,12 +611,28 @@ with tab_editor:
         # === AUTO-TRIGGER photo analysis when a NEW first image arrives ===
         # Customer-facing app: people won't think to click "Auto-fill". We
         # detect new uploads by tracking image IDs we've already analyzed.
+        # We do TWO things in this pass:
+        #   1. photo_analyzer to fill the form dropdowns (sub-category, fit…)
+        #   2. describe_for_sketch to produce a plain-text reading of the
+        #      photo that the user can later review and edit before
+        #      generating the sketch.
         if ai_ready and has_image:
             _first_id = images[0].get("id")
             _analyzed_ids = st.session_state.get("_autoanalyzed_ids", set())
             if _first_id and _first_id not in _analyzed_ids:
                 with st.spinner("🔍 AI is reading your photo to pre-fill the form…"):
                     ai_autofill_callback()
+                    try:
+                        _first = images[0]
+                        _desc = describe_for_sketch(
+                            _first["data"],
+                            _first.get("mime", "image/jpeg"),
+                        )
+                        if _desc:
+                            st.session_state["_photo_description"] = _desc
+                    except Exception:
+                        # Non-fatal — description editor will just be empty
+                        pass
                 st.session_state["_autoanalyzed_ids"] = _analyzed_ids | {_first_id}
                 st.rerun()
 
@@ -795,15 +812,47 @@ with tab_editor:
     if ai_demo_mode():
         ai_cols[1].caption("🧪 **Demo mode** — placeholder output")
 
+    # Editable photo description — what AI reads from the photo. Lets the
+    # user fix any misreadings (wrong button count, wrong sleeve length)
+    # BEFORE generating, instead of regenerating + adjusting in a loop.
+    _has_user_photo = any(
+        ("ai_generated" not in (i.get("source") or ""))
+        for i in (st.session_state.get("images") or [])
+    )
+    if _has_user_photo and ai_ready:
+        with st.expander("📝 What AI sees in your photo — edit before generating", expanded=True):
+            st.caption(
+                "AI's plain-text reading of your photo. The sketch is generated from "
+                "this description, so editing here is the fastest way to correct any "
+                "misreading (wrong button count, wrong length, wrong knit pattern). "
+                "Leave blank to have AI re-read from scratch on next generation."
+            )
+            st.text_area(
+                "Photo description (used for sketch generation)",
+                value=st.session_state.get("_photo_description", ""),
+                key="_photo_description_edit",
+                height=180,
+                label_visibility="collapsed",
+            )
+
     # Generate / re-generate button
     existing_drawing = st.session_state.get("technical_drawing")
 
     def _do_generate():
         try:
             data_now = collect_data()
+            # Pass the user-edited description (if any) to override the
+            # auto-generated one inside generate_drawing.
+            edited_desc = (st.session_state.get("_photo_description_edit") or "").strip()
+            if edited_desc:
+                data_now["_photo_description_override"] = edited_desc
             drawing = generate_drawing(data_now)
             st.session_state["technical_drawing"] = drawing
             st.session_state["_drawing_status"] = ("success", None)
+            # Keep _photo_description in sync with what was actually used so
+            # the editor shows the latest version next render.
+            if drawing.get("photo_description"):
+                st.session_state["_photo_description"] = drawing["photo_description"]
         except Exception as e:
             st.session_state["_drawing_status"] = ("error", str(e))
 
@@ -846,6 +895,36 @@ with tab_editor:
             st.image(to_data_url(existing_drawing), use_container_width=True)
             st.caption(existing_drawing.get("caption") or "—")
         with disp_cols[1]:
+            # AI self-critique transparency. If a critique was run, show what
+            # the second pass spotted and whether it triggered a re-draw.
+            # Demystifies what the AI is doing under the hood.
+            _crit = existing_drawing.get("critique")
+            if _crit:
+                _devs = _crit.get("deviations") or []
+                _faithful = _crit.get("faithful", True)
+                if _devs and not _faithful:
+                    _crit_label = f"🔬 AI self-critique — re-drew to fix {len(_devs)} issue(s)"
+                    _expanded = True
+                else:
+                    _crit_label = "🔬 AI self-critique — first pass matched"
+                    _expanded = False
+                with st.expander(_crit_label, expanded=_expanded):
+                    if _devs and not _faithful:
+                        st.markdown("**Issues the AI spotted in its first sketch and re-drew to fix:**")
+                        for d in _devs:
+                            st.markdown(f"- {d}")
+                        if _crit.get("correction_note"):
+                            st.caption(f"_Summary: {_crit['correction_note']}_")
+                    elif _devs:
+                        # Faithful overall but had minor notes
+                        st.markdown("**Minor observations (not re-drawn):**")
+                        for d in _devs:
+                            st.markdown(f"- {d}")
+                    else:
+                        st.markdown(
+                            "First-pass sketch matched the photo and description "
+                            "well enough — no second pass needed."
+                        )
             with st.expander("🔍 View AI prompt that was used", expanded=False):
                 st.code(existing_drawing.get("prompt") or "(no prompt recorded)", language="text")
 
