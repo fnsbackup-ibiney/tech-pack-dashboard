@@ -145,8 +145,16 @@ def init_state():
 # Keys we must NOT touch via session_state — Streamlit forbids it for
 # some widgets (e.g. data_editor, button, file_uploader, form_submit_button).
 # Touching them throws StreamlitValueAssignmentNotAllowedError.
+# Widgets whose state Streamlit refuses to let us assign. We can `del` them
+# but Streamlit also internally caches their state, so for file_uploader in
+# particular `del` alone doesn't fully clear the visible filename — see the
+# uploader_version trick below.
 WIDGET_ONLY_KEYS = {"measurements_editor", "_image_uploader"}
-PROTECTED_KEYS = {"initialized", "_snapshot"} | WIDGET_ONLY_KEYS
+# Counter that bumps on every reset_to_blank. We compose the file_uploader's
+# key as f"_image_uploader_{version}" so a reset gives the widget a brand
+# new key, forcing Streamlit to rebuild it empty. The version key itself is
+# protected from being cleared by the reset loop.
+PROTECTED_KEYS = {"initialized", "_snapshot", "_uploader_version"} | WIDGET_ONLY_KEYS
 
 
 def _snapshot():
@@ -165,14 +173,24 @@ def reset_to_blank():
     _snapshot()
     for k in [k for k in st.session_state.keys() if k not in PROTECTED_KEYS]:
         del st.session_state[k]
-    # Streamlit forbids ASSIGNING widget-only keys but allows DELETING them.
-    # Without this, the file_uploader visually retains the old filename and
-    # re-processes it on next render, defeating the whole point of "start new".
-    for widget_key in ("_image_uploader", "measurements_editor"):
+    # Bump the uploader version so the file_uploader gets a NEW key on the
+    # next render. Streamlit caches widget state internally and `del` on the
+    # widget key alone doesn't fully clear the visible filename — but giving
+    # the widget a different key forces a clean rebuild.
+    st.session_state["_uploader_version"] = (
+        st.session_state.get("_uploader_version", 0) + 1
+    )
+    # Also try to delete the OLD widget keys (belt-and-suspenders — harmless
+    # even if they're already gone).
+    for v in range(st.session_state["_uploader_version"]):
         try:
-            del st.session_state[widget_key]
+            del st.session_state[f"_image_uploader_{v}"]
         except KeyError:
             pass
+    try:
+        del st.session_state["measurements_editor"]
+    except KeyError:
+        pass
     st.session_state["_form_unlocked"] = False
     st.session_state["_just_reset"] = True
 
@@ -639,11 +657,16 @@ with tab_editor:
             "Images are auto-resized to 800 px and compressed before saving."
         )
 
+        # Versioned key: each reset_to_blank bumps _uploader_version, which
+        # changes this key and forces Streamlit to rebuild the widget clean.
+        # Without this, "Start a new tech pack" leaves the old filename
+        # showing in the uploader.
+        _uploader_key = f"_image_uploader_{st.session_state.get('_uploader_version', 0)}"
         uploaded_files = st.file_uploader(
             "Drop images here or click to browse",
             accept_multiple_files=True,
             type=["png", "jpg", "jpeg", "webp", "gif"],
-            key="_image_uploader",
+            key=_uploader_key,
             label_visibility="collapsed",
         )
         if uploaded_files:
