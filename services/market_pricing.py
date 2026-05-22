@@ -228,6 +228,149 @@ def _expand_to_groups(tokens: set[str]) -> set[frozenset[str]]:
     return groups
 
 
+# =============================================================================
+# BRAND-DEFAULTS AUTO-FILL  (use the matched item's known specs to populate
+# the form — stakeholder ask: "populate with MC to keep it realistic")
+# =============================================================================
+
+# Map the German measurement names PNC uses to the English measurement-point
+# names we have in KNITWEAR_MEASUREMENT_POINTS. We only map the ones PNC
+# actually exposes on product detail pages — the rest of the points are
+# left for the user to fill in.
+_DE_TO_FORM_MEASUREMENT = {
+    "Rückenlänge":     "Body length (CB)",
+    "Vorderlänge":     "Body length (HPS)",
+    "Brustweite":      "Chest width",
+    "Taillenweite":    "Waist width",
+    "Hüftweite":       "Hem width",
+    "Schulterbreite":  "Shoulder width",
+    "Ärmellänge":      "Sleeve length (CB)",
+    "Armlänge":        "Sleeve length (CB)",
+    "Armausschnitt":   "Armhole",
+    "Ärmelöffnung":    "Sleeve opening",
+    "Halsausschnitt":  "Neckline drop",
+}
+
+
+def _composition_to_text(composition_list) -> str:
+    """Flatten the [{group:..., text:'70% Viskose|30% Polyamid'}, ...] form into
+    a single readable string. Keeps secondary groups (Futter / Verzierung) when
+    they exist."""
+    if not composition_list:
+        return ""
+    parts = []
+    for entry in composition_list:
+        text = (entry.get("text") or "").replace("|", " / ").strip()
+        group = (entry.get("group") or "").strip()
+        if not text:
+            continue
+        # If there's only one group ("Obermaterial"), don't bother labeling it.
+        if len(composition_list) > 1 and group and group != "Obermaterial":
+            parts.append(f"{text} ({group})")
+        else:
+            parts.append(text)
+    return ", ".join(parts)
+
+
+def _sizes_to_range(available_sizes) -> str | None:
+    """Pick the SIZE_RANGES dropdown option that best fits the given list of
+    sizes. Returns None if nothing fits cleanly — caller leaves the field empty."""
+    if not available_sizes:
+        return None
+    letters = {s.upper() for s in available_sizes if s and not s[0].isdigit()}
+    if not letters:
+        # Numeric sizes (34, 36, etc.) — falls outside the dropdown shapes
+        return "Custom"
+    # Pick the smallest dropdown option that covers what we see
+    covers = {
+        "S - XL":     {"S", "M", "L", "XL"},
+        "XS - XXL":   {"XS", "S", "M", "L", "XL", "XXL"},
+        "XXS - XXXL": {"XXS", "XS", "S", "M", "L", "XL", "XXL", "XXXL"},
+    }
+    for label, supported in covers.items():
+        if letters.issubset(supported):
+            return label
+    return "Custom"
+
+
+def apply_brand_defaults(match: dict, session_state, overwrite: bool = False) -> dict:
+    """Populate the tech-pack form from the matched MC (Marie Lund) item.
+
+    Stakeholder's framing: a "new" garment for an existing brand is mostly a
+    remix of brand conventions — composition, gauge, size chart, etc. So when
+    we find the closest catalog item via ``find_similar_item``, we copy its
+    known brand-convention values into the form as DEFAULTS. The user only
+    has to edit what's actually different about their new design.
+
+    Only fills:
+      - composition (free-text field)
+      - measurements (dict — uses the matched item's sample_measurements as
+        baseline; German measurement names mapped to the English form labels)
+      - size_range (dropdown — best-fit from the matched item's available sizes)
+      - base_size (mirrors the sample-size PNC uses for measurements, usually S)
+
+    By default ``overwrite=False`` — we never replace something the user has
+    already filled in. Pass overwrite=True to force-replace.
+
+    Returns a dict {field_label: applied_value} for the UI to show what got
+    filled, mirroring photo_analyzer.apply_suggestions's contract.
+    """
+    applied: dict = {}
+    blank = "— Not specified —"
+
+    def _empty(v):
+        return v in (None, "", blank, {}, [])
+
+    # 1. Composition — single free-text field
+    comp_text = _composition_to_text(match.get("composition"))
+    if comp_text:
+        current = session_state.get("composition")
+        if overwrite or _empty(current):
+            session_state["composition"] = comp_text
+            applied["composition"] = comp_text
+
+    # 2. Size range
+    size_label = _sizes_to_range(match.get("available_sizes"))
+    if size_label:
+        current = session_state.get("size_range")
+        if overwrite or _empty(current):
+            session_state["size_range"] = size_label
+            applied["size_range"] = size_label
+
+    # 3. Base size — use whichever size PNC reported measurements against
+    sample_meas = match.get("sample_measurements") or []
+    if sample_meas:
+        # All entries share the same sample_size in our data, but be defensive
+        base_size = sample_meas[0].get("sample_size")
+        if base_size:
+            current = session_state.get("base_size")
+            if overwrite or _empty(current):
+                session_state["base_size"] = base_size
+                applied["base_size"] = base_size
+
+    # 4. Measurements — German labels → English form labels
+    if sample_meas:
+        current_meas = session_state.get("measurements") or {}
+        new_meas = dict(current_meas) if not overwrite else {}
+        applied_meas: dict = {}
+        for entry in sample_meas:
+            en_label = _DE_TO_FORM_MEASUREMENT.get(entry.get("name"))
+            if not en_label:
+                continue
+            if not overwrite and en_label in new_meas:
+                continue
+            new_meas[en_label] = {
+                "value": float(entry.get("value") or 0),
+                "tolerance": 1.0,
+            }
+            applied_meas[en_label] = entry.get("value")
+        if applied_meas:
+            session_state["measurements"] = new_meas
+            applied["measurements"] = applied_meas
+
+    return applied
+
+
 def _color_score(user_color: str, item_color: str) -> int:
     """How well does the user's color match this item's color?
 

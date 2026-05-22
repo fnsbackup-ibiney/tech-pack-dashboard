@@ -302,8 +302,32 @@ def ai_autofill_callback():
         applied = photo_analyzer.apply_suggestions(
             suggestions, st.session_state, overwrite=False
         )
+
+        # Stakeholder ask: "populate with MC to keep it realistic". After the
+        # photo_analyzer has filled VISUAL fields, look up the closest item in
+        # the Marie Lund catalog and use its brand-convention spec (composition,
+        # measurements, size range) to fill the CONSTRUCTION fields the photo
+        # can't reveal. The user only edits what's actually different.
+        brand_applied = {}
+        if market_pricing.is_available():
+            try:
+                # Build the match query from what photo_analyzer just filled
+                form_snapshot = {
+                    "garment_sub_category": st.session_state.get("garment_sub_category"),
+                    "color_name": st.session_state.get("color_name"),
+                }
+                match = market_pricing.find_similar_item(form_snapshot)
+                if match:
+                    brand_applied = market_pricing.apply_brand_defaults(
+                        match, st.session_state, overwrite=False
+                    )
+            except Exception:
+                # Non-fatal — if MC lookup fails we still have photo-analyzer output
+                pass
+
         st.session_state["_ai_autofill_result"] = {
             "applied": applied,
+            "brand_applied": brand_applied,
             "raw": suggestions,
         }
         # Unlock the rest of the form so the user can review what AI filled.
@@ -718,15 +742,38 @@ with tab_editor:
         if last:
             if last.get("error"):
                 st.error(f"❌ AI couldn't analyze the photo: {last['error']}")
-            elif last.get("applied"):
-                field_lines = "\n".join(
-                    f"- **{k.replace('_', ' ').title()}**: {v}"
-                    for k, v in last["applied"].items()
-                )
+            elif last.get("applied") or last.get("brand_applied"):
+                # Two distinct sources: photo-vision (visual fields) and
+                # MC brand defaults (composition / measurements / sizes).
+                # Show them separately so the user knows which signals came
+                # from where.
+                lines = []
+                applied = last.get("applied") or {}
+                if applied:
+                    lines.append(f"**From the photo** ({len(applied)} field"
+                                 f"{'s' if len(applied) != 1 else ''}):")
+                    for k, v in applied.items():
+                        lines.append(f"- {k.replace('_', ' ').title()}: {v}")
+                brand_applied = last.get("brand_applied") or {}
+                if brand_applied:
+                    if lines:
+                        lines.append("")
+                    lines.append(
+                        f"**From the closest Marie Lund item** "
+                        f"({len(brand_applied)} field"
+                        f"{'s' if len(brand_applied) != 1 else ''} pre-filled):"
+                    )
+                    for k, v in brand_applied.items():
+                        if k == "measurements" and isinstance(v, dict):
+                            preview = ", ".join(f"{n} {val}" for n, val in v.items())
+                            lines.append(f"- Measurements: {preview}")
+                        else:
+                            lines.append(f"- {k.replace('_', ' ').title()}: {v}")
+                total = len(applied) + len(brand_applied)
                 st.success(
-                    f"✅ AI filled in {len(last['applied'])} field"
-                    f"{'s' if len(last['applied']) != 1 else ''}. "
-                    "Scroll down to review and adjust.\n\n" + field_lines
+                    f"✅ AI filled in {total} field"
+                    f"{'s' if total != 1 else ''}. Scroll down to review and adjust.\n\n"
+                    + "\n".join(lines)
                 )
             else:
                 st.info(
