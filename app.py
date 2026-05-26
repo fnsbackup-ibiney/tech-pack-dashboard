@@ -91,6 +91,10 @@ st.set_page_config(
     page_title="Tech Pack Dashboard",
     page_icon="🧶",
     layout="wide",
+    # "auto" is Streamlit's default but doesn't reliably collapse on mobile,
+    # so the sidebar clips the main content on phones. "collapsed" forces it
+    # closed at startup on every device — desktop users click once to open.
+    initial_sidebar_state="collapsed",
 )
 
 
@@ -175,9 +179,38 @@ st.markdown(
     h2 { font-size: 1.25rem !important; }
     h3 { font-size: 1.1rem !important; }
 
-    /* Sidebar: when expanded on mobile, take full viewport so it's usable */
+    /* Sidebar: when open on mobile, float over the content (don't push it).
+       Without these overrides Streamlit docks the sidebar to the left and
+       shrinks the main column, which clips headings on narrow screens. */
     [data-testid="stSidebar"] {
-        min-width: 85vw !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: 100vh !important;
+        width: 88vw !important;
+        min-width: 0 !important;
+        max-width: 360px !important;
+        z-index: 999 !important;
+        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.18) !important;
+    }
+    /* When collapsed, make sure the sidebar takes ZERO width so the main
+       column flows full-width. Streamlit hides it with transform, but we
+       belt-and-braces. */
+    [data-testid="stSidebar"][aria-expanded="false"] {
+        width: 0 !important;
+        min-width: 0 !important;
+        transform: translateX(-100%) !important;
+    }
+    /* Main content always full width on mobile, regardless of sidebar */
+    section.main,
+    [data-testid="stAppViewContainer"] > section:not([data-testid="stSidebar"]) {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    /* The "open sidebar" hamburger / chevron — make it tappable and visible */
+    [data-testid="collapsedControl"],
+    [data-testid="stSidebarCollapsedControl"] {
+        z-index: 1000 !important;
     }
 
     /* File uploader: stack the label + drop zone */
