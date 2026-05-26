@@ -614,16 +614,66 @@ with tab_editor:
                 "neckline": st.session_state.get("neckline"),
             }
 
+            # === User-configurable filters ===
+            # Stakeholder ask: let customer constrain the closest-match by
+            # price and material composition. Filters live above the widget
+            # so the displayed match always reflects them.
+            with st.expander("🔧 Filters", expanded=False):
+                _price_range = st.slider(
+                    "Price (USD)", 0, 200, (0, 200), step=5,
+                    key="_filter_price",
+                    help="Closest item must fall inside this price range.",
+                )
+                _materials_filter = st.multiselect(
+                    "Material contains",
+                    market_pricing.FILTER_MATERIALS,
+                    key="_filter_materials",
+                    help="Closest item must contain ALL selected fibres. "
+                         "Empty = no material constraint.",
+                )
+                _filters_active = (
+                    _price_range[0] > 0 or _price_range[1] < 200 or bool(_materials_filter)
+                )
+                if _filters_active and st.button("Clear filters", use_container_width=True):
+                    st.session_state.pop("_filter_price", None)
+                    st.session_state.pop("_filter_materials", None)
+                    st.rerun()
+
+            _filters = {
+                "price_min": _price_range[0] if _price_range[0] > 0 else None,
+                "price_max": _price_range[1] if _price_range[1] < 200 else None,
+                "materials": _materials_filter or None,
+            }
+
             # Reuse last vision result if user already paid for it this session
             # AND the form snapshot hasn't changed. Hash via JSON for stability.
-            _snapshot_key = json.dumps(_form_snapshot, sort_keys=True)
+            # Include the filter dict so applying a different filter forces
+            # a fresh match instead of returning the stale vision pick.
+            _snapshot_key = json.dumps({**_form_snapshot, "_filters": _filters}, sort_keys=True)
             _vision_cache = st.session_state.get("_market_vision_cache", {})
             _vision_match = _vision_cache.get(_snapshot_key)
 
-            _match = _vision_match or market_pricing.find_similar_item(_form_snapshot)
+            _match = _vision_match or market_pricing.find_similar_item(_form_snapshot, filters=_filters)
+
+            # Handle the "no-match-after-filtering" sentinel separately —
+            # show a friendly message rather than rendering a fake match.
+            if _match and _match.get("_no_filter_match"):
+                st.caption("💰 **Closest item selling now**")
+                st.warning(
+                    f"No items match the active filters within this category "
+                    f"({_match.get('category_size', 0)} items in category, "
+                    "0 after filters). Loosen the filters above."
+                )
+                _match = None  # skip the rest of the rendering block
 
             if _match:
-                st.caption("💰 **Closest item selling now**")
+                _filter_caption = ""
+                if _match.get("filter_pool_size") is not None and _match.get("category_pool_size") is not None:
+                    pool = _match["filter_pool_size"]
+                    total = _match["category_pool_size"]
+                    if pool < total:
+                        _filter_caption = f" · {pool}/{total} after filters"
+                st.caption(f"💰 **Closest item selling now**{_filter_caption}")
                 if _match.get("image_url"):
                     try:
                         st.image(_match["image_url"], use_container_width=True)
@@ -659,6 +709,7 @@ with tab_editor:
                                 _form_snapshot,
                                 user_photo_data=_first_user_image["data"],
                                 user_photo_mime=_first_user_image.get("mime", "image/jpeg"),
+                                filters=_filters,
                             )
                         if _refined:
                             _vision_cache[_snapshot_key] = _refined

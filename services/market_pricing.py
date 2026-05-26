@@ -551,9 +551,77 @@ def _score_candidate(form_data: dict, item: dict) -> tuple[int, list[str]]:
     return score, reasons
 
 
-def find_similar_item(form_data: dict) -> dict | None:
+# German names for each English fibre filter option. PNC ships composition
+# labels in German, so the filter has to look for the German tokens. Some
+# English names map to multiple German variants (Acrylic → "Acryl" or
+# "Polyacryl") — we accept any of them. We're case-insensitive on match.
+_MATERIAL_DE_TOKENS: dict[str, list[str]] = {
+    "Cotton":     ["Baumwolle"],
+    "Wool":       ["Wolle"],          # also covers Schurwolle, Merinowolle
+    "Cashmere":   ["Kaschmir"],
+    "Viscose":    ["Viskose"],
+    "Polyester":  ["Polyester"],
+    "Acrylic":    ["Acryl", "Polyacryl"],
+    "Linen":      ["Leinen"],
+    "Silk":       ["Seide"],
+    "Polyamide":  ["Polyamid"],
+    "Elastane":   ["Elasthan"],
+    "Mohair":     ["Mohair"],
+    "Alpaca":     ["Alpaka"],
+}
+
+# English fibre labels surfaced in the filter UI, in display order.
+FILTER_MATERIALS = list(_MATERIAL_DE_TOKENS.keys())
+
+
+def _item_has_material(item: dict, english_material: str) -> bool:
+    """True iff the item's composition mentions the given fibre.
+
+    Looks up the German equivalents of ``english_material`` (see
+    ``_MATERIAL_DE_TOKENS``) and returns True if any of them appears in any
+    of the composition entries.
+    """
+    tokens = _MATERIAL_DE_TOKENS.get(english_material, [english_material])
+    comp = item.get("composition") or []
+    for entry in comp:
+        text = (entry.get("text") or "").lower()
+        for tok in tokens:
+            if tok.lower() in text:
+                return True
+    return False
+
+
+def _apply_filters(candidates: list[dict], filters: dict | None) -> list[dict]:
+    """Trim a candidate list by user filters. ``filters`` shape:
+
+      {
+        "price_min": float | None,  # USD
+        "price_max": float | None,  # USD
+        "materials": list[str],     # English fibre names — ALL must be present
+      }
+    """
+    if not filters:
+        return candidates
+    out = candidates
+    pmin = filters.get("price_min")
+    pmax = filters.get("price_max")
+    if pmin is not None:
+        out = [c for c in out if (c.get("price_eur") or 0) * EUR_TO_USD >= pmin]
+    if pmax is not None:
+        out = [c for c in out if (c.get("price_eur") or 0) * EUR_TO_USD <= pmax]
+    mats = filters.get("materials") or []
+    if mats:
+        out = [c for c in out if all(_item_has_material(c, m) for m in mats)]
+    return out
+
+
+def find_similar_item(form_data: dict, filters: dict | None = None) -> dict | None:
     """Return the catalog SKU most similar to the user's tech pack inputs,
     or ``None`` if no category is selected / category has no entries.
+
+    Optional ``filters`` constrain the candidate pool BEFORE scoring:
+      - price_min / price_max (USD): keep only items inside the range
+      - materials: list of English fibre names; item must mention all of them
 
     Text-only matching. Fast (sub-millisecond). For the AI-vision variant
     that visually compares the uploaded photo to each candidate, see
@@ -568,13 +636,26 @@ def find_similar_item(form_data: dict) -> dict | None:
     if not candidates:
         return None
 
-    scored = [(item, *_score_candidate(form_data, item)) for item in candidates]
+    # Apply user filters BEFORE scoring — no point scoring items the user
+    # has explicitly excluded.
+    filtered = _apply_filters(candidates, filters)
+    if not filtered:
+        # User filters too restrictive — surface this via a sentinel return so
+        # the caller can show a helpful "no items match" message instead of
+        # silently falling back to an unrelated item.
+        return {
+            "_no_filter_match": True,
+            "category_size": len(candidates),
+            "match_reason": "no items in this category match the active filters",
+        }
+
+    scored = [(item, *_score_candidate(form_data, item)) for item in filtered]
     scored.sort(key=lambda triple: triple[1], reverse=True)
     top_item, top_score, top_reasons = scored[0]
 
     if top_score == 0:
         # No useful signal — fall back to median-priced item as a "representative".
-        sorted_by_price = sorted(candidates, key=lambda c: c["price_eur"])
+        sorted_by_price = sorted(filtered, key=lambda c: c["price_eur"])
         top_item = sorted_by_price[len(sorted_by_price) // 2]
         match_reason = f"no specific signal — showing median-priced {cat.lower()}"
     else:
@@ -587,6 +668,8 @@ def find_similar_item(form_data: dict) -> dict | None:
         "match_reason": match_reason,
         "match_method": "text",
         "fx_rate": EUR_TO_USD,
+        "filter_pool_size": len(filtered),
+        "category_pool_size": len(candidates),
     }
 
 
@@ -603,17 +686,18 @@ def _vision_available() -> bool:
         return False
 
 
-def _shortlist_candidates(form_data: dict, top_n: int = 8) -> list[dict]:
+def _shortlist_candidates(form_data: dict, top_n: int = 8, filters: dict | None = None) -> list[dict]:
     """Return the top_n text-scored candidates within the selected category.
 
-    Used to narrow before sending images to Vision — we don't want to upload
-    all 120 photos every time.
+    Honors the same filters as ``find_similar_item`` so that AI Vision
+    refine also respects user-applied price/material constraints.
     """
     cat = form_data.get("garment_sub_category")
     if not cat:
         return []
     items = _load().get("items", [])
     cands = [it for it in items if it.get("category", "").lower() == cat.lower()]
+    cands = _apply_filters(cands, filters)
     if not cands:
         return []
     scored = sorted(cands, key=lambda c: _score_candidate(form_data, c)[0], reverse=True)
@@ -636,26 +720,23 @@ def find_similar_item_vision(
     user_photo_data: str,
     user_photo_mime: str,
     top_n: int = 6,
+    filters: dict | None = None,
 ) -> dict | None:
     """Vision-narrowed match: text-shortlist top_n, then ask Gemini which is
     the most visually similar to the user's uploaded photo.
 
-    ``user_photo_data`` is the base64 string from session_state (same shape
-    as images stored elsewhere in the app).
-
-    Returns the same dict shape as ``find_similar_item`` but with
-    ``match_method="vision"`` and a reasoning sentence from the model.
-    Falls back to text-only ``find_similar_item`` on any vision error.
+    Respects the same ``filters`` as ``find_similar_item`` so AI Vision
+    refine doesn't suggest items the user has explicitly filtered out.
     """
     if not _vision_available():
-        return find_similar_item(form_data)
+        return find_similar_item(form_data, filters=filters)
 
-    shortlist = _shortlist_candidates(form_data, top_n=top_n)
+    shortlist = _shortlist_candidates(form_data, top_n=top_n, filters=filters)
     if not shortlist:
         return None
     if len(shortlist) == 1:
         # Only one option — no need to call Vision
-        return find_similar_item(form_data)
+        return find_similar_item(form_data, filters=filters)
 
     # Download candidate images
     cand_with_bytes: list[tuple[dict, bytes]] = []
@@ -665,7 +746,7 @@ def find_similar_item_vision(
             cand_with_bytes.append((c, img))
     if len(cand_with_bytes) < 2:
         # Nothing or only one fetch succeeded — degrade to text
-        return find_similar_item(form_data)
+        return find_similar_item(form_data, filters=filters)
 
     # Build the Vision call
     try:
