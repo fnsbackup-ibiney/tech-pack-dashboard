@@ -133,17 +133,35 @@ st.markdown(
         min-width: 100% !important;
     }
 
-    /* Tabs: allow horizontal scroll instead of cramming 5 tabs into 375px */
+    /* Tabs: force visible labels + horizontal scroll.
+       Earlier version only set flex/overflow on the list; Streamlit's own
+       BaseWeb styles still squashed the buttons to zero visible height on
+       mobile (only the bottom-border red line showed). This block forces
+       padding/min-height on every tab button regardless of selector flavor
+       and unwraps the outer containers. */
+    [data-testid="stTabs"] > div:first-child,
     [data-testid="stTabs"] [data-baseweb="tab-list"],
     [data-testid="stTabs"] [role="tablist"] {
-        overflow-x: auto !important;
+        display: flex !important;
         flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
         scrollbar-width: thin;
+        padding-bottom: 4px !important;
     }
+    [data-testid="stTabs"] button,
     [data-testid="stTabs"] [data-baseweb="tab"],
     [data-testid="stTabs"] [role="tab"] {
         flex: 0 0 auto !important;
+        display: inline-flex !important;
+        align-items: center !important;
         white-space: nowrap !important;
+        min-height: 44px !important;
+        padding: 0.5rem 0.9rem !important;
+        font-size: 14px !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
 
     /* Touch-friendly: 44px is the iOS HIG minimum tap target */
