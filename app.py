@@ -95,6 +95,74 @@ st.set_page_config(
 
 
 # =============================================================================
+# ACCESS GATE — shared password (Stage 1 of the auth roadmap)
+# =============================================================================
+# Stakeholder ask: "we need to add a login so no one can use it without access".
+# This is the simplest possible version — a single shared password kept in
+# st.secrets["app_password"]. Good enough for the demo / pre-customer phase.
+# Upgrade to Google OAuth (st.login) once a customer account is needed and we
+# have an OAuth client ID provisioned.
+#
+# Behavior:
+#   - If `app_password` exists in secrets → require it before showing the app.
+#   - If it doesn't exist → open access (useful for local dev without secrets).
+
+def _password_required() -> bool:
+    """True iff an app_password is configured in Streamlit secrets."""
+    try:
+        return bool(st.secrets.get("app_password"))
+    except Exception:
+        return False
+
+
+def _check_password() -> bool:
+    """Return True iff the user has entered the right password this session.
+
+    Renders a login form when not authenticated. Uses ``hmac.compare_digest``
+    so the comparison is constant-time (no timing-attack leak on which char
+    diverged). The password itself is never stored in session_state — only
+    a boolean flag.
+    """
+    if not _password_required():
+        return True  # No password set → open access
+    if st.session_state.get("_authenticated"):
+        return True
+
+    # Centered, simple login form
+    _, mid, _ = st.columns([1, 2, 1])
+    with mid:
+        st.markdown("# 🧶 Tech Pack Dashboard")
+        st.caption("Sign in with the access password to continue.")
+        with st.form("_login_form", clear_on_submit=False):
+            pw = st.text_input(
+                "Password",
+                type="password",
+                key="_pw_input",
+                placeholder="Enter access password",
+            )
+            submitted = st.form_submit_button("Sign in", type="primary", use_container_width=True)
+        if submitted:
+            import hmac
+            expected = str(st.secrets.get("app_password", ""))
+            if pw and hmac.compare_digest(pw, expected):
+                st.session_state["_authenticated"] = True
+                # Drop the typed password — no need to keep it around
+                st.session_state.pop("_pw_input", None)
+                st.rerun()
+            else:
+                st.error("Incorrect password.")
+        st.caption(
+            "_If you don't have the password, contact the dashboard owner. "
+            "Single sign-on (Google) will replace this gate in the next phase._"
+        )
+    return False
+
+
+if not _check_password():
+    st.stop()
+
+
+# =============================================================================
 # CONSTANTS & HELPERS
 # =============================================================================
 
@@ -447,6 +515,14 @@ init_state()
 with st.sidebar:
     st.title("🧶 Tech Pack")
     st.caption("Build a factory-ready tech pack without a physical sample.")
+
+    # Sign-out button (only meaningful when password gate is active)
+    if _password_required() and st.session_state.get("_authenticated"):
+        def _do_logout():
+            st.session_state.pop("_authenticated", None)
+            st.session_state.pop("_pw_input", None)
+        st.button("🔒 Sign out", on_click=_do_logout, use_container_width=True,
+                  help="End this session. You'll need to re-enter the password.")
 
     st.divider()
 
