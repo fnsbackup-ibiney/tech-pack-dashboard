@@ -615,14 +615,18 @@ def _demo_drawing(prompt: str, error: str | None = None) -> dict:
 def _pick_reference_image(data: dict) -> dict | None:
     """Find the best uploaded photo to use as a visual reference for the AI.
 
-    Strategy: take the FIRST user-uploaded image that isn't itself an AI
-    output (so we don't feed the model its own previous drawing). Returns
-    None if no usable reference exists — caller falls back to text-only.
+    Strategy: take the FIRST user-uploaded reference image that isn't:
+      - an AI-generated drawing (we don't feed the model its own output)
+      - a camera-captured photo (those are for discussion/record only,
+        not for AI analysis per stakeholder spec)
+    Returns None if no usable reference exists — caller falls back to
+    text-only.
     """
     for img in (data.get("images") or []):
         source = (img.get("source") or "").lower()
-        # Skip AI-generated images — we don't want to echo our own output
         if "ai_generated" in source:
+            continue
+        if source == "captured":
             continue
         if img.get("data"):
             return img

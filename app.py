@@ -311,13 +311,20 @@ def ai_autofill_callback():
     """
     import base64
     images = st.session_state.get("images") or []
-    if not images:
+    # Only consider true reference uploads — skip AI-generated drawings and
+    # camera-captured photos (those are for discussion only, not analysis).
+    reference_images = [
+        i for i in images
+        if "ai_generated" not in (i.get("source") or "")
+        and (i.get("source") or "") != "captured"
+    ]
+    if not reference_images:
         st.session_state["_ai_autofill_result"] = {
-            "error": "No image uploaded. Drop one onto the uploader first."
+            "error": "No reference photo uploaded. Drop one onto the uploader first."
         }
         return
     try:
-        first_image = images[0]
+        first_image = reference_images[0]
         suggestions = photo_analyzer.analyze_garment_photo(
             base64.b64decode(first_image["data"]),
             mime_type=first_image.get("mime", "image/jpeg"),
@@ -788,14 +795,20 @@ with tab_editor:
         #   2. describe_for_sketch to produce a plain-text reading of the
         #      photo that the user can later review and edit before
         #      generating the sketch.
-        if ai_ready and has_image:
-            _first_id = images[0].get("id")
+        # Find the first true REFERENCE image — skip captures and AI outputs.
+        _reference_imgs = [
+            i for i in images
+            if "ai_generated" not in (i.get("source") or "")
+            and (i.get("source") or "") != "captured"
+        ]
+        if ai_ready and _reference_imgs:
+            _first_id = _reference_imgs[0].get("id")
             _analyzed_ids = st.session_state.get("_autoanalyzed_ids", set())
             if _first_id and _first_id not in _analyzed_ids:
                 with st.spinner("🔍 AI is reading your photo to pre-fill the form…"):
                     ai_autofill_callback()
                     try:
-                        _first = images[0]
+                        _first = _reference_imgs[0]
                         _desc = describe_for_sketch(
                             _first["data"],
                             _first.get("mime", "image/jpeg"),
@@ -812,11 +825,11 @@ with tab_editor:
                     # regenerate. Saves 25+ seconds and an API call.
                     if firestore_client.is_configured():
                         try:
-                            _ph = firestore_client.compute_photo_hash(images[0]["data"])
+                            _ph = firestore_client.compute_photo_hash(_reference_imgs[0]["data"])
                             _saved = firestore_client.load_approved_sketch(_ph)
                             if _saved and _saved.get("data"):
                                 st.session_state["technical_drawing"] = {
-                                    "id": images[0]["id"] + "_approved",
+                                    "id": _reference_imgs[0]["id"] + "_approved",
                                     "data": _saved["data"],
                                     "mime": _saved.get("mime") or "image/png",
                                     "caption": _saved.get("caption") or "✅ Loaded from your approved version for this photo",
@@ -907,12 +920,15 @@ with tab_editor:
                 with st.expander("🔧 Brand-defaults debug (what the MC lookup did)"):
                     st.json(_bd)
 
-        # Image list with per-image controls
-        if not images:
-            st.info("No images yet. Drop one onto the uploader above.")
+        # Image list with per-image controls.
+        # Skip "captured" photos here — they live in the Quick photo capture
+        # expander below and shouldn't clutter the reference-photo list.
+        _ref_only_images = [i for i in images if (i.get("source") or "") != "captured"]
+        if not _ref_only_images:
+            st.info("No reference images yet. Drop one onto the uploader above.")
         else:
-            st.markdown(f"**{len(images)}** image{'s' if len(images) != 1 else ''}")
-            for idx, img in enumerate(images):
+            st.markdown(f"**{len(_ref_only_images)}** image{'s' if len(_ref_only_images) != 1 else ''}")
+            for idx, img in enumerate(_ref_only_images):
                 cols = st.columns([1, 4, 1, 1, 1])
                 cols[0].image(to_data_url(img), width=110)
                 caption_key = f"_caption_input_{img['id']}"
@@ -941,7 +957,7 @@ with tab_editor:
                     on_click=move_image,
                     args=(img["id"], +1),
                     use_container_width=True,
-                    disabled=(idx == len(images) - 1),
+                    disabled=(idx == len(_ref_only_images) - 1),
                 )
                 cols[4].button(
                     "🗑️",
@@ -951,6 +967,71 @@ with tab_editor:
                     use_container_width=True,
                     help="Remove this image",
                 )
+
+    # === Camera capture — separate workflow, NOT tied to AI analysis ===
+    # Stakeholder ask: a quick-camera widget so customers can capture photos
+    # in-app and keep them with the tech pack for later discussion. No AI
+    # analysis on these — they're for record-keeping only.
+    with st.expander("📸 Quick photo capture (for discussion, not AI)", expanded=False):
+        st.caption(
+            "Take a photo with the device camera. Saved with the tech pack so you can "
+            "come back to it, but **not** sent to AI for analysis. Useful for capturing "
+            "physical samples, swatches, factory details, etc. that you want to discuss "
+            "later but don't want auto-classified."
+        )
+
+        # Versioned key so once a photo is saved, the widget resets clean
+        # instead of holding onto the last shot forever.
+        _cam_version = st.session_state.get("_camera_version", 0)
+        _cam_key = f"_camera_input_{_cam_version}"
+        captured = st.camera_input(
+            "📷 Tap to open camera",
+            key=_cam_key,
+            label_visibility="visible",
+        )
+        if captured is not None:
+            import hashlib as _h
+            _bytes = captured.getvalue()
+            _hash = _h.md5(_bytes).hexdigest()[:12]
+            _processed = st.session_state.get("_processed_captures", set())
+            if _hash not in _processed:
+                from datetime import datetime as _dt
+                _ts = _dt.now().strftime("%Y-%m-%d %H:%M")
+                entry = make_image_entry(
+                    _bytes,
+                    filename=f"capture_{_hash}.jpg",
+                    caption=f"Captured {_ts}",
+                )
+                entry["source"] = "captured"
+                st.session_state["images"] = (st.session_state.get("images") or []) + [entry]
+                _processed.add(_hash)
+                st.session_state["_processed_captures"] = _processed
+                # Bump version so camera_input widget rebuilds clean next render.
+                st.session_state["_camera_version"] = _cam_version + 1
+                st.rerun()
+
+        # Dedicated list of captured photos with delete controls
+        _captures = [i for i in (st.session_state.get("images") or [])
+                     if (i.get("source") or "") == "captured"]
+        if _captures:
+            st.markdown(
+                f"**{len(_captures)} captured photo{'s' if len(_captures) != 1 else ''}** "
+                "(saved with the tech pack)"
+            )
+            for cap_img in _captures:
+                cc = st.columns([2, 4, 1])
+                cc[0].image(to_data_url(cap_img), use_container_width=True)
+                cc[1].markdown(f"**{cap_img.get('caption', '—')}**")
+                cc[1].caption(f"~{approximate_size_kb(cap_img):.0f} KB · id `{cap_img['id']}`")
+                if cc[2].button("🗑️", key=f"_del_cap_{cap_img['id']}",
+                                use_container_width=True,
+                                help="Remove this captured photo"):
+                    st.session_state["images"] = [
+                        i for i in st.session_state["images"] if i["id"] != cap_img["id"]
+                    ]
+                    st.rerun()
+        else:
+            st.caption("_No captured photos yet — tap the camera button above to take one._")
 
     # === Gate: rest of the form only shows once unlocked ===
     if not form_unlocked:
