@@ -95,6 +95,108 @@ st.set_page_config(
 
 
 # =============================================================================
+# MOBILE-FRIENDLY CSS
+# =============================================================================
+# Streamlit's default behavior: columns stay side-by-side at any viewport width,
+# which gets crushed on phones. Tabs overflow off-screen. Buttons too small for
+# touch. This injected CSS only activates at <= 768px — desktop is untouched.
+st.markdown(
+    """
+<style>
+@media (max-width: 768px) {
+    /* Reduce page padding so we don't waste edges on a narrow screen */
+    .main .block-container,
+    section.main > div.block-container,
+    [data-testid="stAppViewContainer"] .block-container {
+        padding: 1rem 0.75rem 4rem !important;
+        max-width: 100% !important;
+    }
+
+    /* Force every column to take full width and stack vertically */
+    [data-testid="stHorizontalBlock"] {
+        flex-wrap: wrap !important;
+        gap: 0.5rem !important;
+    }
+    [data-testid="stHorizontalBlock"] > [data-testid="column"],
+    [data-testid="column"] {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 100% !important;
+    }
+
+    /* EXCEPTION: when a row is just small icon buttons (↑ ↓ 🗑️ etc.),
+       keep them inline so they don't eat 3 vertical rows.
+       Heuristic: a column whose ONLY child is a stButton stays inline. */
+    [data-testid="stHorizontalBlock"]:has([data-testid="column"]:has(> div > .stButton:only-child))
+        [data-testid="column"]:has(> div > .stButton:only-child) {
+        width: auto !important;
+        flex: 0 0 auto !important;
+        min-width: 44px !important;
+    }
+
+    /* Tabs: allow horizontal scroll instead of cramming 5 tabs into 375px */
+    [data-testid="stTabs"] [role="tablist"] {
+        overflow-x: auto !important;
+        flex-wrap: nowrap !important;
+        scrollbar-width: thin;
+    }
+    [data-testid="stTabs"] [role="tab"] {
+        flex: 0 0 auto !important;
+        white-space: nowrap !important;
+    }
+
+    /* Touch-friendly: 44px is the iOS HIG minimum tap target */
+    .stButton > button,
+    .stDownloadButton > button,
+    [data-testid="stFormSubmitButton"] > button {
+        min-height: 44px !important;
+        padding: 0.6rem 1rem !important;
+    }
+
+    /* Inputs: bigger touch area + prevent iOS zoom on focus (font >= 16px) */
+    .stTextInput input,
+    .stTextArea textarea,
+    .stNumberInput input,
+    .stSelectbox [data-baseweb="select"] > div,
+    .stMultiSelect [data-baseweb="select"] > div {
+        font-size: 16px !important;
+        min-height: 44px !important;
+    }
+
+    /* Images: never overflow their container */
+    .stImage img,
+    [data-testid="stImage"] img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Headings: scale down so titles don't dominate the screen */
+    h1 { font-size: 1.5rem !important; }
+    h2 { font-size: 1.25rem !important; }
+    h3 { font-size: 1.1rem !important; }
+
+    /* Sidebar: when expanded on mobile, take full viewport so it's usable */
+    [data-testid="stSidebar"] {
+        min-width: 85vw !important;
+    }
+
+    /* File uploader: stack the label + drop zone */
+    [data-testid="stFileUploader"] section {
+        padding: 1rem !important;
+    }
+
+    /* Metric cards: smaller labels */
+    [data-testid="stMetric"] {
+        padding: 0.5rem !important;
+    }
+}
+</style>
+""",
+    unsafe_allow_html=True,
+)
+
+
+# =============================================================================
 # ACCESS GATE — shared password (Stage 1 of the auth roadmap)
 # =============================================================================
 # Stakeholder ask: "we need to add a login so no one can use it without access".
