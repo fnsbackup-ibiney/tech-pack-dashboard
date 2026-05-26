@@ -116,34 +116,31 @@ st.markdown(
         max-width: 100% !important;
     }
 
-    /* Force every column to take full width and stack vertically */
+    /* Force every column to take full width and stack vertically.
+       We deliberately do NOT carve out an exception for icon-only button
+       rows — a previous version used :has() to keep them inline, but :has()
+       has spotty iOS Safari support and the rule cascaded onto unrelated
+       columns (e.g. the market-pricing card in the editor header), which
+       collapsed them to one-character-wide vertical strips. Stacking
+       everything is uglier on icon rows but predictable. */
     [data-testid="stHorizontalBlock"] {
         flex-wrap: wrap !important;
         gap: 0.5rem !important;
     }
-    [data-testid="stHorizontalBlock"] > [data-testid="column"],
-    [data-testid="column"] {
+    [data-testid="stHorizontalBlock"] > [data-testid="column"] {
         width: 100% !important;
         flex: 1 1 100% !important;
         min-width: 100% !important;
     }
 
-    /* EXCEPTION: when a row is just small icon buttons (↑ ↓ 🗑️ etc.),
-       keep them inline so they don't eat 3 vertical rows.
-       Heuristic: a column whose ONLY child is a stButton stays inline. */
-    [data-testid="stHorizontalBlock"]:has([data-testid="column"]:has(> div > .stButton:only-child))
-        [data-testid="column"]:has(> div > .stButton:only-child) {
-        width: auto !important;
-        flex: 0 0 auto !important;
-        min-width: 44px !important;
-    }
-
     /* Tabs: allow horizontal scroll instead of cramming 5 tabs into 375px */
+    [data-testid="stTabs"] [data-baseweb="tab-list"],
     [data-testid="stTabs"] [role="tablist"] {
         overflow-x: auto !important;
         flex-wrap: nowrap !important;
         scrollbar-width: thin;
     }
+    [data-testid="stTabs"] [data-baseweb="tab"],
     [data-testid="stTabs"] [role="tab"] {
         flex: 0 0 auto !important;
         white-space: nowrap !important;
@@ -179,50 +176,17 @@ st.markdown(
     h2 { font-size: 1.25rem !important; }
     h3 { font-size: 1.1rem !important; }
 
-    /* Sidebar: when open on mobile, float over the content (don't push it).
-       Without these overrides Streamlit docks the sidebar to the left and
-       shrinks the main column, which clips headings on narrow screens. */
-    [data-testid="stSidebar"] {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        height: 100vh !important;
-        width: 88vw !important;
-        min-width: 0 !important;
-        max-width: 360px !important;
-        z-index: 999 !important;
-        box-shadow: 2px 0 12px rgba(0, 0, 0, 0.18) !important;
-    }
-    /* When collapsed, make sure the sidebar takes ZERO width so the main
-       column flows full-width. Streamlit hides it with transform, but we
-       belt-and-braces. */
-    [data-testid="stSidebar"][aria-expanded="false"] {
-        width: 0 !important;
-        min-width: 0 !important;
-        transform: translateX(-100%) !important;
-    }
-    /* Main content always full width on mobile, regardless of sidebar */
-    section.main,
-    [data-testid="stAppViewContainer"] > section:not([data-testid="stSidebar"]) {
-        margin-left: 0 !important;
-        width: 100% !important;
-    }
-    /* The "open sidebar" hamburger / chevron — make it tappable and visible */
-    [data-testid="collapsedControl"],
-    [data-testid="stSidebarCollapsedControl"] {
-        z-index: 1000 !important;
-    }
-
-    /* File uploader: stack the label + drop zone */
-    [data-testid="stFileUploader"] section {
-        padding: 1rem !important;
-    }
-
-    /* Metric cards: smaller labels */
-    [data-testid="stMetric"] {
-        padding: 0.5rem !important;
-    }
+    /* File uploader & metric: compact padding */
+    [data-testid="stFileUploader"] section { padding: 1rem !important; }
+    [data-testid="stMetric"] { padding: 0.5rem !important; }
 }
+
+/* ---- Sidebar: rely on Streamlit's native mobile behavior. ----
+   We previously customized stSidebar with position:fixed + max-width,
+   which fought with Streamlit's own collapse logic and left a narrow
+   slice of sidebar text bleeding into the main content. The
+   `initial_sidebar_state="collapsed"` set in page_config above is now
+   enough to keep it hidden by default; Streamlit handles the rest. */
 </style>
 """,
     unsafe_allow_html=True,
