@@ -220,6 +220,72 @@ def _spec_glossary(data: dict) -> list[str]:
     return out
 
 
+# Common color words we look for in the user-edited description. If any of
+# these appear AS A WHOLE WORD, we treat it as an explicit user request to
+# render the sketch in that color (default is B&W tech-pack convention).
+# Includes EN + a few German colors that might leak in from the describer.
+_COLOR_REQUEST_WORDS = {
+    # Universal / generic
+    "color", "colour", "colored", "coloured", "tint", "tinted",
+    # Yellows
+    "yellow", "gold", "mustard", "lemon", "gelb",
+    # Reds / pinks
+    "red", "pink", "rose", "fuchsia", "magenta", "bordeaux", "burgundy",
+    "coral", "salmon", "rot", "rosa", "altrosa",
+    # Blues
+    "blue", "navy", "indigo", "teal", "turquoise", "petrol", "blau",
+    "marine", "hellblau",
+    # Greens
+    "green", "olive", "khaki", "mint", "grün", "schilf",
+    # Neutrals
+    "white", "black", "grey", "gray", "beige", "cream", "ecru", "ivory",
+    "tan", "taupe", "stone", "kitt", "schwarz", "weiß", "weiss", "grau",
+    # Browns / earth
+    "brown", "chocolate", "tan", "camel", "rust", "terracotta", "braun",
+    # Purples
+    "purple", "violet", "lavender", "lilac", "aubergine", "lila",
+    # Orange
+    "orange", "apricot", "peach",
+}
+
+
+# Intent phrases that signal the user is REQUESTING a specific output color
+# (vs. just describing what the photo shows). Default Vision descriptions
+# often say "this is a cream cardigan" — that's a statement of fact, not a
+# request, so we don't switch to color mode for those. But if the user adds
+# "make it yellow" or "i want it in red" to the description, that's an
+# explicit instruction we should honor.
+_COLOR_INTENT_RE = re.compile(
+    r"\b("
+    r"i\s+want|i'd\s+like|id\s+like|"        # "I want", "I'd like"
+    r"make\s+(it|this|the)|"                  # "make it", "make this"
+    r"render\s+(it|in)|"                      # "render it", "render in"
+    r"should\s+be|must\s+be|"                 # "should be", "must be"
+    r"in\s+(yellow|blue|red|green|black|white|pink|orange|brown|grey|gray|"
+    r"navy|cream|beige|tan|purple|gold|silver|color|colour)|"
+    r"colored|coloured|color:|colour:"
+    r")\b",
+    re.IGNORECASE,
+)
+
+
+def _description_requests_color(desc: str) -> bool:
+    """Did the USER explicitly request a colored output?
+
+    Returns True only when both:
+      - an intent phrase is present (e.g. "i want", "make it", "in red")
+      - AND a color word is present somewhere
+    so Vision's neutral "this is a yellow cardigan" doesn't accidentally
+    flip the sketch to color, while the user's "make it yellow" does.
+    """
+    if not desc:
+        return False
+    if not _COLOR_INTENT_RE.search(desc):
+        return False
+    tokens = set(re.findall(r"[A-Za-zäöüÄÖÜß]+", desc.lower()))
+    return bool(tokens & _COLOR_REQUEST_WORDS)
+
+
 def _collect_spec_lines(data: dict) -> list[str]:
     """Pull out the spec values the user has filled in (visual + construction).
 
@@ -348,20 +414,33 @@ def build_prompt(
         if spec_lines:
             parts.append("Spec:\n" + "\n".join(spec_lines))
 
-    # Hard styling rules — explicit so the image model doesn't add color/model/background.
-    # Note: Pro tends to leak the photo's color into the output ("if the input is yellow,
-    # the drawing comes out yellow"). Hammer this point until it's unambiguous.
-    parts.append(
-        "STYLE — STRICT MONOCHROME REQUIREMENT:\n"
-        "- Output MUST be pure BLACK linework on a WHITE background. No color whatsoever.\n"
-        "- The reference photo's color is for SHAPE and PATTERN reference only — DO NOT "
-        "reproduce its color in the sketch, even faintly. Even if the input is bright yellow / "
-        "red / blue, the output is monochrome black-and-white.\n"
-        "- No color fills, no shading, no gradients, no tinting, no perspective.\n"
-        "- No model, no human body, no background details, no props.\n"
-        "- Clean vector-style technical illustration suitable for a manufacturing tech pack.\n"
-        "- Label 'FRONT' below the front view and 'BACK' below the back view."
-    )
+    # Hard styling rules — monochrome by default (industry convention for
+    # tech pack flats). But if the user has explicitly asked for color in
+    # the description (e.g. "make it yellow", "in cream", "i want this red"),
+    # we soften the rule to honor that request. Default stays B&W so factories
+    # get the standard format unless someone deliberately opts into color.
+    if _description_requests_color(photo_description):
+        parts.append(
+            "STYLE — COLORED FLAT (user requested color in the description):\n"
+            "- Output is a flat technical illustration with the color the user "
+            "specified in the description. Use a light, flat color wash on the "
+            "garment with crisp black linework on top.\n"
+            "- No shading, no gradient, no 3D rendering — just flat color fill + line art.\n"
+            "- No model, no human body, no background details, no props.\n"
+            "- Label 'FRONT' below the front view and 'BACK' below the back view."
+        )
+    else:
+        parts.append(
+            "STYLE — STRICT MONOCHROME REQUIREMENT:\n"
+            "- Output MUST be pure BLACK linework on a WHITE background. No color whatsoever.\n"
+            "- The reference photo's color is for SHAPE and PATTERN reference only — DO NOT "
+            "reproduce its color in the sketch, even faintly. Even if the input is bright yellow / "
+            "red / blue, the output is monochrome black-and-white.\n"
+            "- No color fills, no shading, no gradients, no tinting, no perspective.\n"
+            "- No model, no human body, no background details, no props.\n"
+            "- Clean vector-style technical illustration suitable for a manufacturing tech pack.\n"
+            "- Label 'FRONT' below the front view and 'BACK' below the back view."
+        )
 
     return "\n\n".join(p for p in parts if p and p.strip())
 
