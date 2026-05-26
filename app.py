@@ -632,8 +632,8 @@ with st.sidebar:
 # =============================================================================
 # MAIN TABS
 # =============================================================================
-tab_editor, tab_preview, tab_export, tab_history = st.tabs(
-    ["📝 Editor", "👀 Preview", "📥 Export", "🗂️ History"]
+tab_editor, tab_preview, tab_export, tab_history, tab_catalog = st.tabs(
+    ["📝 Editor", "👀 Preview", "📥 Export", "🗂️ History", "📚 Browse Catalog"]
 )
 
 
@@ -1935,3 +1935,131 @@ with tab_history:
                 st.success(f"✅ Loaded record `{payload[:8]}…` — switch to the **📝 Editor** tab to see it.")
             else:
                 st.error(f"❌ Load failed: {payload}")
+
+
+# -----------------------------------------------------------------------------
+# TAB 5: BROWSE CATALOG
+# -----------------------------------------------------------------------------
+# Stakeholder ask: "put their whole collection on the website inside" +
+# "filter by general style they should be able to grouped together".
+# We show the full 564-SKU Marie Lund catalog with rich filters so customers
+# can browse for inspiration / cross-reference without leaving the app.
+
+with tab_catalog:
+    if not market_pricing.is_available():
+        st.warning("Catalog data isn't loaded. Check that data/marie_lund_pricing.json exists.")
+    else:
+        st.header("📚 Browse Marie Lund collection")
+        st.caption(
+            "All scraped SKUs from PNC's Marie Lund knitwear and shirts-tops categories. "
+            "Filter to narrow down by style, price, material, color family, or pattern keyword. "
+            "Click 🔗 on any item to open its PNC product page in a new tab."
+        )
+
+        _all_items = market_pricing.load_all_items()
+        _all_cats = market_pricing.get_all_categories()
+        _all_color_fams = market_pricing.get_all_color_families()
+
+        # Filter row
+        f1, f2, f3 = st.columns(3)
+        _cat_filter = f1.multiselect(
+            "Category", _all_cats, default=[],
+            placeholder="All categories", key="_cat_cat_filter",
+        )
+        _color_filter = f2.multiselect(
+            "Color family", _all_color_fams, default=[],
+            placeholder="All colors", key="_cat_color_filter",
+        )
+        _material_filter = f3.multiselect(
+            "Material contains", market_pricing.FILTER_MATERIALS, default=[],
+            placeholder="Any material", key="_cat_material_filter",
+        )
+        f4, f5 = st.columns([2, 3])
+        _price_filter = f4.slider(
+            "Price (USD)", 0, 200, (0, 200), step=5,
+            key="_cat_price_filter",
+        )
+        _pattern_filter = f5.text_input(
+            "Pattern / keyword",
+            placeholder="e.g. stripe, cable, pointelle, V-neck — searches name + description",
+            key="_cat_pattern_filter",
+        )
+
+        # Apply filters
+        _filtered = market_pricing.filter_catalog(
+            _all_items,
+            categories=_cat_filter or None,
+            price_min=_price_filter[0] if _price_filter[0] > 0 else None,
+            price_max=_price_filter[1] if _price_filter[1] < 200 else None,
+            materials=_material_filter or None,
+            color_families=_color_filter or None,
+            pattern_keyword=_pattern_filter or None,
+        )
+
+        # Result count + clear button
+        _stat_col, _clear_col = st.columns([4, 1])
+        _stat_col.markdown(
+            f"**Showing {len(_filtered)} of {len(_all_items)} items**"
+            + (" — adjust filters above to see different cuts." if len(_filtered) < len(_all_items)
+               else "")
+        )
+        if (_cat_filter or _color_filter or _material_filter
+                or _pattern_filter or _price_filter != (0, 200)):
+            if _clear_col.button("Clear filters", use_container_width=True, key="_cat_clear"):
+                for k in ("_cat_cat_filter", "_cat_color_filter",
+                          "_cat_material_filter", "_cat_price_filter", "_cat_pattern_filter"):
+                    st.session_state.pop(k, None)
+                st.session_state.pop("_catalog_page", None)
+                st.rerun()
+
+        st.divider()
+
+        if not _filtered:
+            st.info("No items match the active filters. Try loosening them above.")
+        else:
+            # Paginate — show 24 at a time. Use a "Load more" pattern instead of
+            # page numbers (simpler for users, simpler for us).
+            PAGE_SIZE = 24
+            _catalog_page = st.session_state.get("_catalog_page", 1)
+            _shown = _filtered[: _catalog_page * PAGE_SIZE]
+
+            # Grid: 4 columns × N rows
+            COLS = 4
+            for row_start in range(0, len(_shown), COLS):
+                row_items = _shown[row_start: row_start + COLS]
+                grid_cols = st.columns(COLS)
+                for i, item in enumerate(row_items):
+                    with grid_cols[i]:
+                        if item.get("image_url"):
+                            try:
+                                st.image(item["image_url"], use_container_width=True)
+                            except Exception:
+                                pass
+                        # Name (trim long ones to keep the grid even)
+                        _name = item.get("name") or "Untitled"
+                        if len(_name) > 50:
+                            _name = _name[:47] + "…"
+                        st.markdown(f"**{_name}**")
+                        # Metadata line
+                        _meta = []
+                        if item.get("category"):
+                            _meta.append(item["category"])
+                        if item.get("color"):
+                            _meta.append(item["color"])
+                        st.caption(" · ".join(_meta) if _meta else "—")
+                        st.caption(f"**${item['price_usd']:.2f}**")
+                        if item.get("url"):
+                            st.markdown(f"[🔗 View on PNC]({item['url']})")
+
+            # Load more
+            if len(_shown) < len(_filtered):
+                _remaining = len(_filtered) - len(_shown)
+                st.divider()
+                if st.button(
+                    f"Load more ({_remaining} remaining)",
+                    use_container_width=True,
+                    type="primary",
+                    key="_catalog_load_more",
+                ):
+                    st.session_state["_catalog_page"] = _catalog_page + 1
+                    st.rerun()

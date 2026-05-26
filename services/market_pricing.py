@@ -574,6 +574,112 @@ _MATERIAL_DE_TOKENS: dict[str, list[str]] = {
 FILTER_MATERIALS = list(_MATERIAL_DE_TOKENS.keys())
 
 
+# Color families — broader buckets that group similar colors so users can
+# filter by "show me all blues" instead of having to know whether a specific
+# item is labelled "marine" or "navy" or "hellblau".
+_COLOR_FAMILY_PATTERNS = [
+    ("Cream / White",  r"ecru|cream|natur|wei|off-?white|white|nude"),
+    ("Beige / Sand",   r"beige|sand|stone|taupe|kitt|nougat"),
+    ("Brown",          r"braun|brown|cognac|mocha|kaffee|schoko|schlamm"),
+    ("Black",          r"schwarz|black|anthrazit|charcoal"),
+    ("Grey",           r"grau|grey|gray|silber|melange"),
+    ("Blue",           r"blau|blue|navy|denim|jeans|petrol|marine|indigo|royal"),
+    ("Green",          r"grün|green|oliv|moss|mint|khaki|jade|schilf|lind"),
+    ("Yellow / Gold",  r"gelb|yellow|gold|senf|mustard|ocker|zitrone|mais"),
+    ("Pink / Rose",    r"rosa|pink|rose|peach|coral|altrosa"),
+    ("Red / Burgundy", r"rot|red|bordeaux|wein|cherry|kirsch|burgundy|fuchsia"),
+    ("Purple",         r"lila|violet|purple|aubergine|flieder|lavendel"),
+    ("Orange",         r"orange|apricot|terracotta|rost|rust"),
+    ("Turquoise",      r"türkis|turquoise|teal|aqua"),
+]
+
+
+def color_family_for(color_label: str) -> str:
+    """Map a raw color label (German or English) to a broader family bucket
+    for the catalog browse view. Returns "Other" if no pattern matches."""
+    if not color_label:
+        return "Other"
+    lower = color_label.lower()
+    for family, pattern in _COLOR_FAMILY_PATTERNS:
+        if re.search(pattern, lower):
+            return family
+    return "Other"
+
+
+# Catalog-browse helpers (used by the Browse Catalog tab).
+# These return the FULL dataset for the catalog view — distinct from
+# find_similar_item which only returns one match.
+
+def load_all_items() -> list[dict]:
+    """Return every SKU in the dataset (with USD prices computed)."""
+    items = _load().get("items", [])
+    out = []
+    for it in items:
+        out.append({**it, "price_usd": (it.get("price_eur") or 0) * EUR_TO_USD})
+    return out
+
+
+def get_all_categories() -> list[str]:
+    """Distinct sub-category labels, sorted by frequency descending."""
+    items = _load().get("items", [])
+    counts: dict[str, int] = {}
+    for it in items:
+        c = it.get("category") or ""
+        if c:
+            counts[c] = counts.get(c, 0) + 1
+    return [c for c, _ in sorted(counts.items(), key=lambda kv: kv[1], reverse=True)]
+
+
+def get_all_color_families() -> list[str]:
+    """Distinct color families present in the catalog, sorted by frequency."""
+    items = _load().get("items", [])
+    counts: dict[str, int] = {}
+    for it in items:
+        fam = color_family_for(it.get("color") or "")
+        if fam:
+            counts[fam] = counts.get(fam, 0) + 1
+    return [c for c, _ in sorted(counts.items(), key=lambda kv: kv[1], reverse=True)]
+
+
+def filter_catalog(
+    items: list[dict],
+    categories: list[str] | None = None,
+    price_min: float | None = None,
+    price_max: float | None = None,
+    materials: list[str] | None = None,
+    color_families: list[str] | None = None,
+    pattern_keyword: str | None = None,
+) -> list[dict]:
+    """Apply all catalog filters to an item list. Empty/None filters are skipped.
+
+    pattern_keyword is matched against the item's name AND description
+    (case-insensitive substring), so a user typing "stripe" finds anything
+    that mentions stripes regardless of where.
+    """
+    out = items
+    if categories:
+        cset = {c.lower() for c in categories}
+        out = [it for it in out if (it.get("category") or "").lower() in cset]
+    if price_min is not None:
+        out = [it for it in out if (it.get("price_usd") or 0) >= price_min]
+    if price_max is not None:
+        out = [it for it in out if (it.get("price_usd") or 0) <= price_max]
+    if materials:
+        out = [it for it in out if all(_item_has_material(it, m) for m in materials)]
+    if color_families:
+        fset = set(color_families)
+        out = [it for it in out if color_family_for(it.get("color") or "") in fset]
+    if pattern_keyword:
+        kw = pattern_keyword.lower().strip()
+        if kw:
+            out = [
+                it for it in out
+                if kw in (it.get("name") or "").lower()
+                or kw in (it.get("description") or "").lower()
+            ]
+    return out
+
+
 def _item_has_material(item: dict, english_material: str) -> bool:
     """True iff the item's composition mentions the given fibre.
 
