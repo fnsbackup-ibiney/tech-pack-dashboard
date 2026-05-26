@@ -582,6 +582,25 @@ with tab_editor:
                 "click '↩ Undo' in the sidebar to restore if needed."
             ),
         )
+
+        # Reference photo preview — keeps the garment the user is spec'ing
+        # in view while they scroll through the form. Helps catch mistakes
+        # like "wait, this isn't the right photo" without scrolling back to
+        # the upload section. Skip AI-generated images here — they have
+        # their own dedicated display in the Technical Drawing area.
+        _ref_img = next(
+            (i for i in (st.session_state.get("images") or [])
+             if "ai_generated" not in (i.get("source") or "")), None
+        )
+        if _ref_img:
+            _img_col, _gap_col = st.columns([2, 3])
+            with _img_col:
+                st.caption("📷 Your reference photo")
+                st.image(to_data_url(_ref_img), use_container_width=True)
+                _ai_drawing = st.session_state.get("technical_drawing")
+                if _ai_drawing and _ai_drawing.get("data"):
+                    st.caption("🎨 Latest AI sketch")
+                    st.image(to_data_url(_ai_drawing), use_container_width=True)
     with _mkt_col:
         if market_pricing.is_available():
             # Pull what we need for matching. Category and color drive the
