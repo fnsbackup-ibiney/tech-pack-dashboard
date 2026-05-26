@@ -108,11 +108,14 @@ st.markdown(
     """
 <style>
 @media (max-width: 768px) {
-    /* Reduce page padding so we don't waste edges on a narrow screen */
+    /* Reduce SIDE padding to use the narrow screen width, but keep enough
+       TOP padding so the tabs row clears the Streamlit Cloud embed toolbar
+       (the Fork / GitHub / ⋯ bar at the top of *.streamlit.app links).
+       1rem was too tight — the toolbar was overlapping the tab labels. */
     .main .block-container,
     section.main > div.block-container,
     [data-testid="stAppViewContainer"] .block-container {
-        padding: 1rem 0.75rem 4rem !important;
+        padding: 4.5rem 0.75rem 4rem !important;
         max-width: 100% !important;
     }
 
