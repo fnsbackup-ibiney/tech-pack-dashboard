@@ -13,8 +13,10 @@ Deploy:
 """
 
 import base64
+import hashlib
+import hmac
 import json
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 
 import pandas as pd
 import streamlit as st
@@ -61,7 +63,6 @@ from exporters.pdf_exporter import generate_pdf
 from sample_data.cardigan_sample import CARDIGAN_SAMPLE
 from services import firestore_client, market_pricing, photo_analyzer
 from services.ai_drawing import (
-    build_prompt as build_drawing_prompt,
     generate_drawing,
     is_demo_mode as ai_demo_mode,
     _describe_for_sketch as describe_for_sketch,
@@ -235,6 +236,10 @@ def _password_required() -> bool:
         return False
 
 
+_PW_MAX_ATTEMPTS = 5       # wrong guesses before lockout
+_PW_LOCKOUT_SECS = 300    # 5-minute cooldown
+
+
 def _check_password() -> bool:
     """Return True iff the user has entered the right password this session.
 
@@ -242,6 +247,11 @@ def _check_password() -> bool:
     so the comparison is constant-time (no timing-attack leak on which char
     diverged). The password itself is never stored in session_state — only
     a boolean flag.
+
+    Rate-limiting: after ``_PW_MAX_ATTEMPTS`` wrong guesses the form is locked
+    for ``_PW_LOCKOUT_SECS`` seconds. Counters live in session_state, so they
+    reset when the user closes the tab — good enough for the threat model here
+    (casual guessing), without needing a backend.
     """
     if not _password_required():
         return True  # No password set → open access
@@ -253,28 +263,61 @@ def _check_password() -> bool:
     with mid:
         st.markdown("# 🧶 Tech Pack Dashboard")
         st.caption("Sign in with the access password to continue.")
+
+        # Check whether we're currently locked out
+        _lockout_until = st.session_state.get("_pw_lockout_until", 0.0)
+        _now = datetime.now(timezone.utc).timestamp()
+        _locked = _now < _lockout_until
+
         with st.form("_login_form", clear_on_submit=False):
             pw = st.text_input(
                 "Password",
                 type="password",
                 key="_pw_input",
                 placeholder="Enter access password",
+                disabled=_locked,
             )
-            submitted = st.form_submit_button("Sign in", type="primary", use_container_width=True)
-        if submitted:
-            import hmac
+            submitted = st.form_submit_button(
+                "Sign in", type="primary", use_container_width=True, disabled=_locked
+            )
+
+        if _locked:
+            _remaining = int(_lockout_until - _now)
+            st.error(
+                f"Too many failed attempts. Try again in {_remaining} second{'s' if _remaining != 1 else ''}."
+            )
+        elif submitted:
             expected = str(st.secrets.get("app_password", ""))
             if pw and hmac.compare_digest(pw, expected):
                 st.session_state["_authenticated"] = True
-                # Drop the typed password — no need to keep it around
+                # Drop the typed password and reset attempt counters
                 st.session_state.pop("_pw_input", None)
+                st.session_state.pop("_pw_attempts", None)
+                st.session_state.pop("_pw_lockout_until", None)
                 st.rerun()
             else:
                 # Drop the typed password on failure too. Otherwise it lingers
                 # in session_state (and visibly in the input field) — bad if
                 # someone is screen-sharing or handing the laptop over.
                 st.session_state.pop("_pw_input", None)
-                st.error("Incorrect password.")
+                _attempts = st.session_state.get("_pw_attempts", 0) + 1
+                st.session_state["_pw_attempts"] = _attempts
+                if _attempts >= _PW_MAX_ATTEMPTS:
+                    st.session_state["_pw_lockout_until"] = (
+                        datetime.now(timezone.utc).timestamp() + _PW_LOCKOUT_SECS
+                    )
+                    st.session_state.pop("_pw_attempts", None)
+                    st.error(
+                        f"Too many failed attempts. "
+                        f"Locked for {_PW_LOCKOUT_SECS // 60} minutes."
+                    )
+                else:
+                    _left = _PW_MAX_ATTEMPTS - _attempts
+                    st.error(
+                        f"Incorrect password. "
+                        f"{_left} attempt{'s' if _left != 1 else ''} remaining."
+                    )
+
         st.caption(
             "_If you don't have the password, contact the dashboard owner. "
             "Single sign-on (Google) will replace this gate in the next phase._"
@@ -472,6 +515,10 @@ def delete_image(img_id: str):
     st.session_state["images"] = [
         i for i in st.session_state["images"] if i["id"] != img_id
     ]
+    # Clean up the stale caption widget key for this image so it doesn't
+    # linger in session_state and potentially confuse the next image that
+    # happens to get the same short ID.
+    st.session_state.pop(f"_caption_input_{img_id}", None)
 
 
 def move_image(img_id: str, direction: int):
@@ -653,7 +700,7 @@ def collect_data() -> dict:
     if isinstance(data.get("delivery_date"), (date, datetime)):
         data["delivery_date"] = data["delivery_date"].isoformat()
 
-    data["_exported_at"] = datetime.utcnow().isoformat() + "Z"
+    data["_exported_at"] = datetime.now(timezone.utc).isoformat()
     return data
 
 
@@ -882,11 +929,25 @@ with tab_editor:
                 "materials": _materials_filter or None,
             }
 
+            # Pull the first user-uploaded photo now so we can include a hash
+            # of it in the cache key. Without this, uploading a different
+            # photo with the same form fields returns the stale vision result.
+            _first_user_image = next(
+                (i for i in (st.session_state.get("images") or [])
+                 if "ai_generated" not in (i.get("source") or "")), None
+            )
+            _photo_hash = (
+                hashlib.md5(_first_user_image["data"].encode()[:2000]).hexdigest()[:8]
+                if _first_user_image else ""
+            )
+
             # Reuse last vision result if user already paid for it this session
-            # AND the form snapshot hasn't changed. Hash via JSON for stability.
-            # Include the filter dict so applying a different filter forces
-            # a fresh match instead of returning the stale vision pick.
-            _snapshot_key = json.dumps({**_form_snapshot, "_filters": _filters}, sort_keys=True)
+            # AND the form snapshot (fields + filters + photo) hasn't changed.
+            # Hash via JSON for stability.
+            _snapshot_key = json.dumps(
+                {**_form_snapshot, "_filters": _filters, "_photo": _photo_hash},
+                sort_keys=True,
+            )
             _vision_cache = st.session_state.get("_market_vision_cache", {})
             _vision_match = _vision_cache.get(_snapshot_key)
 
@@ -924,10 +985,7 @@ with tab_editor:
 
                 # Vision-refine button — only show if not already refined for
                 # this snapshot AND there's a photo + category to work with.
-                _first_user_image = next(
-                    (i for i in (st.session_state.get("images") or [])
-                     if "ai_generated" not in (i.get("source") or "")), None
-                )
+                # (_first_user_image was already computed above for the cache key.)
                 _can_refine = (
                     _form_snapshot["garment_sub_category"]
                     and _first_user_image
@@ -1929,13 +1987,24 @@ with tab_export:
     style_id = "".join(c if (c.isalnum() or c in "-_") else "_" for c in _raw_style_id) or "tech_pack"
     timestamp = datetime.now().strftime("%Y%m%d")
 
+    # Cache key for the export output — regenerate only when form data changes.
+    # Without this, switching to the Export tab always rerenders the whole page
+    # and calls generate_pdf() / generate_docx() even if nothing changed.
+    _export_key = hashlib.md5(
+        json.dumps(data, sort_keys=True, ensure_ascii=False, default=str).encode()
+    ).hexdigest()
+
     col_pdf, col_docx, col_json = st.columns(3)
 
     with col_pdf:
         st.subheader("📄 PDF")
         st.caption("Best for sharing externally — print-ready, fixed layout.")
         try:
-            pdf_bytes = generate_pdf(data)
+            if st.session_state.get("_pdf_cache_key") != _export_key:
+                _fresh_pdf = generate_pdf(data)
+                st.session_state["_pdf_cache_key"] = _export_key
+                st.session_state["_pdf_cache_bytes"] = _fresh_pdf
+            pdf_bytes = st.session_state["_pdf_cache_bytes"]
             st.download_button(
                 label="Download PDF",
                 data=pdf_bytes,
@@ -1950,7 +2019,11 @@ with tab_export:
         st.subheader("📝 Word")
         st.caption("Editable — drop into your existing tech pack template.")
         try:
-            docx_bytes = generate_docx(data)
+            if st.session_state.get("_docx_cache_key") != _export_key:
+                _fresh_docx = generate_docx(data)
+                st.session_state["_docx_cache_key"] = _export_key
+                st.session_state["_docx_cache_bytes"] = _fresh_docx
+            docx_bytes = st.session_state["_docx_cache_bytes"]
             st.download_button(
                 label="Download Word",
                 data=docx_bytes,
@@ -2151,6 +2224,20 @@ with tab_catalog:
             placeholder="e.g. stripe, cable, pointelle, V-neck — searches name + description",
             key="_cat_pattern_filter",
         )
+
+        # Detect filter changes so we can reset pagination automatically.
+        # Without this, a user on page 3 changes a filter and still sees
+        # "page 3" of the new (possibly shorter) result set — confusing.
+        _filter_fp = json.dumps({
+            "cat": sorted(_cat_filter),
+            "color": sorted(_color_filter),
+            "material": sorted(_material_filter),
+            "price": list(_price_filter),
+            "pattern": _pattern_filter,
+        }, sort_keys=True)
+        if st.session_state.get("_catalog_filter_fp") != _filter_fp:
+            st.session_state["_catalog_filter_fp"] = _filter_fp
+            st.session_state.pop("_catalog_page", None)
 
         # Apply filters
         _filtered = market_pricing.filter_catalog(

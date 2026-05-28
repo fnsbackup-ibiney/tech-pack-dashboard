@@ -27,6 +27,7 @@ downloaded service account JSON pasted in.
 from __future__ import annotations
 
 import hashlib
+import json
 from datetime import datetime
 from typing import Any
 
@@ -96,6 +97,8 @@ def save_tech_pack(data: dict, doc_id: str | None = None) -> str:
     """Save a tech pack. Creates a new doc if ``doc_id`` is None, otherwise updates.
 
     Returns the document id (existing or newly created).
+    Raises ValueError if the payload would exceed Firestore's 1 MB limit
+    (images are the most common cause — user should remove one or more photos).
     """
     client = _get_client()
     payload = {
@@ -106,6 +109,16 @@ def save_tech_pack(data: dict, doc_id: str | None = None) -> str:
         "data": _sanitize_for_firestore(data),
         "updated_at": firestore.SERVER_TIMESTAMP,
     }
+
+    # Guard: Firestore documents are hard-capped at 1 MB. We warn at 900 KB
+    # so the error message reaches the user before the write is rejected.
+    _payload_size = len(json.dumps(payload, default=str).encode())
+    if _payload_size > 900_000:
+        raise ValueError(
+            f"Tech pack is too large to save ({_payload_size // 1024} KB — limit is ~900 KB). "
+            "Remove one or more reference photos and try again."
+        )
+
     if doc_id:
         client.collection(COLLECTION).document(doc_id).set(payload, merge=True)
         return doc_id
