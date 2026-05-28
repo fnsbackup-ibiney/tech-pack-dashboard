@@ -15,6 +15,13 @@ from io import BytesIO
 
 from PIL import Image, ImageOps
 
+# Cap PIL's decompression-bomb tolerance. Without this, a small (KB-scale)
+# but cleverly crafted PNG can decode to a 50000x50000-pixel image and OOM
+# the whole Streamlit process. 50 megapixels is ~20x what any phone camera
+# produces (modern phones top out around 50MP raw / ~12MP JPEG) so legitimate
+# uploads aren't affected. PIL raises Image.DecompressionBombError above this.
+Image.MAX_IMAGE_PIXELS = 50_000_000
+
 # Long-edge limit for stored images. 800 keeps each one well under 200 KB
 # even for busy photos, leaving plenty of headroom inside a Firestore doc.
 MAX_DIM = 800

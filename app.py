@@ -270,6 +270,10 @@ def _check_password() -> bool:
                 st.session_state.pop("_pw_input", None)
                 st.rerun()
             else:
+                # Drop the typed password on failure too. Otherwise it lingers
+                # in session_state (and visibly in the input field) — bad if
+                # someone is screen-sharing or handing the laptop over.
+                st.session_state.pop("_pw_input", None)
                 st.error("Incorrect password.")
         st.caption(
             "_If you don't have the password, contact the dashboard owner. "
@@ -1744,7 +1748,10 @@ with tab_editor:
 # TAB 2: PREVIEW
 # -----------------------------------------------------------------------------
 with tab_preview:
-    is_knitwear = st.session_state["product_type"].startswith("Knitwear")
+    # Defensive .get() with PRODUCT_TYPES[0] fallback — old packs loaded from
+    # Firestore that pre-date product_type can otherwise KeyError here and
+    # crash the whole app on tab render.
+    is_knitwear = st.session_state.get("product_type", PRODUCT_TYPES[0]).startswith("Knitwear")
     data = collect_data()
 
     st.title("TECH PACK")
@@ -1879,7 +1886,12 @@ with tab_export:
 
     data = collect_data()
 
-    style_id = data.get("style_number") or "tech_pack"
+    # Sanitise the style number before it becomes part of a download filename:
+    # values like "KW/SS26/001" would otherwise break the download (Windows
+    # rejects slashes, browsers re-interpret them as paths). Replace anything
+    # that isn't a letter, digit, dash, or underscore with "_".
+    _raw_style_id = data.get("style_number") or "tech_pack"
+    style_id = "".join(c if (c.isalnum() or c in "-_") else "_" for c in _raw_style_id) or "tech_pack"
     timestamp = datetime.now().strftime("%Y%m%d")
 
     col_pdf, col_docx, col_json = st.columns(3)

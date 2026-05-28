@@ -913,8 +913,10 @@ def find_similar_item_vision(
         }
 
     except Exception:
-        # Any vision failure → graceful text fallback
-        result = find_similar_item(form_data)
+        # Any vision failure → graceful text fallback.
+        # Pass filters through so we don't silently suggest items the user
+        # has explicitly filtered out (matches the docstring contract above).
+        result = find_similar_item(form_data, filters=filters)
         if result is not None:
             result["match_reason"] = result.get("match_reason", "") + " (AI Vision failed, fell back to text match)"
         return result
