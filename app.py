@@ -326,7 +326,7 @@ def init_state():
     if "initialized" not in st.session_state:
         if LOAD_SAMPLE_ON_FIRST_VISIT:
             for key, value in CARDIGAN_SAMPLE.items():
-                if key not in WIDGET_ONLY_KEYS:
+                if not _is_widget_key(key):
                     st.session_state[key] = value
             st.session_state["_form_unlocked"] = True
         else:
@@ -334,25 +334,66 @@ def init_state():
         st.session_state["initialized"] = True
 
 
-# Keys we must NOT touch via session_state — Streamlit forbids it for
-# some widgets (e.g. data_editor, button, file_uploader, form_submit_button).
-# Touching them throws StreamlitValueAssignmentNotAllowedError.
-# Widgets whose state Streamlit refuses to let us assign. We can `del` them
-# but Streamlit also internally caches their state, so for file_uploader in
-# particular `del` alone doesn't fully clear the visible filename — see the
-# uploader_version trick below.
-WIDGET_ONLY_KEYS = {"measurements_editor", "_image_uploader"}
-# Counter that bumps on every reset_to_blank. We compose the file_uploader's
-# key as f"_image_uploader_{version}" so a reset gives the widget a brand
-# new key, forcing Streamlit to rebuild it empty. The version key itself is
-# protected from being cleared by the reset loop.
-PROTECTED_KEYS = {"initialized", "_snapshot", "_uploader_version", "_measurements_version"} | WIDGET_ONLY_KEYS
+# Bookkeeping keys we never wipe on reset / restore / undo. They drive
+# widget-versioning and the snapshot/undo mechanism itself.
+PROTECTED_KEYS = {
+    "initialized",
+    "_snapshot",
+    "_uploader_version",
+    "_measurements_version",
+}
+
+# Prefixes of Streamlit widget-state keys. The actual keys are versioned —
+# e.g. "measurements_editor_3" or "_image_uploader_2" — so we can't use a
+# plain set-membership check; use _is_widget_key() instead. Streamlit allows
+# `del` on these keys but NOT direct assignment (throws
+# StreamlitValueAssignmentNotAllowedError), so callbacks that restore from
+# saved data must skip them entirely.
+WIDGET_KEY_PREFIXES = ("measurements_editor", "_image_uploader")
+
+
+def _is_widget_key(k: str) -> bool:
+    """True if k is one of Streamlit's versioned widget-state keys.
+
+    Matches both the bare prefix (defensive) and the versioned form, e.g.
+    both "_image_uploader" and "_image_uploader_3" return True.
+    """
+    return any(k == p or k.startswith(p + "_") for p in WIDGET_KEY_PREFIXES)
+
+
+def _is_clearable(k: str) -> bool:
+    """True if k should be wiped during reset/restore.
+
+    Everything except bookkeeping — versioned widget keys included, because
+    we want resets to clean the widget state too (the version bump after the
+    wipe forces a fresh widget on next render).
+    """
+    return k not in PROTECTED_KEYS
+
+
+def _is_restorable_userdata(k: str) -> bool:
+    """True if k is user-facing data safe to write back via session_state.
+
+    Excludes bookkeeping, widget-state keys, and anything starting with `_`
+    (which we treat as internal). Used when restoring from a snapshot or
+    from a saved record loaded out of Firestore.
+    """
+    return (
+        k not in PROTECTED_KEYS
+        and not _is_widget_key(k)
+        and not k.startswith("_")
+    )
 
 
 def _snapshot():
-    """Save the current state so the user can Undo later."""
+    """Save the current state so the user can Undo later.
+
+    Only user-facing data is snapshotted — bookkeeping and widget state
+    are left out, both to keep the snapshot small and to avoid trying to
+    assign back to widget keys on undo (which Streamlit forbids).
+    """
     st.session_state["_snapshot"] = {
-        k: v for k, v in st.session_state.items() if k not in PROTECTED_KEYS
+        k: v for k, v in st.session_state.items() if _is_restorable_userdata(k)
     }
 
 
@@ -363,31 +404,18 @@ def reset_to_blank():
     Also re-locks the form so the user sees the "upload a photo first" prompt.
     """
     _snapshot()
-    for k in [k for k in st.session_state.keys() if k not in PROTECTED_KEYS]:
+    for k in [k for k in st.session_state.keys() if _is_clearable(k)]:
         del st.session_state[k]
-    # Bump the uploader version so the file_uploader gets a NEW key on the
-    # next render. Streamlit caches widget state internally and `del` on the
-    # widget key alone doesn't fully clear the visible filename — but giving
-    # the widget a different key forces a clean rebuild.
+    # Bump widget versions so file_uploader and data_editor each get a NEW
+    # key on the next render. Streamlit caches widget state internally and
+    # `del` on the old key alone doesn't fully clear the visible filename /
+    # editor contents — but a fresh key forces a clean rebuild.
     st.session_state["_uploader_version"] = (
         st.session_state.get("_uploader_version", 0) + 1
     )
-    # Also bump the measurements-editor version so its data_editor rebuilds
-    # from the cleared session_state["measurements"] (= empty dict).
     st.session_state["_measurements_version"] = (
         st.session_state.get("_measurements_version", 0) + 1
     )
-    # Also try to delete the OLD widget keys (belt-and-suspenders — harmless
-    # even if they're already gone).
-    for v in range(st.session_state["_uploader_version"]):
-        try:
-            del st.session_state[f"_image_uploader_{v}"]
-        except KeyError:
-            pass
-    try:
-        del st.session_state["measurements_editor"]
-    except KeyError:
-        pass
     st.session_state["_form_unlocked"] = False
     st.session_state["_just_reset"] = True
 
@@ -400,7 +428,7 @@ def load_sample():
     """
     _snapshot()
     for key, value in CARDIGAN_SAMPLE.items():
-        if key not in WIDGET_ONLY_KEYS:
+        if not _is_widget_key(key):
             st.session_state[key] = value
     st.session_state["_form_unlocked"] = True
 
@@ -410,12 +438,13 @@ def undo():
     snapshot = st.session_state.get("_snapshot")
     if not snapshot:
         return
-    # Clear current state (except protected keys)
-    for k in [k for k in st.session_state.keys() if k not in PROTECTED_KEYS]:
+    # Clear current state (except bookkeeping)
+    for k in [k for k in st.session_state.keys() if _is_clearable(k)]:
         del st.session_state[k]
-    # Restore from snapshot (skip widget-only keys)
+    # Restore from snapshot. The snapshot was already filtered to user-data
+    # only, but we re-check defensively in case anyone hand-edits it.
     for k, v in snapshot.items():
-        if k not in WIDGET_ONLY_KEYS:
+        if _is_restorable_userdata(k):
             st.session_state[k] = v
     # Remove the snapshot itself (single-level undo)
     del st.session_state["_snapshot"]
@@ -476,12 +505,13 @@ def restore_from_dict(loaded: dict):
     Unlocks the form because loaded records are already populated.
     """
     _snapshot()
-    # Clear current state
-    for k in [k for k in st.session_state.keys() if k not in PROTECTED_KEYS]:
+    # Clear current state (except bookkeeping)
+    for k in [k for k in st.session_state.keys() if _is_clearable(k)]:
         del st.session_state[k]
-    # Apply the loaded values
+    # Apply the loaded values, skipping anything we shouldn't write back
+    # (widget keys, internal underscores)
     for k, v in loaded.items():
-        if k in WIDGET_ONLY_KEYS or k.startswith("_"):
+        if _is_widget_key(k) or k.startswith("_"):
             continue
         # delivery_date comes back as ISO string — try to parse back to date
         if k == "delivery_date" and isinstance(v, str):
@@ -1706,17 +1736,22 @@ with tab_editor:
     st.divider()
     st.header("5. Labels & Packing")
     c1, c2 = st.columns(2)
-    c1.multiselect("Labels to include", LABEL_TYPES, default=st.session_state.get("labels", []), key="labels")
+    # NB: don't pass both `default=` and `key=` — Streamlit raises
+    # StreamlitAPIException when the keyed session_state value already exists
+    # (as it does after Load Demo or a Firestore restore). `key=` alone is
+    # enough; the widget picks up the existing value from session_state.
+    c1.multiselect("Labels to include", LABEL_TYPES, key="labels")
     opts = with_blank(PACKING)
     c2.selectbox("Packing method", opts, index=safe_index(opts, st.session_state.get("packing")), key="packing")
 
     # --- Section 6: Supplier Actions ---
     st.divider()
     st.header("6. Supplier Actions Required")
+    # Same reason as `labels` above — `default=` + `key=` together blows up
+    # once the keyed value exists in session_state. `key=` alone is enough.
     st.multiselect(
         "What we need from the supplier",
         SUPPLIER_ACTIONS,
-        default=st.session_state.get("supplier_actions", []),
         key="supplier_actions",
     )
 

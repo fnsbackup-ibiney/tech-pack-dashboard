@@ -68,14 +68,30 @@ CARDIGAN_SAMPLE = {
     "shoulder_reinforcement": True,
 
     # Measurements (Size M baseline)
+    # Keys MUST match KNITWEAR_MEASUREMENT_POINTS in config/dropdown_options.py
+    # — the editor renders rows from that list and looks up values by name. If
+    # a key here doesn't match, the value silently doesn't show, and the editor
+    # then overwrites session_state["measurements"] on the next render, losing
+    # this demo data permanently. Values 1–6 are from the customer's original
+    # tech pack; 7–15 are sensible size-M boxy-cardigan estimates so the demo
+    # has a complete measurement table when the user clicks "Load Demo".
     "base_size": "M",
     "measurements": {
-        "Body length (CB)": {"value": 57.0, "tolerance": 1.0},
-        "Chest width": {"value": 56.0, "tolerance": 1.0},
-        "Hem width": {"value": 54.0, "tolerance": 1.0},
-        "Sleeve length (CB)": {"value": 77.0, "tolerance": 1.0},
-        "Shoulder drop": {"value": 3.0, "tolerance": 0.5},
-        "Sleeve opening": {"value": 12.0, "tolerance": 0.5},
+        "Front body Length (fm HPS)": {"value": 57.0, "tolerance": 1.0},
+        "1/2 Chest Width (below armhole)": {"value": 56.0, "tolerance": 1.0},
+        "1/2 Bottom Width (at edge)": {"value": 54.0, "tolerance": 1.0},
+        "Sleeve length (from CB)": {"value": 77.0, "tolerance": 1.0},
+        "Cuff width (at edge)": {"value": 12.0, "tolerance": 0.5},
+        "Hem rib Height": {"value": 2.0, "tolerance": 0.3},
+        "Shoulder (seam to seam)": {"value": 42.0, "tolerance": 0.5},
+        "Armhole (straight)": {"value": 22.0, "tolerance": 0.5},
+        "Bicep (below armhole)": {"value": 19.0, "tolerance": 0.5},
+        "Cuff trim Height": {"value": 2.0, "tolerance": 0.3},
+        "Neck Width (seam to seam)": {"value": 18.0, "tolerance": 0.5},
+        "Front neck drop (fm HPS)": {"value": 16.0, "tolerance": 0.5},
+        "Back Neck drop (fm HPS)": {"value": 2.0, "tolerance": 0.5},
+        "Neck Height": {"value": 2.5, "tolerance": 0.3},
+        "Placket width": {"value": 3.0, "tolerance": 0.3},
     },
 
     # Packing & Labels

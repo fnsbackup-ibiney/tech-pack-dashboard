@@ -4,6 +4,7 @@ Generate a printable PDF version of the tech pack using reportlab.
 
 from datetime import datetime
 from io import BytesIO
+from xml.sax.saxutils import escape as _xml_escape
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
@@ -11,6 +12,8 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import cm
 import base64
 
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 from reportlab.platypus import (
     Image as RLImage,
     Paragraph,
@@ -22,24 +25,61 @@ from reportlab.platypus import (
 from PIL import Image as PILImage
 
 
+# --- Font registration ---
+# Default reportlab fonts (Helvetica) don't ship with CJK glyphs, so any
+# Chinese / Japanese character in user input renders as a blank box. Register
+# STSong-Light, one of the CID fonts Adobe Reader / most viewers have built
+# in (no font file needed). Falls back to Helvetica if registration fails
+# (very rare — only happens if reportlab is patched / sandboxed).
+try:
+    pdfmetrics.registerFont(UnicodeCIDFont("STSong-Light"))
+    _FONT_REGULAR = "STSong-Light"
+    # STSong-Light only ships in one weight, so "bold" is the same font as
+    # regular. The text still reads correctly; just won't visually bold.
+    # For projects that need a bold weight + CJK, bundle a TrueType font
+    # (e.g. Noto Sans CJK Bold) and registerFont() it here instead.
+    _FONT_BOLD = "STSong-Light"
+except Exception:
+    _FONT_REGULAR = "Helvetica"
+    _FONT_BOLD = "Helvetica-Bold"
+
+
+def _esc(text) -> str:
+    """Escape user-supplied text for safe inclusion in a reportlab Paragraph.
+
+    Paragraph parses its content as XML — an unescaped `<` or `>` from a user
+    note (e.g. "克重 < 30 g") raises xml.parsers.expat.ExpatError and kills
+    the whole export. None / non-string values are coerced to empty / str.
+    """
+    if text is None:
+        return ""
+    return _xml_escape(str(text))
+
+
 def _styles():
     base = getSampleStyleSheet()
+    # All ParagraphStyles use _FONT_REGULAR so they pick up CJK glyphs when
+    # the user types Chinese / Japanese names, compositions, notes, etc.
     styles = {
         "title": ParagraphStyle(
             "TPTitle", parent=base["Heading1"],
+            fontName=_FONT_BOLD,
             fontSize=20, alignment=1, spaceAfter=12,
         ),
         "h2": ParagraphStyle(
             "TPH2", parent=base["Heading2"],
+            fontName=_FONT_BOLD,
             fontSize=12, textColor=colors.HexColor("#222222"),
             spaceBefore=14, spaceAfter=6,
         ),
         "normal": ParagraphStyle(
             "TPNormal", parent=base["Normal"],
+            fontName=_FONT_REGULAR,
             fontSize=9, leading=12,
         ),
         "small": ParagraphStyle(
             "TPSmall", parent=base["Normal"],
+            fontName=_FONT_REGULAR,
             fontSize=8, textColor=colors.grey,
         ),
     }
@@ -77,7 +117,7 @@ def _team_spec_sheet(data: dict, styles) -> list:
         ("Unit:",              "CM"),
     ]
     info = Table(
-        [[Paragraph(f"<b>{l}</b>", styles["normal"]), Paragraph(str(v), styles["normal"])]
+        [[Paragraph(f"<b>{_esc(l)}</b>", styles["normal"]), Paragraph(_esc(v), styles["normal"])]
          for l, v in header_rows],
         colWidths=(4.5 * cm, 13 * cm),
     )
@@ -123,7 +163,7 @@ def _team_spec_sheet(data: dict, styles) -> list:
         ("FONTSIZE", (0, 0), (-1, -1), 7),
         ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#888888")),
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#EFEFEF")),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTNAME", (0, 0), (-1, 0), _FONT_BOLD),
         # Highlight base size column
         ("BACKGROUND", (base_col_idx, 0), (base_col_idx, -1), colors.HexColor("#FFF7E6")),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
@@ -140,8 +180,8 @@ def _kv_table(items: list, col_widths=(5 * cm, 7 * cm)) -> Table:
     rows = [[label, value if value is not None else "—"] for label, value in items]
     table = Table(rows, colWidths=col_widths)
     table.setStyle(TableStyle([
-        ("FONT", (0, 0), (-1, -1), "Helvetica", 9),
-        ("FONT", (0, 0), (0, -1), "Helvetica-Bold", 9),
+        ("FONT", (0, 0), (-1, -1), _FONT_REGULAR, 9),
+        ("FONT", (0, 0), (0, -1), _FONT_BOLD, 9),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("TEXTCOLOR", (0, 0), (0, -1), colors.HexColor("#444444")),
         ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
@@ -164,8 +204,8 @@ def _measurement_table(measurements: dict, base_size: str) -> Table:
     table.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#333333")),
         ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-        ("FONT", (0, 0), (-1, 0), "Helvetica-Bold", 9),
-        ("FONT", (0, 1), (-1, -1), "Helvetica", 9),
+        ("FONT", (0, 0), (-1, 0), _FONT_BOLD, 9),
+        ("FONT", (0, 1), (-1, -1), _FONT_REGULAR, 9),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
         ("ROWBACKGROUNDS", (0, 1), (-1, -1),
          [colors.white, colors.HexColor("#f5f5f5")]),
@@ -198,7 +238,7 @@ def _render_images(images: list, max_per_row: int = 2) -> list:
         scale = min(target_w / w, target_h / h)
         rl_img = RLImage(BytesIO(raw), width=w * scale, height=h * scale)
         caption = Paragraph(
-            f'<i>{(img.get("caption") or "").replace("&", "&amp;")}</i>',
+            f'<i>{_esc(img.get("caption"))}</i>',
             styles["small"],
         )
         cells.append([rl_img, caption])
@@ -248,8 +288,8 @@ def generate_pdf(data: dict) -> bytes:
     # --- Title block ---
     story.append(Paragraph("TECH PACK", styles["title"]))
     story.append(Paragraph(
-        f"{data.get('style_name') or '—'} · {data.get('style_number') or '—'}"
-        f" · {data.get('season') or '—'}",
+        f"{_esc(data.get('style_name') or '—')} · {_esc(data.get('style_number') or '—')}"
+        f" · {_esc(data.get('season') or '—')}",
         styles["normal"],
     ))
     story.append(Paragraph(
@@ -353,7 +393,7 @@ def generate_pdf(data: dict) -> bytes:
     actions = data.get("supplier_actions") or []
     if actions:
         for a in actions:
-            story.append(Paragraph(f"• {a}", styles["normal"]))
+            story.append(Paragraph(f"• {_esc(a)}", styles["normal"]))
     else:
         story.append(Paragraph("None specified.", styles["normal"]))
 
@@ -366,7 +406,7 @@ def generate_pdf(data: dict) -> bytes:
     ]))
     if data.get("notes"):
         story.append(Spacer(1, 6))
-        story.append(Paragraph(f"<b>Notes:</b> {data['notes']}", styles["normal"]))
+        story.append(Paragraph(f"<b>Notes:</b> {_esc(data['notes'])}", styles["normal"]))
 
     doc.build(story)
     return buf.getvalue()

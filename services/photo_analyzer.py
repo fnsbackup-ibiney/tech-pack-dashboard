@@ -183,6 +183,37 @@ SUGGESTION_TO_STATE = {
     "print_embroidery": "print_embroidery",
 }
 
+# Allowed values for each state field. If Gemini returns something off-schema
+# (e.g. "Slim/Fitted" when the dropdown only has "Slim"), we silently skip
+# the assignment — writing it would put session_state in a state the
+# corresponding selectbox can't render, triggering StreamlitAPIException on
+# the next rerun. None means "no validation" (free-text field).
+_ALLOWED_VALUES = {
+    "product_type": frozenset(PRODUCT_TYPES),
+    "fit": frozenset(FITS),
+    "neckline": frozenset(NECKLINES),
+    "sleeve_length": frozenset(SLEEVE_LENGTHS),
+    "sleeve_type": frozenset(SLEEVE_TYPES),
+    "hem_style": frozenset(HEM_STYLES),
+    "cuff_style": frozenset(CUFF_STYLES),
+    "placket": frozenset(PLACKETS),
+    "knit_structure": frozenset(KNIT_STRUCTURES),
+    "rib_structure": frozenset(RIB_STRUCTURES),
+    "fabric_structure": frozenset(FABRIC_STRUCTURES),
+    "print_embroidery": frozenset(PRINT_EMBROIDERY),
+}
+
+
+def _is_valid_for(state_key: str, value) -> bool:
+    """True iff value is one of the allowed dropdown options for state_key.
+
+    Fields not in _ALLOWED_VALUES (e.g. free-text like color_name) always
+    pass. Empty / placeholder values always pass through to the existing
+    "is_empty" check elsewhere.
+    """
+    allowed = _ALLOWED_VALUES.get(state_key)
+    return allowed is None or value in allowed
+
 
 def apply_suggestions(
     suggestions: dict,
@@ -194,6 +225,11 @@ def apply_suggestions(
     Returns a dict of {field_label: applied_value} so the UI can show what
     was filled in. By default, doesn't overwrite fields the user has already
     set — pass overwrite=True to force-replace everything.
+
+    Values that don't match the corresponding dropdown's allowed options
+    are silently dropped (Gemini sometimes returns variants like
+    "Slim/Fitted" when only "Slim" is in the list — assigning that to
+    session_state would crash the selectbox on the next render).
     """
     applied = {}
     blank_marker = "— Not specified —"
@@ -202,16 +238,25 @@ def apply_suggestions(
         value = suggestions.get(src_key)
         if not value or value == "null":
             continue
+        if not _is_valid_for(state_key, value):
+            # Off-schema value — skip rather than crash the dropdown later
+            continue
         current = session_state.get(state_key)
         is_empty = current in (None, "", blank_marker)
         if overwrite or is_empty:
             session_state[state_key] = value
             applied[src_key] = value
 
-    # Sub-category — depends on product_type
+    # Sub-category — depends on product_type. Validate against the right
+    # list for whichever variant Gemini returned; drop off-schema values
+    # (same reason as the dropdown validation above).
     sub_knit = suggestions.get("garment_sub_category_knit")
     sub_tee = suggestions.get("garment_sub_category_tee")
-    sub = sub_knit or sub_tee
+    sub = None
+    if sub_knit and sub_knit in KNITWEAR_SUB_CATEGORIES:
+        sub = sub_knit
+    elif sub_tee and sub_tee in TSHIRT_SUB_CATEGORIES:
+        sub = sub_tee
     if sub:
         current = session_state.get("garment_sub_category")
         if overwrite or current in (None, "", blank_marker):
