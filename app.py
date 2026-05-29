@@ -2138,21 +2138,34 @@ with tab_history:
                         help="Load this record into the Editor (your current work will be undoable).",
                     )
 
-                    # Delete button (two-step: arm then confirm)
-                    arm_key = f"arm_delete_{rec['id']}"
-                    if st.session_state.get(arm_key):
+                    # Delete button (two-step: arm then confirm).
+                    # We use a single session key _delete_armed_id (the record ID
+                    # currently waiting for confirmation) instead of one boolean per
+                    # record — this ensures only one row can be in the "armed" state
+                    # at a time.  Clicking Delete on a different row automatically
+                    # dismisses the previous confirmation prompt.
+                    _armed_id = st.session_state.get("_delete_armed_id")
+                    if _armed_id == rec["id"]:
+                        # Show Cancel in col 4 (replacing Load temporarily) and
+                        # Confirm in col 5 so both fit without layout changes.
+                        if cols[4].button(
+                            "✕ Cancel",
+                            key=f"cancel_{rec['id']}",
+                            use_container_width=True,
+                        ):
+                            st.session_state.pop("_delete_armed_id", None)
+                            st.rerun()
                         if cols[5].button(
-                            "❗ Confirm",
+                            "❗ Sure?",
                             key=f"confirm_{rec['id']}",
                             use_container_width=True,
                             type="primary",
                         ):
                             try:
                                 firestore_client.delete_tech_pack(rec["id"])
-                                # Also clear the editing pointer if we just deleted what's open
                                 if st.session_state.get("_current_doc_id") == rec["id"]:
                                     st.session_state["_current_doc_id"] = None
-                                st.session_state[arm_key] = False
+                                st.session_state.pop("_delete_armed_id", None)
                                 st.rerun()
                             except Exception as e:
                                 st.error(f"Delete failed: {e}")
@@ -2162,7 +2175,7 @@ with tab_history:
                             key=f"del_{rec['id']}",
                             use_container_width=True,
                         ):
-                            st.session_state[arm_key] = True
+                            st.session_state["_delete_armed_id"] = rec["id"]
                             st.rerun()
 
                     st.divider()
