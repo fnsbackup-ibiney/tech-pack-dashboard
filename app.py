@@ -578,7 +578,6 @@ def ai_autofill_callback():
     on_click callback (NOT inline) so it modifies session_state BEFORE the
     form widgets are re-instantiated this run.
     """
-    import base64
     images = st.session_state.get("images") or []
     # Only consider true reference uploads — skip AI-generated drawings and
     # camera-captured photos (those are for discussion only, not analysis).
