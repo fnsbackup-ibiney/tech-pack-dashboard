@@ -591,7 +591,11 @@ def _demo_drawing(prompt: str, error: str | None = None) -> dict:
       - No Gemini key is configured (true demo mode)
       - The API call fails (error path — caption shows why)
     """
-    time.sleep(DEMO_LATENCY_SECONDS)
+    # Simulate API latency only in true demo mode (no key configured).
+    # When called from the error-fallback path the user already waited for
+    # a real (failed) request — adding a fake sleep on top is just cruel.
+    if error is None:
+        time.sleep(DEMO_LATENCY_SECONDS)
     raw_bytes = _FALLBACK_DRAWING.read_bytes()
     caption = "AI-generated technical drawing (demo placeholder)"
     if error:
