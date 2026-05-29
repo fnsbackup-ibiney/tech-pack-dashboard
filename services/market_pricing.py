@@ -578,7 +578,7 @@ FILTER_MATERIALS = list(_MATERIAL_DE_TOKENS.keys())
 # filter by "show me all blues" instead of having to know whether a specific
 # item is labelled "marine" or "navy" or "hellblau".
 _COLOR_FAMILY_PATTERNS = [
-    ("Cream / White",  r"ecru|cream|natur|wei|off-?white|white|nude"),
+    ("Cream / White",  r"ecru|cream|natur|weiß|weiss|off-?white|white|nude"),
     ("Beige / Sand",   r"beige|sand|stone|taupe|kitt|nougat"),
     ("Brown",          r"braun|brown|cognac|mocha|kaffee|schoko|schlamm"),
     ("Black",          r"schwarz|black|anthrazit|charcoal"),
