@@ -241,8 +241,15 @@ def delete_approved_sketch(photo_hash: str) -> None:
     try:
         client = _get_client()
         client.collection(APPROVED_COLLECTION).document(photo_hash).delete()
-    except Exception:
-        pass
+    except Exception as e:
+        # Non-fatal: if Firestore cleanup fails the user can still generate a
+        # new sketch — the old approved record will just be overwritten on the
+        # next approval. Log so the issue is visible without crashing the UI.
+        import logging
+        logging.getLogger(__name__).warning(
+            "delete_approved_sketch failed for hash=%s (%s: %s)",
+            photo_hash, type(e).__name__, e,
+        )
 
 
 # =============================================================================

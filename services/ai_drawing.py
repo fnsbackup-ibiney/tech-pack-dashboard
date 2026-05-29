@@ -20,9 +20,12 @@ from __future__ import annotations
 
 import base64
 import json
+import logging
 import re
 import time
 from pathlib import Path
+
+_log = logging.getLogger(__name__)
 
 import streamlit as st
 
@@ -157,7 +160,10 @@ def _describe_for_sketch(image_data: str, mime: str) -> str:
             ],
         )
         return (response.text or "").strip()
-    except Exception:
+    except Exception as e:
+        # Sketch generation will proceed in photo-only mode (no text description).
+        # Log so the issue is visible in Streamlit Cloud logs without crashing the UI.
+        _log.warning("_describe_for_sketch failed (%s: %s) — proceeding without description", type(e).__name__, e)
         return ""
 
 
